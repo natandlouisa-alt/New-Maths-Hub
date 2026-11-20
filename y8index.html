@@ -901,7 +901,7 @@ header .sub { font-size: 12px; color: rgba(255,255,255,0.4); }
       <div class="units" id="units-1"></div>
     </div>
     <div class="cycle-panel c2" data-panel="2">
-      <p class="cycle-meta">10 weeks · 40 lessons &nbsp;·&nbsp; Time &amp; Measures · 2D Shapes · Coordinates · Factors/Multiples/Primes · Fractions · Brackets</p>
+      <p class="cycle-meta">8 units · 34 topics &nbsp;·&nbsp; Rounding · Coordinates &amp; Linear Graphs · Area · Circles · Standard Form · Venn Diagrams · 3D Shapes · Surface Area and Volume</p>
       <div class="units" id="units-2"></div>
     </div>
     <div class="cycle-panel c3" data-panel="3">
@@ -1048,6 +1048,96 @@ const SOW = {
           markscheme:{ label: "Mark Scheme",            icon: "✅", link: "https://twmat.sharepoint.com/:b:/s/STJMaths/IQCXHmKqMJ6NRZtHAxacb8tFAYS6KeUzXyhXjHObTYNNlu8?e=xMGAMd", notes: "Full mark scheme with method marks and acceptable alternative answers" },
           shadow:    { label: "Shadow Paper",           icon: "📋", link: "", notes: "" },
           revision:  { label: "Revision Resources",    icon: "📚", link: "https://twmat.sharepoint.com/:b:/s/STJMaths/IQB--yvOiU2vSJ2TlQ_lPMfQAfuReDq0-flAmooYzzxMUcY?e=ovOyaf", notes: "Sparx Maths Year 8 Term 1 Revision Workbook" }
+        }
+      }
+    },
+    {
+      id: 2, label: "Cycle 2",
+      meta: "8 units · 34 topics · Rounding · Coordinates & Linear Graphs · Area · Circles · Standard Form · Venn Diagrams · 3D Shapes · Surface Area and Volume",
+      units: [
+        {
+          id: "rounding", name: "Rounding",
+          topics: [
+            { id: "identifying-significant-figures", name: "Identifying Significant Figures", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "rounding-integers-sf", name: "Rounding Integers to Significant Figures", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "rounding-decimals-sf", name: "Rounding Decimals to Significant Figures", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "estimating-with-significant-figures", name: "Using Significant Figures for Estimating", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+          ]
+        },
+        {
+          id: "coordinates-linear-graphs", name: "Coordinates & Linear Graphs",
+          topics: [
+            { id: "coordinate-geometry", name: "Coordinate Geometry", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "midpoint-of-a-line", name: "Finding the midpoint of a line", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "equations-of-lines", name: "Equations of lines (horizontal, vertical, diagonal)", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "intro-to-gradient", name: "Intro to Gradient", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "positive-fractional-gradient", name: "Positive Fractional Gradient", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "negative-gradient", name: "Negative Gradient", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "using-ymxc-to-draw", name: "Using y=mx+c to draw", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "equation-from-graph", name: "Finding equation from graph", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "plotting-from-table", name: "Plotting from table of values", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "calculator-table-of-values", name: "Using a calculator to find table of values", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+          ]
+        },
+        {
+          id: "area", name: "Area",
+          topics: [
+            { id: "area-of-parallelograms", name: "Area of parallelograms", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "area-of-a-trapezium", name: "Area of a trapezium", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "converting-units-of-area", name: "Converting units of area", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+          ]
+        },
+        {
+          id: "circles", name: "Circles",
+          topics: [
+            { id: "what-is-pi", name: "What is pi?", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "circumference-of-a-circle", name: "Circumference of a circle", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "deriving-area-of-a-circle", name: "Deriving area of a circle", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "area-of-a-circle", name: "Area of a circle", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "circles-working-backwards", name: "Working backwards", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+          ]
+        },
+        {
+          id: "standard-form", name: "Standard Form",
+          topics: [
+            { id: "standard-form-positive-1", name: "Standard form positive 1", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "standard-form-positive-2", name: "Standard form positive 2", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "standard-form-negative", name: "Standard form negative", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+          ]
+        },
+        {
+          id: "venn-diagrams", name: "Venn Diagrams",
+          topics: [
+            { id: "venn-diagrams", name: "Venn Diagrams", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "venn-diagrams-interpret", name: "Venn Diagrams Interpret", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+          ]
+        },
+        {
+          id: "shapes-3d", name: "3D Shapes",
+          topics: [
+            { id: "properties-of-3d-shapes", name: "Properties of 3D Shapes", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "nets-of-3d-shapes", name: "Nets of 3D Shapes", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+          ]
+        },
+        {
+          id: "surface-area-volume", name: "Surface Area and Volume",
+          topics: [
+            { id: "surface-area-cubes-cuboids", name: "Surface Area of Cubes/Cuboids", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "surface-area-prisms", name: "Surface Area of Prisms", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "volume-of-a-cuboid", name: "Volume of a Cuboid", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "volume-of-prisms", name: "Volume of Prisms", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+            { id: "converting-units-of-volume", name: "Converting Units of Volume", knowledge: { rule: "", example: "" }, resources: { powerpoint: "", minVaried: [], increasing: [], examStyle: [] } },
+          ]
+        },
+      ],
+      cycleTest: {
+        id: "cycle2-test",
+        name: "Cycle 2 Test",
+        resources: {
+          test:       { label: "Cycle 2 Test Paper", icon: "📄", link: "", notes: "" },
+          markscheme: { label: "Mark Scheme",         icon: "✅", link: "", notes: "" },
+          shadow:     { label: "Shadow Paper",        icon: "📋", link: "", notes: "" },
+          revision:   { label: "Revision Resources",  icon: "📚", link: "", notes: "" }
         }
       }
     }
