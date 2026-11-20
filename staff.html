@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Area · Maths Schemes of Work · St James School</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-mid: #555;
+    --ink-soft: #888;
+    --rule: #e2e2e2;
+    --bg: #f7f7f5;
+    --card-bg: #ffffff;
+    --radius: 4px;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --font-ui: 'Segoe UI', system-ui, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-ui); background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 28px 32px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  header p { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+  header a.back {
+    color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.3); padding: 7px 14px; border-radius: var(--radius);
+  }
+  header a.back:hover { background: rgba(255,255,255,0.1); }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  main > p.intro { font-size: 14px; color: var(--ink-mid); margin-bottom: 28px; max-width: 640px; }
+
+  .category { margin-bottom: 32px; }
+  .category h2 {
+    font-size: 15px; font-weight: 700; margin-bottom: 12px;
+    padding-left: 10px; border-left: 4px solid var(--cat-colour, #999);
+  }
+  .link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  a.link-card {
+    display: block;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  a.link-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+  a.link-card .link-title { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  a.link-card .link-title::after { content: '↗'; font-size: 12px; color: var(--ink-soft); margin-left: auto; }
+  a.link-card .link-desc { font-size: 12px; color: var(--ink-mid); margin-top: 6px; line-height: 1.4; }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 760px) {
+    .featured-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .featured-grid { grid-template-columns: 1fr; }
+  }
+  .featured-tile {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    text-decoration: none;
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    box-shadow: var(--shadow);
+    min-height: 130px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .featured-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.16); }
+  .featured-tile .tile-icon { font-size: 26px; margin-bottom: 10px; }
+  .featured-tile .tile-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .featured-tile .tile-desc { font-size: 12.5px; color: rgba(255,255,255,0.8); line-height: 1.4; margin-top: auto; }
+
+  .empty-state {
+    background: var(--card-bg); border: 1px dashed var(--rule); border-radius: var(--radius);
+    padding: 24px; text-align: center; color: var(--ink-soft); font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Staff Area</h1>
+    <p>St James School Maths Department · SharePoint quick links</p>
+  </div>
+  <a class="back" href="/index.html">← Back to home</a>
+</header>
+
+<main>
+  <div class="featured-grid">
+    <a href="/weekly-exam-practice.html" class="featured-tile" style="background:#16324f;">
+      <div class="tile-icon">📝</div>
+      <div class="tile-title">Weekly Exam Practice</div>
+      <div class="tile-desc">This week's practice paper, feedback trackers, and past papers &amp; mark schemes →</div>
+    </a>
+
+    <a href="/unifrog-careers.html" class="featured-tile" style="background:#1e6b4a;">
+      <div class="tile-icon">🐸</div>
+      <div class="tile-title">Unifrog — Careers</div>
+      <div class="tile-desc">This cycle's careers by year group, plus the full Unifrog careers guide →</div>
+    </a>
+
+    <a href="https://twmat.sharepoint.com/sites/StudentSupportDocuments/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener" class="featured-tile" style="background:#6b4c9a;">
+      <div class="tile-icon">🪪</div>
+      <div class="tile-title">Pupil Passports</div>
+      <div class="tile-desc">Open Student Support Documents on SharePoint ↗</div>
+    </a>
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScTuVr0Kj4HgwHhqP3eWQKLmhdqnDSDZSOQAhWeFkuVP2py8w/viewform?usp=header" target="_blank" rel="noopener" class="featured-tile" style="background:#b45309;">
+      <div class="tile-icon">🚌</div>
+      <div class="tile-title">Trip Planning</div>
+      <div class="tile-desc">Open the trip planning form ↗</div>
+    </a>
+
+    <a href="https://twmat.sharepoint.com/:f:/s/STJMaths/IgAD35eaN_5STZHRC6lPNX3NAYue6Jes4tOpSEVWgrcYGuk?e=CPydrz" target="_blank" rel="noopener" class="featured-tile" style="background:#0f766e;">
+      <div class="tile-icon">📰</div>
+      <div class="tile-title">Weekly Bulletin Folder</div>
+      <div class="tile-desc">Open the Bulletin folder on SharePoint ↗</div>
+    </a>
+
+    <a href="https://twmat-my.sharepoint.com/:o:/g/personal/alexandra_pugh_stjamesexeter_co_uk/IgBd0382RdsHTI35lZpmQO_jAZm5U1WUJLptlLevVvKPHmQ?e=5Ou21T" target="_blank" rel="noopener" class="featured-tile" style="background:#7c2d92;">
+      <div class="tile-icon">📓</div>
+      <div class="tile-title">Maths Department OneNote</div>
+      <div class="tile-desc">Open Maths Dept 26–27 OneNote ↗</div>
+    </a>
+
+    <a href="https://twmat.sharepoint.com/:w:/s/STJMaths/IQC36TkYTUSJSaVuhKHlrVHBAfHDpg5PQ76eg4s7Nmctt88?e=W94bUt" target="_blank" rel="noopener" class="featured-tile" style="background:#9d174d;">
+      <div class="tile-icon">📋</div>
+      <div class="tile-title">Behaviour for Learning Policy</div>
+      <div class="tile-desc">Sept 2026–27 DRAFT ↗<br>Yondr Policy Page 9</div>
+    </a>
+
+    <a href="/year11-homework-papers.html" class="featured-tile" style="background:#b45309;">
+      <div class="tile-icon">📄</div>
+      <div class="tile-title">GCSE Hannah Kettle Homework Papers</div>
+      <div class="tile-desc">Half Past Papers policy, trackers, and Hannah Kettle link →</div>
+    </a>
+
+    <a href="/faq.html" class="featured-tile" style="background:#4a5568;">
+      <div class="tile-icon">❓</div>
+      <div class="tile-title">FAQ's</div>
+      <div class="tile-desc">How-to guides — Dr Frost Live Game, and more →</div>
+    </a>
+
+    <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=g20zUQy_xEe8wZY4yAMcQoxrQ1GHb7FPq_sf7hgDBUVUMVJNUURWMDVSTzVTQ0ZIR0c4WlIwNlNWQi4u&route=shorturl" target="_blank" rel="noopener" class="featured-tile" style="background:#0e7490;">
+      <div class="tile-icon">🗓️</div>
+      <div class="tile-title">Absence Requests</div>
+      <div class="tile-desc">Open the absence request form ↗</div>
+    </a>
+  </div>
+
+  <p class="intro">Quick links to shared SharePoint documents. To add or update a link, edit <code>staff-links.json</code> in the repo — no need to touch this page.</p>
+  <div id="categoriesWrap"></div>
+</main>
+
+<script>
+(function() {
+  fetch('staff-links.json')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => {
+      const wrap = document.getElementById('categoriesWrap');
+      if (!data.categories || !data.categories.length) {
+        wrap.innerHTML = '<div class="empty-state">No links added yet.</div>';
+        return;
+      }
+      wrap.innerHTML = data.categories.map(cat => `
+        <div class="category">
+          <h2 style="--cat-colour:${cat.colour || '#999'}">${cat.name}</h2>
+          <div class="link-grid">
+            ${(cat.links || []).map(link => `
+              <a class="link-card" href="${link.url}" target="_blank" rel="noopener">
+                <div class="link-title">${link.title}</div>
+                ${link.description ? `<div class="link-desc">${link.description}</div>` : ''}
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    })
+    .catch(() => {
+      document.getElementById('categoriesWrap').innerHTML =
+        '<div class="empty-state">Links couldn\'t be loaded — check staff-links.json is present.</div>';
+    });
+})();
+</script>
+
+</body>
+</html>

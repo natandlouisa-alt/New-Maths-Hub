@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Y7 Topic Mastery Wheel — Live Trial</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    color-scheme: light;
+    --page:#f6f7f5;
+    --surface:#ffffff;
+    --surface-2:#eef0ed;
+    --ink:#15191c;
+    --ink-2:#555e63;
+    --ink-muted:#8a9195;
+    --border: rgba(21,25,28,0.12);
+    --border-strong: rgba(21,25,28,0.20);
+    --accent:#256abf;
+    --focus:#184f95;
+    --good:#0ca30c;
+    --warning:#c98500;
+    --critical:#d03b3b;
+
+    --num-0:#cde2fb; --num-1:#b7d3f6; --num-2:#9ec5f4; --num-3:#86b6ef; --num-4:#6da7ec; --num-5:#5598e7;
+    --num-6:#3987e5; --num-7:#2a78d6; --num-8:#256abf; --num-9:#1c5cab; --num-10:#184f95; --num-11:#104281; --num-12:#0d366b;
+
+    --alg-0:#fee9e1; --alg-1:#fedcce; --alg-2:#fdc9b4; --alg-3:#fbb599; --alg-4:#faa17e; --alg-5:#f88d63;
+    --alg-6:#f87845; --alg-7:#eb6834; --alg-8:#e8551b; --alg-9:#d7480f; --alg-10:#bf3f0d; --alg-11:#ab3405; --alg-12:#932d04;
+
+    --geo-0:#97fbd7; --geo-1:#83f4cc; --geo-2:#68f4c2; --geo-3:#50efb6; --geo-4:#36edab; --geo-5:#1ee8a0;
+    --geo-6:#14d48f; --geo-7:#1baf7a; --geo-8:#179769; --geo-9:#108158; --geo-10:#0d6a49; --geo-11:#075438; --geo-12:#053d29;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --page:#0e1012; --surface:#17191c; --surface-2:#1f2225;
+      --ink:#f2f3f1; --ink-2:#b9bec1; --ink-muted:#83898c;
+      --border: rgba(255,255,255,0.12); --border-strong: rgba(255,255,255,0.22);
+      --accent:#5598e7; --focus:#86b6ef;
+      --good:#3fbf4a; --warning:#e0a930; --critical:#e66767;
+      --num-0:#0d366b; --num-1:#104281; --num-2:#184f95; --num-3:#1c5cab; --num-4:#256abf; --num-5:#2a78d6;
+      --num-6:#3987e5; --num-7:#5598e7; --num-8:#6da7ec; --num-9:#86b6ef; --num-10:#9ec5f4; --num-11:#b7d3f6; --num-12:#cde2fb;
+      --alg-0:#932d04; --alg-1:#ab3405; --alg-2:#bf3f0d; --alg-3:#d7480f; --alg-4:#e8551b; --alg-5:#eb6834;
+      --alg-6:#f87845; --alg-7:#f88d63; --alg-8:#faa17e; --alg-9:#fbb599; --alg-10:#fdc9b4; --alg-11:#fedcce; --alg-12:#fee9e1;
+      --geo-0:#053d29; --geo-1:#075438; --geo-2:#0d6a49; --geo-3:#108158; --geo-4:#179769; --geo-5:#1baf7a;
+      --geo-6:#14d48f; --geo-7:#1ee8a0; --geo-8:#36edab; --geo-9:#50efb6; --geo-10:#68f4c2; --geo-11:#83f4cc; --geo-12:#97fbd7;
+    }
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--page); color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding-inline:20px; padding-block:28px 40px;
+  }
+  .page{max-width:1180px;margin-inline:auto;display:flex;flex-direction:column;gap:24px;}
+
+  .eyebrow{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:11px; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--accent); font-weight:600; margin:0 0 6px;
+  }
+  h1{
+    font-family:"Newsreader", Georgia, serif; font-weight:600; font-style:italic;
+    font-size:clamp(26px,4vw,34px); line-height:1.1; margin:0 0 8px; text-wrap:balance; color:var(--ink);
+  }
+  .lede{margin:0; color:var(--ink-2); font-size:14.5px; line-height:1.55; max-width:64ch;}
+
+  header{
+    display:flex; flex-wrap:wrap; gap:20px; align-items:flex-end; justify-content:space-between;
+    border-bottom:1px solid var(--border); padding-bottom:20px;
+  }
+  .header-text{flex:1 1 380px;}
+  .logout-btn{font:inherit; font-size:13px; font-weight:600; color:var(--ink-2); background:var(--surface); border:1px solid var(--border-strong); border-radius:8px; padding:8px 16px; cursor:pointer;}
+  .logout-btn:hover{border-color:var(--accent); color:var(--accent);}
+
+  main{display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;}
+
+  .tree-card{
+    flex:2 1 480px; background:var(--surface); border:1px solid var(--border);
+    border-radius:16px; padding:20px 16px 18px; display:flex; flex-direction:column; align-items:center; gap:16px;
+    min-width:320px;
+  }
+  svg#tree{width:100%; height:auto; max-width:560px; touch-action:manipulation; overflow:visible;}
+  .ring-guide{fill:none; stroke:var(--border); stroke-width:1; stroke-dasharray:2 4;}
+  .node{stroke:var(--surface); stroke-width:2px; cursor:pointer; transition:opacity .12s ease, fill .3s ease;}
+  .node-empty{fill:var(--surface-2); stroke:var(--surface); stroke-width:2px; pointer-events:none;}
+  .node:hover, .node:focus-visible{opacity:0.7;}
+  .node:focus-visible{outline:none; stroke:var(--focus); stroke-width:3px;}
+  .node.selected{stroke:var(--ink); stroke-width:3px;}
+  .tier0-label{font-family:"IBM Plex Mono",monospace; font-size:8.5px; font-weight:700; fill:var(--ink); text-transform:uppercase; letter-spacing:0.01em; paint-order:stroke; stroke:var(--surface); stroke-width:1.5px; stroke-linejoin:round; pointer-events:none;}
+  .strand-title{font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; pointer-events:none;}
+  .center-note{font-family:"Newsreader",serif; font-style:italic; font-size:10.5px; fill:var(--ink-muted); text-anchor:middle;}
+  .center-grade-num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-weight:700; font-size:34px; fill:var(--ink);}
+  .center-grade-label{font-family:"IBM Plex Sans",sans-serif; font-size:8px; font-weight:600; letter-spacing:0.04em; fill:var(--accent);}
+
+  .legend-strands{width:100%; display:flex; flex-wrap:wrap; gap:14px 22px; justify-content:center;}
+  .legend-strand{display:flex; align-items:center; gap:8px;}
+  .legend-swatch-dot{width:10px; height:10px; border-radius:50%; flex-shrink:0;}
+  .legend-strand span{font-size:12px; font-weight:600; color:var(--ink-2);}
+  .legend-strand .legend-ramp{width:52px; height:8px; border-radius:4px; border:1px solid var(--border);}
+  .legend-scale{display:flex; align-items:center; gap:8px; font-size:11px; color:var(--ink-muted); font-family:"IBM Plex Mono",monospace;}
+
+  .detail-panel{
+    flex:1 1 280px; min-width:260px; background:var(--surface); border:1px solid var(--border);
+    border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:14px; min-height:320px;
+  }
+  .detail-eyebrow{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:0.07em; text-transform:uppercase; color:var(--ink-muted); font-weight:600;}
+  .detail-topic{font-family:"Newsreader", serif; font-weight:600; font-size:20px; line-height:1.25; color:var(--ink); text-wrap:balance;}
+  .detail-strand{font-size:12.5px; color:var(--ink-2); display:flex; align-items:center; gap:6px;}
+  .detail-strand .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .detail-score-row{display:flex; align-items:baseline; gap:10px; margin-top:4px;}
+  .detail-score{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-size:36px; font-weight:600; color:var(--ink);}
+  .band-chip{font-size:11px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; padding:3px 9px; border-radius:99px; display:inline-flex; align-items:center; gap:5px;}
+  .band-chip.priority{color:var(--critical); background:color-mix(in srgb, var(--critical) 14%, transparent);}
+  .band-chip.developing{color:var(--warning); background:color-mix(in srgb, var(--warning) 16%, transparent);}
+  .band-chip.secure{color:var(--good); background:color-mix(in srgb, var(--good) 14%, transparent);}
+  .detail-meta{display:flex; flex-direction:column; gap:8px; padding-top:10px; border-top:1px solid var(--border); font-size:12.5px; color:var(--ink-2);}
+  .detail-meta div{display:flex; justify-content:space-between; gap:12px;}
+  .detail-meta b{color:var(--ink); font-family:"IBM Plex Mono",monospace; font-weight:600;}
+
+  .practice-box{border-top:1px dashed var(--border); padding-top:12px; display:flex; flex-direction:column; gap:8px;}
+  .practice-head{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .practice-head span{font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; font-weight:600; color:var(--ink-muted);}
+  .practice-tag{font-size:10px; font-weight:600; color:var(--accent); background:color-mix(in srgb, var(--accent) 14%, transparent); padding:2px 8px; border-radius:99px;}
+  .practice-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px;}
+  .practice-list li{font-size:12.5px; color:var(--ink); line-height:1.4; padding:8px 10px; background:var(--surface-2); border-radius:8px;}
+  .practice-list li b{font-family:"IBM Plex Mono",monospace; color:var(--ink-muted); font-weight:600; margin-right:4px;}
+  .qa-q{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px;}
+  .qa-badge{font-family:"IBM Plex Sans",sans-serif; font-size:9px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; padding:1px 6px; border-radius:99px; background:var(--surface); color:var(--ink-muted); border:1px solid var(--border);}
+  .qa-badge-mv{color:var(--num-8); border-color:var(--num-8);}
+  .qa-badge-idq{color:var(--alg-8); border-color:var(--alg-8);}
+  .qa-empty{color:var(--ink-muted); font-style:italic;}
+  .qa-hint{font-size:11px; color:var(--ink-muted); margin:0;}
+  .qa-answer-row{display:flex; gap:6px; margin-top:8px;}
+  .qa-input{flex:1; min-width:0; font-family:"IBM Plex Sans",sans-serif; font-size:12.5px; padding:6px 8px; border-radius:6px; border:1px solid var(--border-strong); background:var(--surface); color:var(--ink);}
+  .qa-input:focus-visible{outline:2px solid var(--focus); outline-offset:1px;}
+  .qa-check-btn{font-family:"IBM Plex Sans",sans-serif; font-size:12px; font-weight:600; padding:6px 12px; border-radius:6px; border:none; background:var(--accent); color:#fff; cursor:pointer;}
+  .qa-check-btn:hover{opacity:0.88;}
+  .qa-check-btn:disabled{opacity:0.5; cursor:default;}
+  .qa-feedback{margin-top:6px; font-size:12px; font-weight:600;}
+  .qa-feedback-correct{color:var(--good);}
+  .qa-feedback-wrong{color:var(--critical);}
+  .qa-feedback-warn{color:var(--ink-muted); font-weight:500; font-style:italic;}
+  .detail-hint{font-size:12px; color:var(--ink-muted); margin-top:auto; padding-top:10px; border-top:1px dashed var(--border);}
+
+  footer{font-size:12px; color:var(--ink-muted); line-height:1.6; border-top:1px solid var(--border); padding-top:16px;}
+  footer strong{color:var(--ink-2);}
+
+  [hidden]{display:none !important;}
+
+  /* ---- login screen ---- */
+  .login-wrap{max-width:380px; margin:12vh auto 0; background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:32px 28px; display:flex; flex-direction:column; gap:14px;}
+  .login-wrap h1{font-size:24px; margin-bottom:2px;}
+  .login-field{display:flex; flex-direction:column; gap:5px;}
+  .login-field label{font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-muted); font-weight:600;}
+  .login-field input{font:inherit; font-size:15px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-strong); background:var(--surface); color:var(--ink);}
+  .login-field input:focus-visible{outline:2px solid var(--focus); outline-offset:1px;}
+  .login-btn{font:inherit; font-size:14.5px; font-weight:700; padding:11px; border-radius:8px; border:none; background:var(--accent); color:#fff; cursor:pointer; margin-top:6px;}
+  .login-btn:hover{opacity:0.9;}
+  .login-btn:disabled{opacity:0.6; cursor:default;}
+  .login-error{font-size:13px; color:var(--critical); min-height:1.2em;}
+  .login-note{font-size:11.5px; color:var(--ink-muted); line-height:1.5; border-top:1px dashed var(--border); padding-top:12px; margin-top:4px;}
+
+  @media (max-width:640px){
+    header{align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<div class="login-wrap" id="login-screen">
+  <p class="eyebrow">Y7 Maths &middot; Live trial</p>
+  <h1>Log in</h1>
+  <p class="lede" style="margin-bottom:8px;">Enter your name and the passcode your teacher gave you.</p>
+  <form id="login-form">
+    <div class="login-field">
+      <label for="login-name">Name</label>
+      <input type="text" id="login-name" autocomplete="off" required>
+    </div>
+    <div class="login-field" style="margin-top:10px;">
+      <label for="login-pass">Passcode</label>
+      <input type="text" id="login-pass" autocomplete="off" required>
+    </div>
+    <p class="login-error" id="login-error"></p>
+    <button type="submit" class="login-btn" id="login-btn">Log in</button>
+  </form>
+  <p class="login-note">Trial logins: <b>Test Student 1</b> / <b>1234</b>, or <b>Test Student 2</b> / <b>5678</b>.</p>
+</div>
+
+<div class="page" id="app" hidden>
+  <header>
+    <div class="header-text">
+      <p class="eyebrow">Y7 Maths &middot; Live trial</p>
+      <h1>Topic Mastery Wheel</h1>
+      <p class="lede">Your own wheel — answer a practice question correctly and its wedge gets a shade darker straight away.</p>
+    </div>
+    <button type="button" class="logout-btn" id="logout-btn">Log out</button>
+  </header>
+
+  <main id="wheel-view">
+    <div class="tree-card">
+      <svg id="tree" viewBox="0 0 660 660" role="img" aria-label="Radial sunburst of topic mastery, coloured by strand, shaded darker for stronger topics"></svg>
+      <div class="legend-strands" id="legend-strands"></div>
+      <div class="legend-scale"><span>Lighter = developing</span><span>&rarr;</span><span>Darker = secure</span></div>
+    </div>
+
+    <aside class="detail-panel" id="detail-panel">
+      <!-- populated by script -->
+    </aside>
+  </main>
+
+  <footer>
+    <strong>How to read it &mdash;</strong> each wedge is one strand, coloured on its own scale; a topic's ring is how many <em>tested</em> prerequisite steps deep it sits, sitting directly outside the topic it builds on. Click, tap, or tab to a wedge for its practice queue &mdash; answer a question and press Check (or hit Enter). Every correct answer nudges that topic's mastery up and the wedge redraws a shade darker immediately. <strong>This is a live trial:</strong> scores are stored in a shared test database with security rules switched off, so treat it as a sandbox &mdash; not for real student data yet.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ==== Supabase (trial project — RLS is OFF on these tables, so this key can read/write
+  // any row. Fine for made-up test students; must be locked down before any real student
+  // data goes in.) ====
+  var SUPABASE_URL = "https://dtywpjyhudcnhtqmtxbo.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0eXdwanlodWRjbmh0cW10eGJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2MTAxNjUsImV4cCI6MjEwNjE4NjE2NX0.I02ARTRpa3AmJjjNHrtVSRhy8X4O0eQv7ShnHdnmGx4";
+
+  function sbHeaders(extra){
+    var h = { "apikey": SUPABASE_ANON_KEY, "Authorization": "Bearer " + SUPABASE_ANON_KEY, "Content-Type": "application/json" };
+    if (extra) for (var k in extra) h[k] = extra[k];
+    return h;
+  }
+  function sbGet(path){
+    return fetch(SUPABASE_URL + "/rest/v1/" + path, { headers: sbHeaders() })
+      .then(function(r){ if (!r.ok) return r.text().then(function(t){ throw new Error("Supabase GET " + r.status + ": " + t); }); return r.json(); });
+  }
+  function sbUpsertProgress(studentId, topic, score){
+    return fetch(SUPABASE_URL + "/rest/v1/progress?on_conflict=student_id,topic", {
+      method: "POST",
+      headers: sbHeaders({ "Prefer": "resolution=merge-duplicates,return=minimal" }),
+      body: JSON.stringify([{ student_id: studentId, topic: topic, score: score, updated_at: new Date().toISOString() }])
+    }).then(function(r){ if (!r.ok) return r.text().then(function(t){ throw new Error("Supabase upsert " + r.status + ": " + t); }); });
+  }
+
+  // ==== login ====
+  var student = null; // {id, name, cls, scores:{}, attempts:{}}
+
+  document.getElementById("login-form").addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var name = document.getElementById("login-name").value.trim();
+    var pass = document.getElementById("login-pass").value.trim();
+    var errEl = document.getElementById("login-error");
+    var btn = document.getElementById("login-btn");
+    errEl.textContent = "";
+    if (!name || !pass){ errEl.textContent = "Enter your name and passcode."; return; }
+    btn.disabled = true; btn.textContent = "Logging in…";
+    sbGet("students?name=eq." + encodeURIComponent(name) + "&passcode=eq." + encodeURIComponent(pass) + "&select=id,name,class")
+      .then(function(rows){
+        if (!rows.length){ errEl.textContent = "Name or passcode not recognised — check with your teacher."; btn.disabled = false; btn.textContent = "Log in"; return; }
+        var row = rows[0];
+        return sbGet("progress?student_id=eq." + row.id + "&select=topic,score").then(function(progress){
+          var scores = {}, attempts = {};
+          ALL_TOPICS.forEach(function(t){ scores[t.topic] = 0; attempts[t.topic] = 0; });
+          progress.forEach(function(p){ scores[p.topic] = p.score; });
+          student = { id: row.id, name: row.name, cls: row["class"], scores: scores, attempts: attempts };
+          document.getElementById("login-screen").hidden = true;
+          document.getElementById("app").hidden = false;
+          buildLegend();
+          renderAll();
+        });
+      })
+      .catch(function(err){
+        console.error(err);
+        errEl.textContent = "Couldn't reach the trial database — check your connection and try again. [" + (err && err.message ? err.message : "unknown error") + "]";
+        btn.disabled = false; btn.textContent = "Log in";
+      });
+  });
+
+  document.getElementById("logout-btn").addEventListener("click", function(){
+    student = null;
+    document.getElementById("app").hidden = true;
+    document.getElementById("login-screen").hidden = false;
+    document.getElementById("login-name").value = "";
+    document.getElementById("login-pass").value = "";
+    document.getElementById("login-error").textContent = "";
+  });
+
+  var STRANDS = [
+    { name:"Number", key:"num", angleStart:0,
+      nodes:[
+        {topic:"Adding decimals", tier:0, angleFrac:0.0556, parent:null},
+        {topic:"Integer place value", tier:0, angleFrac:0.1667, parent:null},
+        {topic:"Decimal place value", tier:0, angleFrac:0.2778, parent:null},
+        {topic:"Rounding to powers of ten", tier:0, angleFrac:0.3889, parent:null},
+        {topic:"Multiplication", tier:0, angleFrac:0.5, parent:null},
+        {topic:"Short division with decimals", tier:0, angleFrac:0.6111, parent:null},
+        {topic:"Ordering negatives", tier:0, angleFrac:0.7222, parent:null},
+        {topic:"Order of operations 1", tier:0, angleFrac:0.8333, parent:null},
+        {topic:"Squares and roots", tier:0, angleFrac:0.9444, parent:null},
+        {topic:"Subtracting decimals", tier:1, angleFrac:0.0556, parent:"Adding decimals"},
+        {topic:"Rounding to decimal places", tier:1, angleFrac:0.3889, parent:"Rounding to powers of ten"},
+        {topic:"Adding negatives", tier:1, angleFrac:0.7222, parent:"Ordering negatives"},
+        {topic:"Order of operations 2", tier:1, angleFrac:0.8333, parent:"Order of operations 1"},
+        {topic:"Cubes and roots", tier:1, angleFrac:0.9444, parent:"Squares and roots"},
+        {topic:"Subtracting negatives", tier:2, angleFrac:0.7222, parent:"Adding negatives"},
+        {topic:"Multiplying positive x negative", tier:3, angleFrac:0.7222, parent:"Subtracting negatives"},
+        {topic:"Dividing with negatives", tier:4, angleFrac:0.7222, parent:"Multiplying positive x negative"}
+      ]
+    },
+    { name:"Algebra", key:"alg", angleStart:0,
+      nodes:[
+        {topic:"Algebraic notation & terminology", tier:0, angleFrac:0.5, parent:null},
+        {topic:"Substitution", tier:1, angleFrac:0.125, parent:"Algebraic notation & terminology"},
+        {topic:"Forming expressions", tier:1, angleFrac:0.375, parent:"Algebraic notation & terminology"},
+        {topic:"Collecting like terms", tier:1, angleFrac:0.625, parent:"Algebraic notation & terminology"},
+        {topic:"Solving one step (adding)", tier:1, angleFrac:0.875, parent:"Algebraic notation & terminology"},
+        {topic:"Solving one step (multiplying)", tier:2, angleFrac:0.875, parent:"Solving one step (adding)"},
+        {topic:"Solving two step (multiply)", tier:3, angleFrac:0.875, parent:"Solving one step (multiplying)"},
+        {topic:"Solving two step (divide)", tier:4, angleFrac:0.875, parent:"Solving two step (multiply)"}
+      ]
+    },
+    { name:"Geometry & Measures", key:"geo", angleStart:0,
+      nodes:[
+        {topic:"Clocks and calendar", tier:0, angleFrac:0.25, parent:null},
+        {topic:"Converting units", tier:0, angleFrac:0.75, parent:null}
+      ]
+    }
+  ];
+
+  // mock QLA data for a trial Year 7 class ("8B", 30 pupils) — this is the exact shape produced by
+  // the 'Topic % (for Wheel)' sheet in the Y7 Term 1 QLA workbook: 0-100 mastery per SOW topic per
+  // student. Swap this block for the real QLA export once the pilot class has been marked.
+
+
+  var PRACTICE_BANK = {
+    "Adding decimals": {
+      "mv": [
+        {
+          "q": "4.3 + 2.5",
+          "a": "6.8"
+        },
+        {
+          "q": "4.3 + 2.8",
+          "a": "7.1"
+        },
+        {
+          "q": "4.6 + 2.8",
+          "a": "7.4"
+        },
+        {
+          "q": "4.63 + 2.8",
+          "a": "7.43"
+        }
+      ],
+      "idq": [
+        {
+          "q": "17.8 + 4.54",
+          "a": "22.34"
+        },
+        {
+          "q": "12.07 + 4.9 + 0.83",
+          "a": "17.8"
+        },
+        {
+          "q": "2.4 + 1.75 + 0.65",
+          "a": "4.8"
+        },
+        {
+          "q": "A piece of wood is 3.46 m. Another is 1.8 m. Total length?",
+          "a": "5.26 m"
+        }
+      ],
+      "exam_preview": "Work out 4.63 + 2.8 (1 mark)"
+    },
+    "Integer place value": {
+      "mv": [
+        {
+          "q": "What is the value of the digit 3 in 3 241?",
+          "a": "3 000"
+        },
+        {
+          "q": "What is the value of the digit 3 in 2 341?",
+          "a": "300"
+        },
+        {
+          "q": "What is the value of the digit 3 in 2 431?",
+          "a": "30"
+        },
+        {
+          "q": "What is the value of the digit 3 in 2 413?",
+          "a": "3"
+        }
+      ],
+      "idq": [
+        {
+          "q": "What is the value of the digit 5 in 5 000?",
+          "a": "5 000"
+        },
+        {
+          "q": "What is the value of the digit 5 in 50 000?",
+          "a": "50 000"
+        },
+        {
+          "q": "What is the value of the digit 5 in 500 000?",
+          "a": "500 000"
+        },
+        {
+          "q": "What is the value of the digit 5 in 15 000?",
+          "a": "5 000"
+        }
+      ],
+      "exam_preview": "Write the value of the digit 7 in the number 47 362 (1 mark)"
+    },
+    "Adding negatives": {
+      "mv": [
+        {
+          "q": "3 + (−1)",
+          "a": "2"
+        },
+        {
+          "q": "3 + (−2)",
+          "a": "1"
+        },
+        {
+          "q": "3 + (−3)",
+          "a": "0"
+        },
+        {
+          "q": "3 + (−4)",
+          "a": "−1"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Work out 4 − (−3)",
+          "a": "7"
+        },
+        {
+          "q": "Work out −7 + 3",
+          "a": "−4"
+        },
+        {
+          "q": "Work out −4 + (−6)",
+          "a": "−10"
+        },
+        {
+          "q": "A temperature falls from 3°C by 8 degrees. New temperature?",
+          "a": "−5°C"
+        }
+      ],
+      "exam_preview": "Work out −3 + (−5) (1 mark)"
+    },
+    "Clocks and calendar": {
+      "exam_preview": "Write 7:20 pm as a 24-hour clock time (1 mark)"
+    },
+    "Multiplication": {
+      "mv": [
+        {
+          "q": "23 x 4",
+          "a": "92"
+        },
+        {
+          "q": "23 x 40",
+          "a": "920"
+        },
+        {
+          "q": "23 x 41",
+          "a": "943"
+        },
+        {
+          "q": "23 x 42",
+          "a": "966"
+        }
+      ],
+      "idq": [
+        {
+          "q": "217 x 3",
+          "a": "651"
+        },
+        {
+          "q": "58 x 37",
+          "a": "2146"
+        },
+        {
+          "q": "7.4 x 3.5",
+          "a": "25.9"
+        },
+        {
+          "q": "0.8 x 0.06",
+          "a": "0.048"
+        }
+      ],
+      "exam_preview": "Work out 36 × 42 (2 marks)"
+    },
+    "Short division with decimals": {
+      "mv": [
+        {
+          "q": "84 / 4",
+          "a": "21"
+        },
+        {
+          "q": "84 / 6",
+          "a": "14"
+        },
+        {
+          "q": "84 / 7",
+          "a": "12"
+        },
+        {
+          "q": "85 / 5",
+          "a": "17"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Calculate 384 / 12",
+          "a": "32"
+        },
+        {
+          "q": "Work out 238 / 7",
+          "a": "34"
+        },
+        {
+          "q": "£37.50 split equally between 6 people. How much each?",
+          "a": "£6.25"
+        },
+        {
+          "q": "29.4 / 7",
+          "a": "4.2"
+        }
+      ],
+      "exam_preview": "Work out 45.6 ÷ 3 (2 marks)"
+    },
+    "Rounding to decimal places": {
+      "mv": [
+        {
+          "q": "Round 3.47 to 1 decimal place",
+          "a": "3.5"
+        },
+        {
+          "q": "Round 3.42 to 1 decimal place",
+          "a": "3.4"
+        },
+        {
+          "q": "Round 3.45 to 1 decimal place",
+          "a": "3.5"
+        },
+        {
+          "q": "Round 3.47 to 2 decimal places",
+          "a": "3.47"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Round 5.248 to 1 decimal place",
+          "a": "5.2"
+        },
+        {
+          "q": "Round 5.248 to 2 decimal places",
+          "a": "5.25"
+        },
+        {
+          "q": "Round 14/3 to 2 decimal places",
+          "a": "4.67"
+        },
+        {
+          "q": "Round 1/3 to 3 decimal places",
+          "a": "0.333"
+        }
+      ],
+      "exam_preview": "Round 3.847 to 2 decimal places (1 mark)"
+    },
+    "Subtracting decimals": {
+      "mv": [
+        {
+          "q": "7.8 - 3.5",
+          "a": "4.3"
+        },
+        {
+          "q": "7.8 - 3.9",
+          "a": "3.9"
+        },
+        {
+          "q": "7.3 - 3.9",
+          "a": "3.4"
+        },
+        {
+          "q": "7.30 - 3.94",
+          "a": "3.36"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Subtract 4.29 from 14.4",
+          "a": "10.11"
+        },
+        {
+          "q": "7.4 - 2.63",
+          "a": "4.77"
+        },
+        {
+          "q": "1.5 - 0.75",
+          "a": "0.75"
+        },
+        {
+          "q": "A rope is 8.5 m. 3.74 m is cut off. How much is left?",
+          "a": "4.76 m"
+        }
+      ],
+      "exam_preview": "Work out 7.4 − 2.63 (1 mark)"
+    },
+    "Converting units": {
+      "exam_preview": "Convert 45 km to metres (1 mark)"
+    },
+    "Solving one step (adding)": {
+      "mv": [
+        {
+          "q": "Solve x + 1 = 5",
+          "a": "x = 4"
+        },
+        {
+          "q": "Solve x + 2 = 5",
+          "a": "x = 3"
+        },
+        {
+          "q": "Solve x + 4 = 5",
+          "a": "x = 1"
+        },
+        {
+          "q": "Solve x + 4 = 9",
+          "a": "x = 5"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Solve 34 = 4 + 5x",
+          "a": "x = 6 (rearrange: 5x = 30)"
+        },
+        {
+          "q": "n + 17 = 42. Find n.",
+          "a": "n = 25"
+        },
+        {
+          "q": "A number plus 35 gives 81. Form and solve an equation.",
+          "a": "x + 35 = 81, x = 46"
+        },
+        {
+          "q": "Solve x + 4 = −7",
+          "a": "x = −11"
+        }
+      ],
+      "exam_preview": "Solve x + 9 = 14 (1 mark)"
+    },
+    "Solving one step (multiplying)": {
+      "mv": [
+        {
+          "q": "Solve 2x = 6",
+          "a": "x = 3"
+        },
+        {
+          "q": "Solve 2x = 10",
+          "a": "x = 5"
+        },
+        {
+          "q": "Solve 2x = 14",
+          "a": "x = 7"
+        },
+        {
+          "q": "Solve 3x = 6",
+          "a": "x = 2"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Solve y/4 + 5 = 13",
+          "a": "y/4 = 8, y = 32"
+        },
+        {
+          "q": "5x = 22.50. Find x.",
+          "a": "x = £4.50"
+        },
+        {
+          "q": "Solve 34 = 4 + 5x",
+          "a": "5x = 30, x = 6"
+        },
+        {
+          "q": "Solve 7x = 0",
+          "a": "x = 0"
+        }
+      ],
+      "exam_preview": "Solve 4x = 28 (1 mark)"
+    },
+    "Ordering negatives": {
+      "mv": [
+        {
+          "q": "Which is smaller: −3 or −5?",
+          "a": "−5"
+        },
+        {
+          "q": "Which is smaller: −1 or −4?",
+          "a": "−4"
+        },
+        {
+          "q": "Which is smaller: −6 or 2?",
+          "a": "−6"
+        },
+        {
+          "q": "Which is smaller: −6 or −2?",
+          "a": "−6"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Order smallest first: −6.7, −6.4, −4.7, −4, 4.3, 6.5",
+          "a": "−6.7, −6.4, −4.7, −4, 4.3, 6.5"
+        },
+        {
+          "q": "Put these in ascending order: −88, −81, −18, 0, 8, 80",
+          "a": "−88, −81, −18, 0, 8, 80"
+        },
+        {
+          "q": "A submarine is at −45 m. A fish is at −12 m. Which is deeper?",
+          "a": "The submarine (−45 m is deeper)"
+        },
+        {
+          "q": "What is the midpoint of −6 and 4 on a number line?",
+          "a": "−1"
+        }
+      ],
+      "exam_preview": "Write these temperatures in order, coldest first: −3°C, 5°C, −7°C, 1°C (1 mark)"
+    },
+    "Order of operations 2": {
+      "mv": [
+        {
+          "q": "3 × (4 + 2)",
+          "a": "18"
+        },
+        {
+          "q": "3 × (4 + 5)",
+          "a": "27"
+        },
+        {
+          "q": "(3 + 5) × 4",
+          "a": "32"
+        },
+        {
+          "q": "(3 + 5) × 6",
+          "a": "48"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Work out (6 + 12 × 4) ÷ (15 − 11 + 2)",
+          "a": "9"
+        },
+        {
+          "q": "Work out 5 + 4 × (12 − 3 × 3)",
+          "a": "17"
+        },
+        {
+          "q": "Insert brackets to make 3 + 5 × 4 − 1 = 31 correct",
+          "a": "(3 + 5) × 4 − 1 = 31"
+        },
+        {
+          "q": "Work out (3 + 5) × (4 − 1) + 6 ÷ 2",
+          "a": "27"
+        }
+      ],
+      "exam_preview": "Work out 3 × (4 + 2)² ÷ 9 (2 marks)"
+    },
+    "Rounding to powers of ten": {
+      "mv": [
+        {
+          "q": "Round 4 600 to the nearest 1 000",
+          "a": "5 000"
+        },
+        {
+          "q": "Round 4 200 to the nearest 1 000",
+          "a": "4 000"
+        },
+        {
+          "q": "Round 4 500 to the nearest 1 000",
+          "a": "5 000"
+        },
+        {
+          "q": "Round 14 600 to the nearest 1 000",
+          "a": "15 000"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Round 7 350 to the nearest 1 000",
+          "a": "7 000"
+        },
+        {
+          "q": "Round 73 500 to the nearest 10 000",
+          "a": "70 000"
+        },
+        {
+          "q": "Round 735 000 to the nearest 100 000",
+          "a": "700 000"
+        },
+        {
+          "q": "Round 23 847 to the nearest 100",
+          "a": "23 800"
+        }
+      ],
+      "exam_preview": "Round 47 386 to the nearest 1000 (1 mark)"
+    },
+    "Algebraic notation & terminology": {
+      "mv": [
+        {
+          "q": "Write n × 3 without a multiply sign",
+          "a": "3n"
+        },
+        {
+          "q": "Write 4 × m without a multiply sign",
+          "a": "4m"
+        },
+        {
+          "q": "Write n × n without a multiply sign",
+          "a": "n²"
+        },
+        {
+          "q": "Write n + n + n in a shorter way",
+          "a": "3n"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Write n pens at 80p each as an expression for the total cost in pence",
+          "a": "80n"
+        },
+        {
+          "q": "Oliver is d years old. Joshua is 5 years older. Write an expression for Joshua's age.",
+          "a": "d + 5"
+        },
+        {
+          "q": "Write an expression for the perimeter of a square with side x",
+          "a": "4x"
+        },
+        {
+          "q": "Write 3a × 2b in a simpler form",
+          "a": "6ab"
+        }
+      ],
+      "exam_preview": "Write an expression for the cost of n pens at 80p each (1 mark)"
+    },
+    "Substitution": {
+      "mv": [
+        {
+          "q": "Find 3x when x = 4",
+          "a": "12"
+        },
+        {
+          "q": "Find 3x when x = 5",
+          "a": "15"
+        },
+        {
+          "q": "Find 3x when x = 0",
+          "a": "0"
+        },
+        {
+          "q": "Find 3x when x = −2",
+          "a": "−6"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Work out 3(2)² − 5",
+          "a": "7"
+        },
+        {
+          "q": "p = 4, q = −3. Work out p² + 2q",
+          "a": "10"
+        },
+        {
+          "q": "A = ½(a + b)h. Find A when a = 5, b = 9, h = 4",
+          "a": "28"
+        },
+        {
+          "q": "Find 2x³ − 3x when x = −2",
+          "a": "−10"
+        }
+      ],
+      "exam_preview": "Work out 3a² − b when a = 2 and b = 5 (2 marks)"
+    },
+    "Collecting like terms": {
+      "mv": [
+        {
+          "q": "3x + 2x",
+          "a": "5x"
+        },
+        {
+          "q": "3x + 5x",
+          "a": "8x"
+        },
+        {
+          "q": "3x − 2x",
+          "a": "x"
+        },
+        {
+          "q": "5x − 2x",
+          "a": "3x"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Simplify 3a + 5b − a + 2b",
+          "a": "2a + 7b"
+        },
+        {
+          "q": "Simplify 4x² + 3x − x² + 2x",
+          "a": "3x² + 5x"
+        },
+        {
+          "q": "Show that 3a + 5b − a + 2b simplifies to 2a + 7b",
+          "a": "(3a − a) + (5b + 2b) = 2a + 7b ✓"
+        },
+        {
+          "q": "Perimeter of a triangle with sides 5x + 2, 3x − 1 and 4x + 3. Simplify.",
+          "a": "12x + 4"
+        }
+      ],
+      "exam_preview": "Simplify 5a + 3b − 2a + b (2 marks)"
+    },
+    "Decimal place value": {
+      "mv": [
+        {
+          "q": "What is the value of the digit 3 in 0.3?",
+          "a": "3 tenths (0.3)"
+        },
+        {
+          "q": "What is the value of the digit 3 in 0.03?",
+          "a": "3 hundredths (0.03)"
+        },
+        {
+          "q": "What is the value of the digit 3 in 0.003?",
+          "a": "3 thousandths (0.003)"
+        },
+        {
+          "q": "What is the value of the digit 3 in 4.3?",
+          "a": "3 tenths (0.3)"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Write 0.4 in words",
+          "a": "Four tenths"
+        },
+        {
+          "q": "Write 3.52 in words",
+          "a": "Three and fifty-two hundredths"
+        },
+        {
+          "q": "What is 5.847 rounded to 2 decimal places?",
+          "a": "5.85"
+        },
+        {
+          "q": "Which is larger: 0.7 or 0.69?",
+          "a": "0.7"
+        }
+      ],
+      "exam_preview": "Write the value of the digit 6 in the number 3.068 (1 mark)"
+    },
+    "Dividing with negatives": {
+      "mv": [
+        {
+          "q": "8 ÷ (−2)",
+          "a": "−4"
+        },
+        {
+          "q": "8 ÷ (−4)",
+          "a": "−2"
+        },
+        {
+          "q": "8 ÷ (−8)",
+          "a": "−1"
+        },
+        {
+          "q": "12 ÷ (−3)",
+          "a": "−4"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Work out (−36) ÷ (−4)",
+          "a": "9"
+        },
+        {
+          "q": "Work out 78 ÷ (−6)",
+          "a": "−13"
+        },
+        {
+          "q": "Work out (−45) ÷ 9",
+          "a": "−5"
+        },
+        {
+          "q": "x ÷ (−4) = 6. Find x.",
+          "a": "x = −24"
+        }
+      ],
+      "exam_preview": "Work out (−36) ÷ (−4) (1 mark)"
+    },
+    "Cubes and roots": {
+      "mv": [
+        {
+          "q": "1³",
+          "a": "1"
+        },
+        {
+          "q": "2³",
+          "a": "8"
+        },
+        {
+          "q": "3³",
+          "a": "27"
+        },
+        {
+          "q": "4³",
+          "a": "64"
+        }
+      ],
+      "idq": [
+        {
+          "q": "∛64",
+          "a": "4"
+        },
+        {
+          "q": "2³ + 3³",
+          "a": "35"
+        },
+        {
+          "q": "343 = 7³. What is ∛343?",
+          "a": "7"
+        },
+        {
+          "q": "∛8 + 4²",
+          "a": "18"
+        }
+      ],
+      "exam_preview": "Write down the value of ∛64 (1 mark)"
+    },
+    "Squares and roots": {
+      "mv": [
+        {
+          "q": "1²",
+          "a": "1"
+        },
+        {
+          "q": "2²",
+          "a": "4"
+        },
+        {
+          "q": "3²",
+          "a": "9"
+        },
+        {
+          "q": "4²",
+          "a": "16"
+        }
+      ],
+      "idq": [
+        {
+          "q": "√169",
+          "a": "13"
+        },
+        {
+          "q": "11² − √81",
+          "a": "112"
+        },
+        {
+          "q": "One square root of 64 is 8. What is the other?",
+          "a": "−8"
+        },
+        {
+          "q": "Find two square numbers that sum to 100",
+          "a": "36 + 64 (6² + 8²)"
+        }
+      ],
+      "exam_preview": "Write down the value of √169 (1 mark)"
+    },
+    "Order of operations 1": {
+      "mv": [
+        {
+          "q": "2 + 3 × 4",
+          "a": "14"
+        },
+        {
+          "q": "2 + 4 × 4",
+          "a": "18"
+        },
+        {
+          "q": "2 + 5 × 4",
+          "a": "22"
+        },
+        {
+          "q": "2 + 3 × 5",
+          "a": "17"
+        }
+      ],
+      "idq": [
+        {
+          "q": "8 − 4 + 2 × 3",
+          "a": "10"
+        },
+        {
+          "q": "5 + 4 × 3",
+          "a": "17"
+        },
+        {
+          "q": "20 − 12 ÷ 4",
+          "a": "17"
+        },
+        {
+          "q": "Work out (6 + 12 × 4) ÷ (15 − 11 + 2)",
+          "a": "9"
+        }
+      ],
+      "exam_preview": "Work out 5 + 3 × 4 (1 mark)"
+    },
+    "Solving two step (multiply)": {
+      "mv": [
+        {
+          "q": "Solve 2x + 1 = 7",
+          "a": "x = 3"
+        },
+        {
+          "q": "Solve 2x + 3 = 7",
+          "a": "x = 2"
+        },
+        {
+          "q": "Solve 2x + 5 = 7",
+          "a": "x = 1"
+        },
+        {
+          "q": "Solve 2x + 1 = 11",
+          "a": "x = 5"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Solve 3x + 5 = 20",
+          "a": "x = 5"
+        },
+        {
+          "q": "Solve 4x − 7 = 13",
+          "a": "x = 5"
+        },
+        {
+          "q": "Solve 2x + 3 = −7",
+          "a": "x = −5"
+        },
+        {
+          "q": "2[x + (2x − 1)] = 34. Find x.",
+          "a": "6x − 2 = 34, x = 6"
+        }
+      ],
+      "exam_preview": "Solve 3x + 5 = 20 (2 marks)"
+    },
+    "Subtracting negatives": {
+      "mv": [
+        {
+          "q": "5 − (−1)",
+          "a": "6"
+        },
+        {
+          "q": "5 − (−2)",
+          "a": "7"
+        },
+        {
+          "q": "5 − (−5)",
+          "a": "10"
+        },
+        {
+          "q": "2 − (−3)",
+          "a": "5"
+        }
+      ],
+      "idq": [
+        {
+          "q": "28 − (−3)",
+          "a": "31"
+        },
+        {
+          "q": "Calculate 38 − 67",
+          "a": "−29"
+        },
+        {
+          "q": "(−2) − (−9)",
+          "a": "7"
+        },
+        {
+          "q": "The temperature in Moscow is −12°C and in London is 4°C. What is the difference?",
+          "a": "16°C"
+        }
+      ],
+      "exam_preview": "Work out 4 − (−6) (1 mark)"
+    },
+    "Forming expressions": {
+      "mv": [
+        {
+          "q": "n sweets shared equally between 4 people. Each person gets:",
+          "a": "n/4"
+        },
+        {
+          "q": "A chocolate bar costs n pence. Cost of 5 bars:",
+          "a": "5n pence"
+        },
+        {
+          "q": "A number n is doubled then 3 is added:",
+          "a": "2n + 3"
+        },
+        {
+          "q": "A number n is multiplied by 4 then 1 is subtracted:",
+          "a": "4n − 1"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Amira is d years old. Joshua's age is Amira's divided by 5. Oliver is 2 years older than Joshua. Write Oliver's age.",
+          "a": "d/5 + 2"
+        },
+        {
+          "q": "The cost of hiring a van is £40 plus £15 per hour h. Write an expression for the total cost.",
+          "a": "15h + 40"
+        },
+        {
+          "q": "Write an expression for the perimeter of a rectangle with length 2x + 3 and width x",
+          "a": "6x + 6"
+        },
+        {
+          "q": "Write the nth term of: 3, 5, 7, 9...",
+          "a": "2n + 1"
+        }
+      ],
+      "exam_preview": "Write an expression for the perimeter of a rectangle with length (2x+3) and width x (2 marks)"
+    },
+    "Solving two step (divide)": {
+      "mv": [
+        {
+          "q": "Solve x/2 + 1 = 4",
+          "a": "x = 6"
+        },
+        {
+          "q": "Solve x/2 + 3 = 4",
+          "a": "x = 2"
+        },
+        {
+          "q": "Solve x/2 + 1 = 6",
+          "a": "x = 10"
+        },
+        {
+          "q": "Solve x/3 + 1 = 4",
+          "a": "x = 9"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Solve x/4 + 3 = 7",
+          "a": "x = 16"
+        },
+        {
+          "q": "Solve x/5 − 2 = 6",
+          "a": "x = 40"
+        },
+        {
+          "q": "Solve (x + 3)/4 = 5",
+          "a": "x + 3 = 20, x = 17"
+        },
+        {
+          "q": "Solve (2x − 1)/3 = 5",
+          "a": "2x − 1 = 15, x = 8"
+        }
+      ],
+      "exam_preview": "Solve x/4 + 3 = 7 (2 marks)"
+    },
+    "Multiplying positive x negative": {
+      "mv": [
+        {
+          "q": "3 × (−1)",
+          "a": "−3"
+        },
+        {
+          "q": "3 × (−2)",
+          "a": "−6"
+        },
+        {
+          "q": "3 × (−3)",
+          "a": "−9"
+        },
+        {
+          "q": "3 × (−4)",
+          "a": "−12"
+        }
+      ],
+      "idq": [
+        {
+          "q": "Work out 6 × (−7)",
+          "a": "−42"
+        },
+        {
+          "q": "Work out (−5) × 8",
+          "a": "−40"
+        },
+        {
+          "q": "A diver descends 3 m every minute for 4 minutes. Find the depth.",
+          "a": "4 × (−3) = −12 m"
+        },
+        {
+          "q": "Work out (−7) × (−8)",
+          "a": "56"
+        }
+      ],
+      "exam_preview": "Work out 6 × (−7) (1 mark)"
+    }
+  };
+
+
+  var ALL_TOPICS = [];
+  var TOPIC_INFO = {}; // topic -> {strand, tier, node}
+  STRANDS.forEach(function(strand){
+    strand.nodes.forEach(function(n){
+      ALL_TOPICS.push({topic:n.topic, strand:strand.name});
+      TOPIC_INFO[n.topic] = {strand:strand.name, key:strand.key, tier:n.tier, parent:n.parent};
+    });
+  });
+
+  function bandOf(score){
+    if (score < 70) return {key:"priority", label:"Priority"};
+    if (score < 80) return {key:"developing", label:"Developing"};
+    return {key:"secure", label:"Secure"};
+  }
+
+  var GRADE_BOUNDARIES = [
+    {min:88, grade:9}, {min:80, grade:8}, {min:72, grade:7}, {min:64, grade:6},
+    {min:56, grade:5}, {min:48, grade:4}, {min:40, grade:3}, {min:30, grade:2}, {min:0, grade:1}
+  ];
+
+  function estimateGrade(stu){
+    var wSum = 0, sSum = 0;
+    ALL_TOPICS.forEach(function(t){
+      var w = TOPIC_INFO[t.topic].tier + 1;
+      wSum += w;
+      sSum += w * stu.scores[t.topic];
+    });
+    var weighted = sSum / wSum;
+    var grade = GRADE_BOUNDARIES.find(function(b){ return weighted >= b.min; }).grade;
+    var distanceToNext = grade < 9 ? (GRADE_BOUNDARIES.find(function(b){ return b.grade === grade+1; }).min - weighted) : null;
+    return { grade: grade, weighted: Math.round(weighted), borderline: distanceToNext !== null && distanceToNext <= 2.5 };
+  }
+
+  function scoreToVar(strandKey, score){
+    var idx = Math.round((Math.max(0,Math.min(100,score))/100) * 12);
+    return "var(--" + strandKey + "-" + idx + ")";
+  }
+
+  function polar(cx,cy,r,angleDeg){
+    var a = (angleDeg-90) * Math.PI/180;
+    return { x: cx + r*Math.cos(a), y: cy + r*Math.sin(a) };
+  }
+
+  function wedgePath(cx,cy,innerR,outerR,startAngle,endAngle){
+    var so = polar(cx,cy,outerR,endAngle);
+    var eo = polar(cx,cy,outerR,startAngle);
+    var si = polar(cx,cy,innerR,endAngle);
+    var ei = polar(cx,cy,innerR,startAngle);
+    var largeArc = (endAngle-startAngle) > 180 ? 1 : 0;
+    return "M " + so.x + " " + so.y +
+      " A " + outerR + " " + outerR + " 0 " + largeArc + " 0 " + eo.x + " " + eo.y +
+      " L " + ei.x + " " + ei.y +
+      " A " + innerR + " " + innerR + " 0 " + largeArc + " 1 " + si.x + " " + si.y + " Z";
+  }
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs){
+    var e = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  var svg = document.getElementById("tree");
+  var CX=330, CY=330;
+  var SECTOR_GAP = 0;
+  var HOLE_R = 64;
+  var TIER_BOUNDS = [HOLE_R, 98, 136, 176, 218, 262];
+
+  var sectorWidth = (360 - SECTOR_GAP*STRANDS.length) / STRANDS.length;
+  STRANDS.forEach(function(strand, i){ strand.angleStart = -90 + i*(sectorWidth + SECTOR_GAP); });
+
+  STRANDS.forEach(function(strand){
+    var byTier = {};
+    strand.nodes.forEach(function(n){ (byTier[n.tier] = byTier[n.tier] || []).push(n); });
+    Object.keys(byTier).forEach(function(tierKey){
+      var arr = byTier[tierKey].slice().sort(function(a,b){ return a.angleFrac - b.angleFrac; });
+      arr.forEach(function(n, i){
+        n._a0Frac = i > 0 ? (arr[i-1].angleFrac + n.angleFrac) / 2 : 0;
+        n._a1Frac = i < arr.length-1 ? (n.angleFrac + arr[i+1].angleFrac) / 2 : 1;
+      });
+    });
+  });
+
+  var pinned = null;
+
+  function nodePos(strand, node){
+    var angle = strand.angleStart + node.angleFrac * sectorWidth;
+    var inner = TIER_BOUNDS[node.tier], outer = TIER_BOUNDS[node.tier+1];
+    var r = (inner+outer)/2;
+    return { angle:angle, r:r, inner:inner, outer:outer, pt: polar(CX, CY, r, angle) };
+  }
+
+  function buildTree(stu){
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.appendChild(el("circle", {cx:CX, cy:CY, r:TIER_BOUNDS[TIER_BOUNDS.length-1], "class":"ring-guide"}));
+
+    STRANDS.forEach(function(strand){
+      var titlePos = polar(CX, CY, TIER_BOUNDS[TIER_BOUNDS.length-1] + 26, strand.angleStart + sectorWidth/2);
+      var title = el("text", {x:titlePos.x, y:titlePos.y, "class":"strand-title", "text-anchor":"middle", fill:"var(--"+strand.key+"-8)"});
+      title.textContent = strand.name.toUpperCase();
+      svg.appendChild(title);
+
+      var maxTierHere = strand.nodes.reduce(function(m,n){ return Math.max(m, n.tier); }, 0);
+
+      strand.nodes.forEach(function(n){
+        var info = nodePos(strand, n);
+        var score = stu.scores[n.topic];
+        var a0 = strand.angleStart + n._a0Frac * sectorWidth;
+        var a1 = strand.angleStart + n._a1Frac * sectorWidth;
+        var wedge = el("path", {
+          d: wedgePath(CX, CY, info.inner, info.outer, a0, a1),
+          "class":"node" + (pinned === n.topic ? " selected" : ""),
+          fill: scoreToVar(strand.key, score),
+          tabindex:"0", role:"button",
+          "aria-label": n.topic + ", " + strand.name + ", mastery " + score + " percent"
+        });
+        wedge.dataset.topic = n.topic;
+        wedge.addEventListener("click", function(){ pinned = n.topic; buildTree(stu); renderDetail(n.topic, true); });
+        wedge.addEventListener("keydown", function(ev){
+          if (ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); pinned = n.topic; buildTree(stu); renderDetail(n.topic, true); }
+        });
+        svg.appendChild(wedge);
+
+        var wedgeDeg = (n._a1Frac - n._a0Frac) * sectorWidth;
+        if (n.tier === 0 && wedgeDeg >= 18){
+          var labelAngle = strand.angleStart + (n._a0Frac + n._a1Frac)/2 * sectorWidth;
+          var lp = polar(CX, CY, info.outer - 6, labelAngle);
+          var dx = Math.cos((labelAngle - 90) * Math.PI / 180);
+          var anchor = dx > 0.2 ? "start" : (dx < -0.2 ? "end" : "middle");
+          var label = el("text", {x:lp.x, y:lp.y, "class":"tier0-label", "text-anchor":anchor});
+          label.textContent = n.topic;
+          svg.appendChild(label);
+          var bb = label.getBBox();
+          var corners = [[bb.x,bb.y],[bb.x+bb.width,bb.y],[bb.x,bb.y+bb.height],[bb.x+bb.width,bb.y+bb.height]];
+          var maxR = corners.reduce(function(m,c){ return Math.max(m, Math.hypot(c[0]-CX, c[1]-CY)); }, 0);
+          if (maxR > info.outer + 16) svg.removeChild(label);
+        }
+      });
+
+      for (var t = maxTierHere + 1; t < TIER_BOUNDS.length - 1; t++){
+        var emptyWedge = el("path", {
+          d: wedgePath(CX, CY, TIER_BOUNDS[t], TIER_BOUNDS[t+1], strand.angleStart, strand.angleStart + sectorWidth),
+          "class":"node-empty",
+          "aria-hidden":"true"
+        });
+        svg.appendChild(emptyWedge);
+      }
+    });
+
+    var est = estimateGrade(stu);
+    var gradeNum = el("text", {x:CX, y:CY-6, "text-anchor":"middle", "class":"center-grade-num"});
+    gradeNum.textContent = est.grade;
+    var gradeLabel = el("text", {x:CX, y:CY+16, "text-anchor":"middle", "class":"center-grade-label"});
+    gradeLabel.textContent = est.borderline ? "EST. " + est.grade + " → " + (est.grade+1) + " BORDERLINE" : "EST. GCSE GRADE";
+    var note = el("text", {x:CX, y:CY+34, "class":"center-note", "text-anchor":"middle"});
+    note.textContent = stu.name.split(" ")[0] + " · " + est.weighted + "% weighted";
+    svg.appendChild(gradeNum); svg.appendChild(gradeLabel); svg.appendChild(note);
+  }
+
+  function buildLegend(){
+    var wrap = document.getElementById("legend-strands");
+    wrap.innerHTML = "";
+    STRANDS.forEach(function(strand){
+      var item = document.createElement("div");
+      item.className = "legend-strand";
+      item.innerHTML =
+        '<span class="legend-swatch-dot" style="background:var(--'+strand.key+'-8)"></span>' +
+        '<span>'+strand.name+'</span>' +
+        '<span class="legend-ramp" style="background:linear-gradient(to right, var(--'+strand.key+'-1), var(--'+strand.key+'-11))"></span>';
+      wrap.appendChild(item);
+    });
+  }
+
+  // ---- self-check answer matching (same lenient engine as the teacher-facing wheel) ----
+  var qaRegistry = {};
+  var qaCounter = 0;
+  // renderDetail rebuilds the whole practice list from scratch every time (score change,
+  // switching topics, switching back) so a per-element "answered" flag would just vanish —
+  // track solved questions here instead, keyed by topic+question text (stable across
+  // re-renders even if the mv/idq ordering flips once a score crosses the 70% line)
+  var qaSolved = {};
+
+  function extractKeyAnswer(raw){
+    var strongMatch = raw.match(/<strong>([\s\S]*?)<\/strong>/);
+    if (strongMatch) return strongMatch[1].replace(/<[^>]+>/g, '').trim();
+    var plain = raw.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ');
+    var eqMatches = plain.match(/(?<![0-9a-zA-Z])[a-zA-Z]\s*=\s*[£\-−]?\d+(\.\d+)?/g);
+    if (eqMatches && eqMatches.length) return eqMatches[eqMatches.length - 1].trim();
+    return plain.trim();
+  }
+  function normStr(s){
+    return s.toLowerCase()
+      .replace(/−/g, '-').replace(/&nbsp;/g, ' ')
+      .replace(/×/g, 'x').replace(/÷/g, '/')
+      .replace(/\s+/g, '')
+      .replace(/[^a-z0-9\-.\/,£°²³=]/g, '');
+  }
+  function stripVarPrefix(s){
+    var m = s.match(/^[a-z]=(.+)$/);
+    return m ? m[1] : s;
+  }
+  function firstNumber(s){
+    var m = s.replace(/,/g, '').match(/-?\d+(\.\d+)?/);
+    return m ? parseFloat(m[0]) : NaN;
+  }
+  function matchAnswer(userInput, rawAnswer){
+    if (!userInput || !userInput.trim()) return "empty";
+    var a = stripVarPrefix(normStr(userInput));
+    var b = stripVarPrefix(normStr(extractKeyAnswer(rawAnswer)));
+    if (a === b) return true;
+    var an = firstNumber(a), bn = firstNumber(b);
+    if (!isNaN(an) && !isNaN(bn) && Math.abs(an - bn) < 1e-9) return true;
+    return false;
+  }
+
+  var SCORE_STEP = 20; // percentage points a topic's mastery rises per correct answer, capped at 100
+
+  window.checkQA = function(btn){
+    var li = btn.closest(".qa-item");
+    var input = li.querySelector(".qa-input");
+    var fb = li.querySelector(".qa-feedback");
+    var topicName = li.dataset.topic;
+    var raw = qaRegistry[li.dataset.qid];
+    var result = matchAnswer(input.value, raw);
+    fb.hidden = false;
+    student.attempts[topicName] = (student.attempts[topicName] || 0) + 1;
+    if (result === "empty"){
+      fb.className = "qa-feedback qa-feedback-warn";
+      fb.textContent = "Type an answer first";
+      student.attempts[topicName]--; // don't count an empty submit as an attempt
+      return;
+    }
+    if (result === true){
+      qaSolved[li.dataset.solveKey] = true;
+      var newScore = Math.min(100, (student.scores[topicName] || 0) + SCORE_STEP);
+      student.scores[topicName] = newScore;
+      buildTree(student);
+      renderDetail(topicName, true); // rebuilds this panel — qaSolved is what makes this question stay marked correct
+      sbUpsertProgress(student.id, topicName, newScore).catch(function(err){ console.error("Could not save progress:", err); });
+    } else {
+      fb.className = "qa-feedback qa-feedback-wrong";
+      fb.innerHTML = "Not quite — answer: " + raw;
+      var attemptsEl = document.getElementById("attempts-count");
+      if (attemptsEl) attemptsEl.textContent = student.attempts[topicName] || 0;
+    }
+  };
+
+  function practiceListFor(topicName, score){
+    var bank = PRACTICE_BANK[topicName] || {};
+    var order = score < 70 ? ["mv","idq"] : ["idq","mv"];
+    var items = [];
+    order.forEach(function(kind){
+      (bank[kind] || []).slice(0, 2).forEach(function(item){
+        items.push({tag: kind.toUpperCase(), q: item.q, a: item.a});
+      });
+    });
+    if (!items.length && bank.exam_preview){
+      items.push({tag:"EXAM STYLE", q: bank.exam_preview, a: null});
+    }
+    if (!items.length){
+      return '<li class="qa-empty">No practice bank built for this topic yet — check back once it\'s added.</li>';
+    }
+    return items.map(function(it, i){
+      if (it.a){
+        qaCounter++;
+        var qid = "qa" + qaCounter;
+        qaRegistry[qid] = it.a;
+        // stable across re-renders (score change, switching topics and back) even though
+        // qid/qaCounter increment fresh every render — this is what qaSolved is keyed on
+        var solveKey = (topicName + "||" + it.q).replace(/"/g, '&quot;');
+        var solved = !!qaSolved[solveKey];
+        var checkRow = solved ?
+          ('<div class="qa-answer-row">' +
+            '<input type="text" class="qa-input" value="' + extractKeyAnswer(it.a).replace(/"/g,'&quot;') + '" disabled>' +
+            '<button type="button" class="qa-check-btn" disabled>Check</button>' +
+          '</div>' +
+          '<div class="qa-feedback qa-feedback-correct">✓ Correct</div>')
+        :
+          ('<div class="qa-answer-row">' +
+            '<input type="text" class="qa-input" placeholder="Your answer" ' +
+              'onkeydown="if(event.key===\'Enter\'){event.preventDefault(); this.nextElementSibling.click();}">' +
+            '<button type="button" class="qa-check-btn" onclick="checkQA(this)">Check</button>' +
+          '</div>' +
+          '<div class="qa-feedback" hidden></div>');
+        return '<li class="qa-item" data-qid="' + qid + '" data-topic="' + topicName.replace(/"/g,'&quot;') + '" data-solve-key="' + solveKey + '">' +
+          '<div class="qa-q"><b>Q' + (i+1) + '</b><span class="qa-badge qa-badge-' + it.tag.split(" ")[0].toLowerCase() + '">' + it.tag + '</span>' + it.q + '</div>' +
+          checkRow +
+        '</li>';
+      }
+      return '<li class="qa-item">' +
+        '<div class="qa-q"><b>Q' + (i+1) + '</b><span class="qa-badge qa-badge-' + it.tag.split(" ")[0].toLowerCase() + '">' + it.tag + '</span>' + it.q + '</div>' +
+      '</li>';
+    }).join('');
+  }
+
+  function renderDetail(topicName, isPinned){
+    var panel = document.getElementById("detail-panel");
+    if (!topicName){
+      var vals = ALL_TOPICS.map(function(t){ return student.scores[t.topic]; });
+      var avg = Math.round(vals.reduce(function(a,b){return a+b;},0) / vals.length);
+      var priorityCount = vals.filter(function(v){return v<70;}).length;
+      var est = estimateGrade(student);
+      panel.innerHTML =
+        '<p class="detail-eyebrow">Overview</p>' +
+        '<p class="detail-topic">' + student.name + '</p>' +
+        '<p class="detail-strand">Class ' + student.cls + ' · ' + ALL_TOPICS.length + ' SOW topics tracked</p>' +
+        '<div class="detail-score-row"><span class="detail-score">' + avg + '%</span><span class="band-chip ' + bandOf(avg).key + '">' + bandOf(avg).label + '</span></div>' +
+        '<div class="detail-meta">' +
+          '<div><span>Estimated GCSE grade</span><b>' + est.grade + (est.borderline ? " (borderline " + est.grade + "→" + (est.grade+1) + ")" : "") + '</b></div>' +
+          '<div><span>Priority topics</span><b>' + priorityCount + '</b></div>' +
+          '<div><span>Secure topics</span><b>' + vals.filter(function(v){return v>=80;}).length + '</b></div>' +
+        '</div>' +
+        '<p class="detail-hint">Click a wedge to see its practice queue. Answer a question correctly and that wedge gets a shade darker right away.</p>';
+      return;
+    }
+    var info = TOPIC_INFO[topicName];
+    var score = student.scores[topicName];
+    var band = bandOf(score);
+    var tierLabel = ["Foundational","Builds on the basics","Intermediate","Advanced","Stretch"][info.tier] || ("Tier " + info.tier);
+    var lowerBlock =
+      '<div class="practice-box">' +
+        '<div class="practice-head"><span>Practice queue</span><span class="practice-tag">' + (score < 70 ? "focus here" : "stretch") + '</span></div>' +
+        '<ul class="practice-list">' + practiceListFor(topicName, score) + '</ul>' +
+        '<p class="qa-hint">Tap Check (or press Enter) — a correct answer raises this topic\'s mastery straight away.</p>' +
+      '</div>';
+    panel.innerHTML =
+      '<p class="detail-eyebrow">' + (isPinned ? "Selected topic" : "Topic") + '</p>' +
+      '<p class="detail-topic">' + topicName + '</p>' +
+      '<p class="detail-strand"><span class="dot" style="background:var(--' + info.key + '-8)"></span>' + info.strand + ' · ' + tierLabel + '</p>' +
+      '<div class="detail-score-row"><span class="detail-score">' + score + '%</span><span class="band-chip ' + band.key + '">' + band.label + '</span></div>' +
+      '<div class="detail-meta">' +
+        '<div><span>Attempts this session</span><b id="attempts-count">' + (student.attempts[topicName] || 0) + '</b></div>' +
+        (info.parent ? '<div><span>Builds on</span><b style="font-family:inherit;font-weight:600;">' + info.parent + '</b></div>' : '') +
+      '</div>' +
+      lowerBlock +
+      '<p class="detail-hint">Click another node to compare topics.</p>';
+  }
+
+  function renderAll(){
+    pinned = null;
+    buildTree(student);
+    renderDetail(null, false);
+  }
+
+})();
+</script>
+</body>
+</html>

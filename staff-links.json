@@ -1,0 +1,32 @@
+{
+  "categories": [
+    {
+      "name": "Maths Department 26/27",
+      "colour": "#16324f",
+      "links": [
+        { "title": "Maths Department One Note", "url": "https://twmat-my.sharepoint.com/:o:/g/personal/alexandra_pugh_stjamesexeter_co_uk/IgBd0382RdsHTI35lZpmQO_jAZm5U1WUJLptlLevVvKPHmQ?e=q8FmJE", "description": "The Master One-Note" }
+      ]
+    },
+    {
+      "name": "Assessment & Data",
+      "colour": "#1e6b4a",
+      "links": [
+        { "title": "Example: Test Papers & Mark Schemes", "url": "https://twmat.sharepoint.com/", "description": "Replace this with a real SharePoint link" }
+      ]
+    },
+    {
+      "name": "Department Meetings",
+      "colour": "#6b4c9a",
+      "links": [
+        { "title": "Example: Meeting Minutes", "url": "https://twmat.sharepoint.com/", "description": "Replace this with a real SharePoint link" }
+      ]
+    },
+    {
+      "name": "Policies & Procedures",
+      "colour": "#9a4c4c",
+      "links": [
+        { "title": "Example: Behaviour Policy", "url": "https://twmat.sharepoint.com/", "description": "Replace this with a real SharePoint link" }
+      ]
+    }
+  ]
+}

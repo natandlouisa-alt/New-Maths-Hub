@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Exam Practice · Maths Schemes of Work · St James School</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-mid: #555;
+    --ink-soft: #888;
+    --rule: #e2e2e2;
+    --bg: #f7f7f5;
+    --card-bg: #ffffff;
+    --radius: 4px;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --font-ui: 'Segoe UI', system-ui, Arial, sans-serif;
+    --accent: #16324f;
+    --accent2: #1e6b4a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-ui); background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 28px 32px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  header p { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+  header a.back {
+    color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.3); padding: 7px 14px; border-radius: var(--radius);
+  }
+  header a.back:hover { background: rgba(255,255,255,0.1); }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  @media (max-width: 850px) {
+    main { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+  }
+  .panel h2 {
+    font-size: 16px; font-weight: 700; margin-bottom: 6px;
+  }
+  .panel .sub { font-size: 12px; color: var(--ink-soft); margin-bottom: 18px; }
+
+  /* This week quick-reference box */
+  .week-badge {
+    display: inline-block; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700;
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 6px;
+  }
+  .week-date { font-size: 12px; color: var(--ink-soft); margin-bottom: 16px; }
+  .tier-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 14px; border: 1px solid var(--rule); border-radius: var(--radius); margin-bottom: 10px;
+  }
+  .tier-row:last-of-type { margin-bottom: 0; }
+  .tier-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-soft); }
+  .tier-paper { font-size: 14px; font-weight: 600; margin-top: 2px; }
+  .tier-link {
+    flex-shrink: 0; background: var(--accent); color: #fff; text-decoration: none; font-size: 12px; font-weight: 700;
+    padding: 8px 14px; border-radius: var(--radius); white-space: nowrap;
+  }
+  .tier-link:hover { opacity: 0.88; }
+  .tier-link.higher { background: var(--accent2); }
+
+  .schedule-image-wrap {
+    margin-top: 20px; border-top: 1px solid var(--rule); padding-top: 18px;
+  }
+  .schedule-image-wrap .caption { font-size: 12px; color: var(--ink-soft); margin-bottom: 10px; }
+  .schedule-image-wrap img {
+    width: 100%; height: auto; border: 1px solid var(--rule); border-radius: var(--radius); display: block;
+  }
+
+  .practice-empty { font-size: 13px; color: var(--ink-soft); padding: 20px 0; }
+
+  /* RHS — trackers + papers */
+  .category { margin-bottom: 22px; }
+  .category:last-child { margin-bottom: 0; }
+  .category h3 { font-size: 13px; font-weight: 700; margin-bottom: 10px; color: var(--ink-mid); text-transform: uppercase; letter-spacing: 0.03em; }
+  .link-list { display: flex; flex-direction: column; gap: 8px; }
+  a.link-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border: 1px solid var(--rule); border-radius: var(--radius);
+    text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 600;
+    transition: background 0.12s ease;
+  }
+  a.link-row:hover { background: var(--bg); }
+  a.link-row .arrow { margin-left: auto; color: var(--ink-soft); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Weekly Exam Practice</h1>
+    <p>St James School Maths Department</p>
+  </div>
+  <a class="back" href="/staff.html">← Back to Staff Area</a>
+</header>
+
+<main>
+  <div class="panel">
+    <h2>This Week's Practice</h2>
+    <div class="sub">Automatically selected based on today's date — no need to update this manually.</div>
+    <div id="weekContent">Loading…</div>
+
+    <div class="schedule-image-wrap">
+      <div class="caption">Full programme — Teacher Schedule Overview</div>
+      <img src="teacher-schedule-overview.png" alt="GCSE Maths Practice Paper Programme — full 30-week teacher schedule for St James School Maths Department, 2026–27">
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="category">
+      <h3>Markbook</h3>
+      <div class="link-list">
+        <a class="link-row" href="https://twmat.sharepoint.com/:x:/s/STJMaths/IQC7k9ev-SKSRa7g4O4zqoI-AWdQuZzxj2HHihB6geDWBoY?e=Oba9ww&download=1">
+          Weekly Exam Practice Markbook <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="category">
+      <h3>Feedback Trackers</h3>
+      <div class="link-list">
+        <a class="link-row" href="https://twmat.sharepoint.com/:b:/s/STJMaths/IQDj59njj-Y4S53dmEftfUsiAQCgalYeCQoOtHC7ELC4Agg?e=4Njrjs" target="_blank" rel="noopener">
+          Foundation Feedback Tracker <span class="arrow">↗</span>
+        </a>
+        <a class="link-row" href="https://twmat.sharepoint.com/:b:/s/STJMaths/IQD0XzEMFXTITYHCBFYNkh3bAQbDu1iJMc3nC0-LE2SpTAw?e=GBRPnn" target="_blank" rel="noopener">
+          Higher Feedback Tracker <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="category">
+      <h3>Papers & Mark Schemes</h3>
+      <div class="link-list">
+        <a class="link-row" href="https://twmat.sharepoint.com/:f:/s/STJMaths/IgBc_VvnSt-9Q4lv1MN9bTzNAYb7x0iy7yu2OBKS7pzChEI?e=WjE0sW" target="_blank" rel="noopener">
+          June 2018 <span class="arrow">↗</span>
+        </a>
+        <a class="link-row" href="https://twmat.sharepoint.com/:f:/s/STJMaths/IgB56AuxypPNTJT7S3NEt25vAf9UO6UD3qC-I916uoLc6tI?e=ntg3CU" target="_blank" rel="noopener">
+          June 2023 <span class="arrow">↗</span>
+        </a>
+        <a class="link-row" href="https://twmat.sharepoint.com/:f:/s/STJMaths/IgCuAazz6DgRTq09-ihpduu7AXyP30qJ51TlFJkQtxfmSZQ?e=aO5dTY" target="_blank" rel="noopener">
+          June 2024 <span class="arrow">↗</span>
+        </a>
+        <a class="link-row" href="https://twmat.sharepoint.com/:f:/s/STJMaths/IgBZAI6SoeG3R4YOvnwYDB0SAXeg21HHXCh2cIN_lbsV0bQ?e=tJwzun" target="_blank" rel="noopener">
+          Nov 2022 <span class="arrow">↗</span>
+        </a>
+        <a class="link-row" href="https://twmat.sharepoint.com/:f:/s/STJMaths/IgDlty8QcGm3TKJ1zEK1pmHnATiDjocl298XCS_jriZhgOo?e=oBMULt" target="_blank" rel="noopener">
+          Nov 2023 <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function() {
+  fetch('weekly-exam-practice.json')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(weeksData => {
+      const el = document.getElementById('weekContent');
+      const weeks = weeksData.slice().sort((a,b) => new Date(a.weekStarting) - new Date(b.weekStarting));
+      const today = new Date();
+      today.setHours(0,0,0,0);
+
+      let current = null;
+      for (const w of weeks) {
+        const wd = new Date(w.weekStarting + 'T00:00:00');
+        if (wd <= today) current = w;
+        else break;
+      }
+
+      if (!current) {
+        el.innerHTML = '<div class="practice-empty">No practice week is set up for this date yet.</div>';
+        return;
+      }
+
+      el.innerHTML = `
+        <div class="week-badge">Week ${current.week}</div>
+        <div class="week-date">Week starting ${current.weekStarting}</div>
+        <div class="tier-row">
+          <div>
+            <div class="tier-label">Foundation</div>
+            <div class="tier-paper">${current.foundation}</div>
+          </div>
+          <a class="tier-link" href="${current.folderUrl}" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <div class="tier-row">
+          <div>
+            <div class="tier-label">Higher</div>
+            <div class="tier-paper">${current.higher}</div>
+          </div>
+          <a class="tier-link higher" href="${current.folderUrl}" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+      `;
+    })
+    .catch(() => {
+      document.getElementById('weekContent').innerHTML =
+        '<div class="practice-empty">Couldn\'t load this week\'s practice — check weekly-exam-practice.json is present.</div>';
+    });
+})();
+</script>
+
+</body>
+</html>

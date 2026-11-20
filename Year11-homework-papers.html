@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 11 — Homework Papers · Maths Schemes of Work · St James School</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-mid: #555;
+    --ink-soft: #888;
+    --rule: #e2e2e2;
+    --bg: #f7f7f5;
+    --card-bg: #ffffff;
+    --radius: 4px;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --font-ui: 'Segoe UI', system-ui, Arial, sans-serif;
+    --accent: #b45309;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-ui); background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 28px 32px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  header p { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+  header a.back {
+    color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.3); padding: 7px 14px; border-radius: var(--radius);
+  }
+  header a.back:hover { background: rgba(255,255,255,0.1); }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  .panel {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .panel h2 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .panel .sub { font-size: 12px; color: var(--ink-soft); margin-bottom: 18px; }
+
+  .link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  a.link-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 14px; border: 1px solid var(--rule); border-radius: var(--radius);
+    text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 600;
+    transition: background 0.12s ease;
+  }
+  a.link-row:hover { background: var(--bg); }
+  a.link-row .arrow { margin-left: auto; color: var(--ink-soft); font-size: 12px; flex-shrink: 0; }
+
+  /* Policy styling */
+  .policy-header {
+    background: var(--accent); color: #fff; border-radius: var(--radius);
+    padding: 22px 24px; margin-bottom: 20px;
+  }
+  .policy-header h1 { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .policy-header .subtitle { font-size: 13px; color: rgba(255,255,255,0.85); }
+
+  .policy-section { margin-bottom: 22px; }
+  .policy-section:last-child { margin-bottom: 0; }
+  .policy-section h3 {
+    font-size: 14px; font-weight: 700; margin-bottom: 10px;
+    padding-bottom: 6px; border-bottom: 2px solid var(--accent); color: var(--accent);
+  }
+  .policy-section p { font-size: 13.5px; line-height: 1.6; color: var(--ink); margin-bottom: 8px; }
+  .policy-section ul, .policy-section ol { margin-left: 20px; margin-bottom: 8px; }
+  .policy-section li { font-size: 13.5px; line-height: 1.6; margin-bottom: 4px; }
+  .policy-section strong { color: var(--ink); }
+  .policy-section a { color: var(--accent); }
+
+  table.cycle-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+  table.cycle-table th {
+    background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.03em; padding: 8px 12px; text-align: left;
+  }
+  table.cycle-table td { padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+  table.cycle-table tr:last-child td { border-bottom: none; }
+
+  .note-box {
+    background: #fffbf0; border: 1px solid #f0d9a0; border-radius: var(--radius);
+    padding: 12px 14px; font-size: 13px; line-height: 1.5; margin: 10px 0;
+  }
+
+  .checklist { list-style: none; margin-left: 0; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.5;
+    padding: 8px 0; border-bottom: 1px solid var(--rule);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist .box {
+    flex-shrink: 0; width: 16px; height: 16px; border: 1.5px solid var(--accent);
+    border-radius: 3px; margin-top: 1px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Year 11 — Homework Papers</h1>
+    <p>St James School Maths Department</p>
+  </div>
+  <a class="back" href="/staff.html">← Back to Staff Area</a>
+</header>
+
+<main>
+  <div class="panel">
+    <h2>Quick Links</h2>
+    <div class="sub">Half Past Papers resource, plus student and class trackers.</div>
+    <div class="link-grid">
+      <a class="link-row" href="https://www.hannahkettlemaths.co.uk/half-past-papers" target="_blank" rel="noopener">
+        Hannah Kettle — Half Past Papers <span class="arrow">↗</span>
+      </a>
+      <a class="link-row" href="https://twmat.sharepoint.com/:b:/s/STJMaths/IQCabaKPOGlrToGbBoAFZOS_AaEHZ6x5JHEi1CkCIlX3fIA?e=IHqf7V" target="_blank" rel="noopener">
+        Student Record Tracker (PDF) <span class="arrow">↗</span>
+      </a>
+      <a class="link-row" href="https://twmat.sharepoint.com/:x:/s/STJMaths/IQBsuEgEU4w2QI2pea2c7PXtAQIt5FaslF5O4Bbk6Bx1_gU?e=UxWNqj" target="_blank" rel="noopener">
+        Full Year Class Tracker (xlsx) <span class="arrow">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="policy-header">
+      <h1>Year 11 Homework Policy — Half Past Papers</h1>
+      <div class="subtitle">A consistent, low-workload weekly homework cycle for Year 11</div>
+    </div>
+
+    <div class="policy-section">
+      <h3>Purpose</h3>
+      <p>A consistent, low-workload weekly homework cycle for Year 11, using Hannah Kettle Maths' "Half Past Papers" — GCSE past papers split into odd/even question halves (~45 minutes each), self-marked using video walkthroughs.</p>
+    </div>
+
+    <div class="policy-section">
+      <h3>The Resource</h3>
+      <ul>
+        <li><strong>Source:</strong> <a href="https://www.hannahkettlemaths.co.uk/half-past-papers" target="_blank" rel="noopener">hannahkettlemaths.co.uk/half-past-papers</a></li>
+        <li><strong>Format:</strong> each week releases one Foundation and one Higher half-paper (odds one week, evens the next, from the same full past paper), each with a QR code linking to a YouTube walkthrough.</li>
+        <li><strong>Live support:</strong> Hannah runs each paper live on YouTube/TikTok every Thursday evening (Foundation 7–7:30pm, Higher 7:30–8pm), which students can watch live, catch up on afterwards, or use as a revision resource any time.</li>
+        <li>Papers are numbered sequentially (Paper 1, 2, 3…) and issued weekly on a rolling schedule — teachers should set the paper matching the current week number and tier.</li>
+      </ul>
+    </div>
+
+    <div class="policy-section">
+      <h3>Weekly Cycle</h3>
+      <table class="cycle-table">
+        <tr><th>Day</th><th>Action</th></tr>
+        <tr><td><strong>Thursday</strong></td><td>New paper set as homework (correct tier: Foundation or Higher)</td></tr>
+        <tr><td><strong>Following Thursday</strong></td><td>Homework due — student brings in completed <strong>and self-marked</strong> paper</td></tr>
+      </table>
+      <div class="note-box">
+        <strong>Start point:</strong> the cycle begins in <strong>Week 2</strong> of the schedule (not Week 1), so students set off one paper behind the live release — this gives them a paper that already has a walkthrough video available in good time, rather than racing the live stream.<br><br>
+        Runs continuously, week on week, for the rest of the year.
+      </div>
+    </div>
+
+    <div class="policy-section">
+      <h3>Student Expectations</h3>
+      <ol>
+        <li>Complete the paper independently — allow <strong>30–45 minutes</strong>.</li>
+        <li>Mark it themselves against the answers/walkthrough, allowing extra time on top of the 30–45 minutes for marking.</li>
+        <li>Use the QR code video either:
+          <ul>
+            <li><strong>the evening it's set</strong> (can watch live or as a replay), to help while completing, or</li>
+            <li><strong>as catch-up support</strong> afterwards, if they got stuck or want to check their marking.</li>
+          </ul>
+        </li>
+        <li>Bring the completed, self-marked paper to the following Thursday's lesson.</li>
+      </ol>
+    </div>
+
+    <div class="policy-section">
+      <h3>Quality Assurance</h3>
+      <p>QA happens <strong>in lesson, during in-class exam practice</strong> — while students are working on their own exam-style questions, the teacher circulates and pulls out Half Past Papers from the previous week to check:</p>
+      <ul>
+        <li>it's been attempted in full</li>
+        <li>it's been marked (not just attempted)</li>
+        <li>marking looks honest/accurate against the answers</li>
+      </ul>
+      <p>This should happen most weeks on a sampling basis (not necessarily every paper, every week) so it doesn't require separate lesson time.</p>
+      <p>Any student without a completed/marked paper is flagged per the department's normal homework follow-up process.</p>
+    </div>
+
+    <div class="policy-section">
+      <h3>Staff Actions Checklist</h3>
+      <ul class="checklist">
+        <li><span class="box"></span> Set the correct week's paper (right tier) every Thursday</li>
+        <li><span class="box"></span> Remind students papers are self-marked, video-supported</li>
+        <li><span class="box"></span> Build in a QA sweep during in-class exam practice each week</li>
+        <li><span class="box"></span> Follow up incomplete/unmarked papers via standard homework procedure</li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

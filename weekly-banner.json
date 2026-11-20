@@ -1,0 +1,20 @@
+{
+  "weekOf": "2026-09-01",
+  "items": [
+    {
+      "icon": "\ud83d\udcef",
+      "label": "Department Priority \u2014 Choral Response",
+      "text": "\u201cI say, you say Parallel Sides.\u201d \u2014 \u201cParallel Sides\u201d"
+    },
+    {
+      "icon": "\u23f0",
+      "label": "Behaviour Priority \u2014 Punctuality",
+      "text": "0 mins late after start/break/lunch. 3 mins after a transition \u2014 Behaviour Point and Log."
+    },
+    {
+      "icon": "\ud83c\udf1f",
+      "label": "Department Hero",
+      "text": "Alex Pugh \u2014 Great start to the new year."
+    }
+  ]
+}

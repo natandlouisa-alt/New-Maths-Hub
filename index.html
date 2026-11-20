@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maths Schemes of Work · St James School</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-mid: #555;
+    --ink-soft: #888;
+    --rule: #e2e2e2;
+    --bg: #f7f7f5;
+    --card-bg: #ffffff;
+    --radius: 4px;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --font-ui: 'Segoe UI', system-ui, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-ui); background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 28px 32px;
+  }
+  header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  header p { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  a.card {
+    display: block;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 20px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  a.card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+  a.card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--stripe, #999);
+  }
+  a.card h2 { font-size: 17px; font-weight: 700; }
+  a.card .status { font-size: 12px; margin-top: 6px; font-weight: 600; letter-spacing: 0.2px; }
+  a.card .status.live { color: #1e6b4a; }
+  a.card .status.soon { color: var(--ink-soft); }
+  a.card .status.pilot { color: #a35b00; }
+  a.card p { font-size: 12px; color: var(--ink-mid); margin-top: 10px; }
+
+  a.card.disabled {
+    pointer-events: none;
+    opacity: 0.55;
+  }
+
+  .y7::before { background: #16324f; }
+  .y8::before { background: #0d5c63; }
+  .y9::before { background: #6b4c9a; }
+  .y10::before { background: #9a4c4c; }
+  .y11::before { background: #4c6b9a; }
+  .wheel::before { background: #c07a1e; }
+
+  .hwtracker-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 640px) {
+    .hwtracker-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Cross-year search */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .search-input {
+    width: 100%;
+    font-family: var(--font-ui);
+    font-size: 15px;
+    padding: 13px 16px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    outline: none;
+    color: var(--ink);
+  }
+  .search-input:focus { border-color: var(--ink-soft); }
+  .search-input::placeholder { color: var(--ink-soft); }
+
+  .search-results {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+    max-height: 360px;
+    overflow-y: auto;
+    z-index: 10;
+    display: none;
+  }
+  .search-results.open { display: block; }
+
+  .search-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+  .search-row:last-child { border-bottom: none; }
+  .search-row:hover, .search-row.active { background: var(--bg); }
+
+  .search-year-badge {
+    flex: 0 0 auto;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    padding: 3px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+  }
+  .search-row-text { min-width: 0; }
+  .search-row-title { font-size: 14px; font-weight: 600; }
+  .search-row-meta { font-size: 12px; color: var(--ink-mid); margin-top: 1px; }
+
+  .search-empty {
+    padding: 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .badge-y7 { background: #16324f; }
+  .badge-y8 { background: #0d5c63; }
+  .badge-y9 { background: #6b4c9a; }
+  .badge-y10 { background: #9a4c4c; }
+  .badge-y11 { background: #4c6b9a; }
+
+  footer {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .wheel-tile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 24px;
+    margin-top: 28px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .wheel-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+  .wheel-tile .wheel-icon { flex: 0 0 auto; display: block; }
+  .wheel-tile .wheel-text { flex: 1 1 auto; min-width: 0; }
+  .wheel-tile h2 { font-size: 17px; font-weight: 700; }
+  .wheel-tile .status { font-size: 12px; margin-top: 4px; font-weight: 600; letter-spacing: 0.2px; color: #a35b00; }
+  .wheel-tile p { font-size: 12px; color: var(--ink-mid); margin-top: 6px; }
+  .wheel-tile .wheel-arrow { flex: 0 0 auto; font-size: 14px; font-weight: 700; color: var(--ink-soft); white-space: nowrap; }
+  @media (max-width: 520px) {
+    .wheel-tile { flex-wrap: wrap; }
+    .wheel-tile .wheel-arrow { display: none; }
+  }
+
+  .team-photo {
+    max-width: 760px;
+    margin: 40px auto 0;
+    padding: 0 24px;
+  }
+  .team-photo img {
+    width: 100%;
+    display: block;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+  .team-photo p {
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Maths Schemes of Work</h1>
+  <p>St James School · Ted Wragg Multi-Academy Trust</p>
+</header>
+
+<main>
+  <a href="https://twmat.sharepoint.com/sites/STJMaths/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FSTJMaths%2FShared%20Documents%2F26%2D27%20Maths&amp;p=true" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:#036c70; color:#fff; text-decoration:none; border-radius:4px; padding:16px 24px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.08); flex-wrap:wrap;">
+    <div>
+      <div style="font-size:16px; font-weight:700;">📁 Maths Sharepoint</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.75); margin-top:2px;">Open the 26-27 Maths folder on SharePoint</div>
+    </div>
+    <div style="font-size:14px; font-weight:700; white-space:nowrap;">Open ↗</div>
+  </a>
+
+  <a href="/staff.html" style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:#16324f; color:#fff; text-decoration:none; border-radius:4px; padding:16px 24px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.08); flex-wrap:wrap;">
+    <div>
+      <div style="font-size:16px; font-weight:700;">🔒 Staff Area</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.75); margin-top:2px;">Weekly exam practice, careers, pupil passports, trip planning, and more</div>
+    </div>
+    <div style="font-size:14px; font-weight:700; white-space:nowrap;">Open →</div>
+  </a>
+
+  <div class="search-wrap">
+    <input
+      type="text"
+      class="search-input"
+      id="topicSearch"
+      placeholder="Search all topics, Y7–Y11 (e.g. 'percentages', 'equations')…"
+      autocomplete="off"
+    >
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+  <div class="grid">
+    <a class="card y7" href="/y7index.html">
+      <h2>Year 7</h2>
+      <div class="status live">Live</div>
+      <p>Full scheme of work, Cycles 1–3.</p>
+    </a>
+    <a class="card y8" href="/y8index.html">
+      <h2>Year 8</h2>
+      <div class="status live">Live · Cycle 1</div>
+      <p>Cycle 1 in progress. Cycles 2–3 coming soon.</p>
+    </a>
+    <a class="card y9" href="/y9index.html">
+      <h2>Year 9</h2>
+      <div class="status live">Live · Cycle 1</div>
+      <p>Cycle 1 in progress. Cycles 2–3 coming soon.</p>
+    </a>
+    <a class="card y10" href="/y10foundation-index.html">
+      <h2>Year 10 Foundation</h2>
+      <div class="status live">Live · Cycle 1</div>
+      <p>Cycle 1 in progress. Cycles 2–3 coming soon.</p>
+    </a>
+    <a class="card y10" href="/y10higher-index.html">
+      <h2>Year 10 Higher</h2>
+      <div class="status live">Live · Cycle 1</div>
+      <p>Cycle 1 complete (Sequences, Trigonometry, Simultaneous Equations, Geometrical Reasoning, Calculating, Understanding Risk). Cycles 2–3 coming soon.</p>
+    </a>
+    <a class="card y11 disabled" href="#">
+      <h2>Year 11 Foundation</h2>
+      <div class="status soon">Coming soon</div>
+      <p>Not yet started.</p>
+    </a>
+    <a class="card y11 disabled" href="#">
+      <h2>Year 11 Higher</h2>
+      <div class="status soon">Coming soon</div>
+      <p>Not yet started.</p>
+    </a>
+  </div>
+
+  <div style="background:#fff; border:1px solid var(--rule); border-radius:4px; padding:16px 20px; margin-top:20px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
+      <div style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--ink-mid);">📊 Homework Tracker</div>
+      <a href="https://twmat.sharepoint.com/:w:/s/STJMaths/IQDoIv1K29OgSprTFO46i3LdAccyjw4K0GSXVQZQPdj2-qQ?e=0NYttI" target="_blank" rel="noopener" style="font-size:11.5px; font-weight:700; color:var(--ink-mid); text-decoration:none; border:1px solid var(--rule); border-radius:4px; padding:4px 10px; white-space:nowrap;">📋 Homework Policy ↗</a>
+    </div>
+    <div class="hwtracker-grid">
+      <a href="https://twmat.sharepoint.com/:x:/s/STJMaths/IQBR-kVfvA5pS7MwK8njgEOcAZfdnTFGOxCGLMgioRPmdw4?e=MGbpiK" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; text-align:center; background:#16324f; color:#fff; text-decoration:none; font-size:13px; font-weight:700; border-radius:4px; padding:14px 8px;">Year 7</a>
+      <a href="https://twmat.sharepoint.com/:x:/s/STJMaths/IQCacC6wXLc0T41lvc06Wq7_ASuKSENFEa_7lVAod5w3MFA?e=jiLwC0" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; text-align:center; background:#0d5c63; color:#fff; text-decoration:none; font-size:13px; font-weight:700; border-radius:4px; padding:14px 8px;">Year 8</a>
+      <a href="https://twmat.sharepoint.com/:x:/s/STJMaths/IQAeiZrcUylITa2Kp7zyq4hTAUGTHd813Qdr98QdzsXPvow?e=4Hpxex" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; text-align:center; background:#6b4c9a; color:#fff; text-decoration:none; font-size:13px; font-weight:700; border-radius:4px; padding:14px 8px;">Year 9</a>
+      <a href="https://twmat.sharepoint.com/:x:/s/STJMaths/IQCW_ni7_vePQrVW1dBKHEZUAXsAZZw4UfN_M7peHAO07RI?e=lcnkfZ" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; text-align:center; background:#9a4c4c; color:#fff; text-decoration:none; font-size:13px; font-weight:700; border-radius:4px; padding:14px 8px;">Year 10</a>
+      <a href="https://twmat.sharepoint.com/:x:/s/STJMaths/IQDnm0PBHt_JRr1NOWm9oyXoAcl3SuvrDIQUydcmXgmk1zA?e=NjAaSv" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; text-align:center; background:#4c6b9a; color:#fff; text-decoration:none; font-size:13px; font-weight:700; border-radius:4px; padding:14px 8px;">Year 11</a>
+      <a href="https://twmat.sharepoint.com/:x:/s/STJMaths/IQBYLGiwXoMVRYZFmtaDea6NAYe5_0oXMRTyDR2eeeFUrgQ?e=KTiJiF" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; text-align:center; background:#8a8a8a; color:#fff; text-decoration:none; font-size:13px; font-weight:700; border-radius:4px; padding:14px 8px;">Not Done Log</a>
+    </div>
+  </div>
+
+  <a class="wheel-tile" href="/y7-mastery-wheel.html">
+    <svg class="wheel-icon" width="56" height="56" viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="16" fill="none" stroke="#2f6fb0" stroke-width="9" stroke-dasharray="32 68.5" stroke-dashoffset="0" transform="rotate(-90 20 20)"/>
+      <circle cx="20" cy="20" r="16" fill="none" stroke="#c76b3d" stroke-width="9" stroke-dasharray="32 68.5" stroke-dashoffset="-33.5" transform="rotate(-90 20 20)"/>
+      <circle cx="20" cy="20" r="16" fill="none" stroke="#1e8a6b" stroke-width="9" stroke-dasharray="32 68.5" stroke-dashoffset="-67" transform="rotate(-90 20 20)"/>
+      <circle cx="20" cy="20" r="7.5" fill="#fff"/>
+    </svg>
+    <div class="wheel-text">
+      <h2>Y7 Topic Mastery Wheel</h2>
+      <div class="status">Live · Pilot</div>
+      <p>Trial student login — practice questions with instant self-marking, wheel updates as topics improve.</p>
+    </div>
+    <div class="wheel-arrow">Open →</div>
+  </a>
+
+  <div class="team-photo">
+    <img src="team-photo.jpeg" alt="Maths department team photo">
+    <p>The Maths Department</p>
+  </div>
+</main>
+
+<footer>
+  Maintained by Mr N Salisbury. Links stay the same — content is updated behind the scenes.
+</footer>
+
+<script>
+(function () {
+  const input = document.getElementById('topicSearch');
+  const resultsEl = document.getElementById('searchResults');
+  let INDEX = [];
+  let activeIndex = -1;
+
+  fetch('curriculum-index.json')
+    .then(r => r.ok ? r.json() : [])
+    .then(data => { INDEX = data || []; })
+    .catch(() => { INDEX = []; });
+
+  function score(entry, terms) {
+    const haystack = (entry.title + ' ' + entry.unitName + ' ' + entry.keywords.join(' ')).toLowerCase();
+    let s = 0;
+    for (const term of terms) {
+      if (!haystack.includes(term)) return -1; // every term must match somewhere
+      if (entry.title.toLowerCase().startsWith(term)) s += 3;
+      else if (entry.title.toLowerCase().includes(term)) s += 2;
+      else s += 1;
+    }
+    return s;
+  }
+
+  function search(query) {
+    const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    if (terms.length === 0) return [];
+    return INDEX
+      .map(entry => ({ entry, s: score(entry, terms) }))
+      .filter(x => x.s >= 0)
+      .sort((a, b) => b.s - a.s || a.entry.year - b.entry.year)
+      .slice(0, 8)
+      .map(x => x.entry);
+  }
+
+  function render(results, query) {
+    activeIndex = -1;
+    if (!query.trim()) {
+      resultsEl.classList.remove('open');
+      resultsEl.innerHTML = '';
+      return;
+    }
+    if (results.length === 0) {
+      resultsEl.innerHTML = '<div class="search-empty">No topics found for "' + escapeHtml(query) + '"</div>';
+      resultsEl.classList.add('open');
+      return;
+    }
+    resultsEl.innerHTML = results.map((entry, i) => `
+      <a class="search-row" href="${entry.file}?topic=${encodeURIComponent(entry.topicId)}" data-idx="${i}">
+        <span class="search-year-badge badge-y${entry.year}">Y${entry.year}</span>
+        <span class="search-row-text">
+          <div class="search-row-title">${escapeHtml(entry.title)}</div>
+          <div class="search-row-meta">${escapeHtml(entry.unitName)}${entry.sparxCode ? ' · ' + escapeHtml(entry.sparxCode) : ''}</div>
+        </span>
+      </a>
+    `).join('');
+    resultsEl.classList.add('open');
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  let currentResults = [];
+
+  input.addEventListener('input', () => {
+    currentResults = search(input.value);
+    render(currentResults, input.value);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    const rows = resultsEl.querySelectorAll('.search-row');
+    if (!rows.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIndex = Math.min(activeIndex + 1, rows.length - 1);
+      rows.forEach((r, i) => r.classList.toggle('active', i === activeIndex));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIndex = Math.max(activeIndex - 1, 0);
+      rows.forEach((r, i) => r.classList.toggle('active', i === activeIndex));
+    } else if (e.key === 'Enter') {
+      const target = activeIndex >= 0 ? rows[activeIndex] : rows[0];
+      if (target) { window.location.href = target.getAttribute('href'); }
+    } else if (e.key === 'Escape') {
+      resultsEl.classList.remove('open');
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-wrap')) {
+      resultsEl.classList.remove('open');
+    }
+  });
+
+  input.addEventListener('focus', () => {
+    if (currentResults.length && input.value.trim()) resultsEl.classList.add('open');
+  });
+})();
+</script>
+
+<style>
+#weeklyBanner {
+  background: var(--ink); color: #fff;
+  border-top: 3px solid #2a4a6f;
+  padding: 18px 32px 20px;
+  font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+}
+#weeklyBanner .wb-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: #9fb3c8; margin-bottom: 12px;
+}
+#weeklyBanner .wb-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px 28px;
+}
+#weeklyBanner .wb-item { display: flex; gap: 10px; align-items: flex-start; }
+#weeklyBanner .wb-icon { font-size: 20px; line-height: 1.3; flex-shrink: 0; }
+#weeklyBanner .wb-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+  color: #9fb3c8; margin-bottom: 3px;
+}
+#weeklyBanner .wb-text { font-size: 14px; line-height: 1.4; color: #fff; }
+#weeklyBanner.wb-hidden { display: none; }
+</style>
+
+<footer id="weeklyBanner" class="wb-hidden">
+  <div class="wb-title">This Week</div>
+  <div class="wb-grid" id="wbGrid"></div>
+</footer>
+
+<script>
+(function() {
+  fetch('weekly-banner.json')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => {
+      const grid = document.getElementById('wbGrid');
+      const banner = document.getElementById('weeklyBanner');
+      if (!data.items || !data.items.length) return;
+      grid.innerHTML = data.items.map(item => `
+        <div class="wb-item">
+          <div class="wb-icon">${item.icon || ''}</div>
+          <div>
+            <div class="wb-label">${item.label || ''}</div>
+            <div class="wb-text">${item.text || ''}</div>
+          </div>
+        </div>
+      `).join('');
+      banner.classList.remove('wb-hidden');
+    })
+    .catch(() => { /* silently hide banner if the file is missing or malformed */ });
+})();
+</script>
+
+</body>
+</html>
