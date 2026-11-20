@@ -458,12 +458,24 @@
 
 <script>
 (function() {
+  function weekLabel(iso) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+    if (!match) return '';
+    const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+    if (Number.isNaN(date.getTime())) return '';
+    const formatted = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+    return 'Week of ' + formatted;
+  }
+
   fetch('weekly-banner.json')
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(data => {
       const grid = document.getElementById('wbGrid');
       const banner = document.getElementById('weeklyBanner');
       if (!data.items || !data.items.length) return;
+      const title = banner.querySelector('.wb-title');
+      const label = weekLabel(data.weekOf);
+      if (title && label) title.textContent = label;
       grid.innerHTML = data.items.map(item => `
         <div class="wb-item">
           <div class="wb-icon">${item.icon || ''}</div>
