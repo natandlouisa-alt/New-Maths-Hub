@@ -1,20 +1,20 @@
 {
-  "weekOf": "2026-09-01",
+  "weekOf": "2026-11-23",
   "items": [
     {
-      "icon": "\ud83d\udcef",
-      "label": "Department Priority \u2014 Choral Response",
-      "text": "\u201cI say, you say Parallel Sides.\u201d \u2014 \u201cParallel Sides\u201d"
+      "icon": "🌟",
+      "label": "Hero of the Week",
+      "text": "Sam Brooks — for getting the Head of Year 7 role."
     },
     {
-      "icon": "\u23f0",
-      "label": "Behaviour Priority \u2014 Punctuality",
-      "text": "0 mins late after start/break/lunch. 3 mins after a transition \u2014 Behaviour Point and Log."
+      "icon": "📢",
+      "label": "Department Priority — Politeness on the door",
+      "text": "When thresholding, ensure all students respond with “Good Morning” or “Good Afternoon”."
     },
     {
-      "icon": "\ud83c\udf1f",
-      "label": "Department Hero",
-      "text": "Alex Pugh \u2014 Great start to the new year."
+      "icon": "📅",
+      "label": "Department Meeting — Monday 23 November",
+      "text": "Alex has got a good one for us!"
     }
   ]
 }
