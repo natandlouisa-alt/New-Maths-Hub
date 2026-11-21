@@ -7610,7 +7610,7 @@
   {
     "id": "y10h-venn-diagrams-interpret",
     "year": "10h",
-    "cycleId": 1,
+    "cycleId": 2,
     "unitId": "understanding-risk",
     "unitName": "Understanding Risk",
     "topicId": "venn-diagrams-interpret",
@@ -7639,7 +7639,7 @@
   {
     "id": "y10h-venn-diagrams-create",
     "year": "10h",
-    "cycleId": 1,
+    "cycleId": 2,
     "unitId": "understanding-risk",
     "unitName": "Understanding Risk",
     "topicId": "venn-diagrams-create",
@@ -7665,7 +7665,7 @@
   {
     "id": "y10h-relative-frequency",
     "year": "10h",
-    "cycleId": 1,
+    "cycleId": 2,
     "unitId": "understanding-risk",
     "unitName": "Understanding Risk",
     "topicId": "relative-frequency",
@@ -7689,7 +7689,7 @@
   {
     "id": "y10h-tree-diagrams-interpret",
     "year": "10h",
-    "cycleId": 1,
+    "cycleId": 2,
     "unitId": "understanding-risk",
     "unitName": "Understanding Risk",
     "topicId": "tree-diagrams-interpret",
@@ -7718,7 +7718,7 @@
   {
     "id": "y10h-tree-diagrams-draw",
     "year": "10h",
-    "cycleId": 1,
+    "cycleId": 2,
     "unitId": "understanding-risk",
     "unitName": "Understanding Risk",
     "topicId": "tree-diagrams-draw",
@@ -7747,7 +7747,7 @@
   {
     "id": "y10h-dependent-tree-diagrams",
     "year": "10h",
-    "cycleId": 1,
+    "cycleId": 2,
     "unitId": "understanding-risk",
     "unitName": "Understanding Risk",
     "topicId": "dependent-tree-diagrams",
@@ -7773,7 +7773,7 @@
   {
     "id": "y10h-conditional-probability",
     "year": "10h",
-    "cycleId": 1,
+    "cycleId": 2,
     "unitId": "understanding-risk",
     "unitName": "Understanding Risk",
     "topicId": "conditional-probability",
@@ -7797,7 +7797,7 @@
   {
     "id": "y10h-product-rule-counting",
     "year": "10h",
-    "cycleId": 1,
+    "cycleId": 2,
     "unitId": "understanding-risk",
     "unitName": "Understanding Risk",
     "topicId": "product-rule-counting",
