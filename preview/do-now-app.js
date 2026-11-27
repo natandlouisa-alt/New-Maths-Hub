@@ -34,6 +34,11 @@ function currentQs() {
   return topic ? (topic[currentStyle] || topic.qs || []) : [];
 }
 function qCount() { return currentQs().length; }
+function boardTitle() {
+  if (typeof BOARD_TITLE === 'string' && BOARD_TITLE) return BOARD_TITLE;
+  const pack = DATA.all && DATA.all[0];
+  return (pack && pack.u) ? String(pack.u).replace(' · ', ' ') : 'Cycle revision';
+}
 function verOf(q) {
   if (q && q.q3) return 3;
   if (q && q.q2) return 2;
@@ -114,7 +119,7 @@ function printSheet() {
   if (!topic) return;
 
   const qs     = currentQs();
-  const title  = (topic.u || '') + (topic.l && topic.l !== topic.u ? ' \u2014 ' + topic.l : '') + ' \u2014 Year 7 Cycle 1';
+  const title  = (topic.u || '') + (topic.l && topic.l !== topic.u ? ' \u2014 ' + topic.l : '') + ' \u2014 ' + boardTitle();
   const activeVer = versions[0] || 1;
 
   // Pre-render KaTeX in the parent page (already loaded) using temp elements
@@ -295,7 +300,7 @@ function renderGrid(keepFocusQ) {
   document.getElementById('ttopic').textContent = topic.l;
   const strandLabel = STRAND_LABELS[STRAND_KEYS.indexOf(currentStrand)];
   document.getElementById('toplabel').textContent =
-    'Year 7 Cycle 1 — ' + strandLabel + ' · ' + qs.length + ' topics';
+    boardTitle() + ' — ' + strandLabel + ' · ' + qs.length + ' topics';
 
   grid.innerHTML = '';
   const cols = 3;
@@ -977,20 +982,21 @@ function toggleCard(idx) {
   revealed[idx] = !revealed[idx];
   const ans = document.getElementById('ans' + idx);
   if (!ans) return;
-  if (revealed[idx]) { ans.classList.add('show'); card.classList.add('rev'); }
+  if (revealed[idx]) { ans.classList.add('show'); card.classList.add('rev'); reRenderMath(); }
   else               { ans.classList.remove('show'); card.classList.remove('rev'); }
 }
 
 function revealAll() {
-  for (let i = 0; i < qs.length; i++) {
+  for (let i = 0; i < qCount(); i++) {
     revealed[i] = true;
     const ans = document.getElementById('ans' + i);
     const card = document.getElementById('card' + i);
     if (ans && card && !card.classList.contains('qhidden')) { ans.classList.add('show'); card.classList.add('rev'); }
   }
+  reRenderMath();
 }
 function hideAll() {
-  for (let i = 0; i < qs.length; i++) {
+  for (let i = 0; i < qCount(); i++) {
     revealed[i] = false;
     const ans = document.getElementById('ans' + i);
     const card = document.getElementById('card' + i);
@@ -1128,6 +1134,10 @@ function closeKbd(e) {
 }
 
 // ── INIT ──
+(function applyHash() {
+  const h = (location.hash || '').replace(/^#/, '');
+  if (h && UNIT_KEYS.indexOf(h) !== -1) currentStrand = h;
+})();
 buildStrandBar();
 populateTopicSelect();
 renderGrid();

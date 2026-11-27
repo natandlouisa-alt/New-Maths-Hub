@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Year 7 Cycle 1 revision — preview</title>
+<title>Year 8 Cycle 1 revision</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -335,7 +335,7 @@ body.mode6 .qcard[data-row]:not([data-row="0"]):not([data-row="1"]){display:none
 
 <div id="topwrap">
 <div id="topbar">
-  <span class="previewtag">Preview</span>
+  <span class="previewtag">Year 8</span>
   <span id="szlabel">SIZE</span>
   <button class="tb" onclick="changeFont(-1)">−</button>
   <span id="szdisplay">18</span>
@@ -472,861 +472,876 @@ body.mode6 .qcard[data-row]:not([data-row="0"]):not([data-row="1"]){display:none
 <div id="fdots"></div>
 
 <script>
-const UNIT_KEYS = ["all","u0","u1","u2","u3","u4","u5","u6"];
-const UNIT_LABELS = ["Whole cycle","Number Sense","Calculation","Negatives 1","Order of Operations","Expressions","Solving Equations","Negatives 2"];
+const BOARD_TITLE = "Year 8 Cycle 1";
+const UNIT_KEYS = ["all","u0","u1","u2","u3","u4","u5"];
+const UNIT_LABELS = ["Whole cycle","Percentages","Money","Indices","Equations","Sequences","Ratio"];
 const DATA = {
   "all": [
     {
-      "u": "Year 7 · Cycle 1",
+      "u": "Year 8 · Cycle 1",
       "l": "Whole cycle",
       "qs": [
         {
-          "unit": "Number Sense",
-          "topic": "Integer place value",
-          "id": "int-place-value",
-          "q": "Write the value of the digit $7$ in $47\\,362$.",
-          "a": "The $7$ is in the thousands column.<br>$\\boldsymbol{7000}$",
-          "q2": "Write the value of the digit $8$ in $82\\,045$.",
-          "a2": "The $8$ is in the ten thousands column.<br>$\\boldsymbol{80000}$",
-          "q3": "Write the value of the digit $5$ in $15\\,208$.",
-          "a3": "The $5$ is in the thousands column.<br>$\\boldsymbol{5000}$"
+          "unit": "Percentages",
+          "topic": "Percentage of amounts",
+          "id": "percentage-of-amounts",
+          "q": "Work out $15\\%$ of $60$.",
+          "a": "$\\dfrac{15}{100} \\times 60 = 9$<br>$\\boldsymbol{9}$",
+          "q2": "Work out $25\\%$ of $80$.",
+          "a2": "$\\dfrac{25}{100} \\times 80 = 20$<br>$\\boldsymbol{20}$",
+          "q3": "Work out $20\\%$ of $45$.",
+          "a3": "$\\dfrac{20}{100} \\times 45 = 9$<br>$\\boldsymbol{9}$"
         },
         {
-          "unit": "Number Sense",
-          "topic": "Decimal place value",
-          "id": "dec-place-value",
-          "q": "Write the value of the digit $6$ in $3.068$.",
-          "a": "The $6$ is in the hundredths column.<br>$\\boldsymbol{0.06}$",
-          "q2": "Write the value of the digit $4$ in $5.074$.",
-          "a2": "The $4$ is in the thousandths column.<br>$\\boldsymbol{0.004}$",
-          "q3": "Write the value of the digit $5$ in $2.519$.",
-          "a3": "The $5$ is in the tenths column.<br>$\\boldsymbol{0.5}$"
+          "unit": "Percentages",
+          "topic": "Percentage increase (non calc)",
+          "id": "percentage-increase-non-calc",
+          "q": "Increase $40$ by $20\\%$.",
+          "a": "$20\\%$ of $40 = 8$<br>$40 + 8 = 48$<br>$\\boldsymbol{48}$",
+          "q2": "Increase $50$ by $10\\%$.",
+          "a2": "$10\\%$ of $50 = 5$<br>$50 + 5 = 55$<br>$\\boldsymbol{55}$",
+          "q3": "Increase $60$ by $25\\%$.",
+          "a3": "$25\\%$ of $60 = 15$<br>$60 + 15 = 75$<br>$\\boldsymbol{75}$"
         },
         {
-          "unit": "Number Sense",
-          "topic": "Rounding to powers of ten",
-          "id": "rounding-powers",
-          "q": "Round $47\\,386$ to the nearest $1\\,000$.",
-          "a": "The hundreds digit is less than 5, so the column stays.<br>$\\boldsymbol{47\\,000}$",
-          "q2": "Round $26\\,850$ to the nearest $100$.",
-          "a2": "The tens digit is 5 or more, so round up.<br>$\\boldsymbol{26\\,900}$",
-          "q3": "Round $39\\,420$ to the nearest $1\\,000$.",
-          "a3": "The hundreds digit is less than 5, so the column stays.<br>$\\boldsymbol{39\\,000}$"
+          "unit": "Percentages",
+          "topic": "Percentage decrease (non calc)",
+          "id": "percentage-decrease-non-calc",
+          "q": "Decrease $80$ by $15\\%$.",
+          "a": "$15\\%$ of $80 = 12$<br>$80 - 12 = 68$<br>$\\boldsymbol{68}$",
+          "q2": "Decrease $40$ by $10\\%$.",
+          "a2": "$10\\%$ of $40 = 4$<br>$40 - 4 = 36$<br>$\\boldsymbol{36}$",
+          "q3": "Decrease $90$ by $20\\%$.",
+          "a3": "$20\\%$ of $90 = 18$<br>$90 - 18 = 72$<br>$\\boldsymbol{72}$"
         },
         {
-          "unit": "Number Sense",
-          "topic": "Rounding to integers",
-          "id": "rounding-int",
-          "q": "Round $8.74$ to the nearest whole number.",
-          "a": "The tenths digit is $7$, so round up.<br>$\\boldsymbol{9}$",
-          "q2": "Round $6.48$ to the nearest whole number.",
-          "a2": "The tenths digit is $4$, so round down.<br>$\\boldsymbol{6}$",
-          "q3": "Round $12.51$ to the nearest whole number.",
-          "a3": "The tenths digit is $5$, so round up.<br>$\\boldsymbol{13}$"
+          "unit": "Percentages",
+          "topic": "Percentage of amount (multipliers)",
+          "id": "percentage-of-amount-multipliers",
+          "q": "Work out $15\\%$ of $60$ using a multiplier.",
+          "a": "Multiplier $= 0.15$<br>$60 \\times 0.15 = 9$<br>$\\boldsymbol{9}$",
+          "q2": "Work out $12\\%$ of $50$ using a multiplier.",
+          "a2": "Multiplier $= 0.12$<br>$50 \\times 0.12 = 6$<br>$\\boldsymbol{6}$",
+          "q3": "Work out $35\\%$ of $80$ using a multiplier.",
+          "a3": "Multiplier $= 0.35$<br>$80 \\times 0.35 = 28$<br>$\\boldsymbol{28}$"
         },
         {
-          "unit": "Number Sense",
-          "topic": "Rounding to decimal places",
-          "id": "rounding-dp",
-          "q": "Round $3.476$ to $1$ decimal place.",
-          "a": "The next digit is $7$, so round up.<br>$\\boldsymbol{3.5}$",
-          "q2": "Round $8.264$ to $2$ decimal places.",
-          "a2": "The next digit is $4$, so the digit stays.<br>$\\boldsymbol{8.26}$",
-          "q3": "Round $5.851$ to $1$ decimal place.",
-          "a3": "The next digit is $5$, so round up.<br>$\\boldsymbol{5.9}$"
+          "unit": "Percentages",
+          "topic": "Percentage increase (multipliers)",
+          "id": "percentage-increase-multipliers",
+          "q": "Increase $40$ by $20\\%$ using a multiplier.",
+          "a": "Multiplier $= 1.2$<br>$40 \\times 1.2 = 48$<br>$\\boldsymbol{48}$",
+          "q2": "Increase $80$ by $10\\%$ using a multiplier.",
+          "a2": "Multiplier $= 1.1$<br>$80 \\times 1.1 = 88$<br>$\\boldsymbol{88}$",
+          "q3": "Increase $25$ by $40\\%$ using a multiplier.",
+          "a3": "Multiplier $= 1.4$<br>$25 \\times 1.4 = 35$<br>$\\boldsymbol{35}$"
         },
         {
-          "unit": "Calculation",
-          "topic": "Adding decimals",
-          "id": "add-dec",
-          "q": "Work out $3.47 + 1.6$.",
-          "a": "$3.47 + 1.6 = 5.07$<br>$\\boldsymbol{5.07}$",
-          "q2": "Work out $2.85 + 0.9$.",
-          "a2": "$2.85 + 0.9 = 3.75$<br>$\\boldsymbol{3.75}$",
-          "q3": "Work out $4.06 + 2.7$.",
-          "a3": "$4.06 + 2.7 = 6.76$<br>$\\boldsymbol{6.76}$"
+          "unit": "Percentages",
+          "topic": "Percentage decrease (multipliers)",
+          "id": "percentage-decrease-multipliers",
+          "q": "Decrease $80$ by $15\\%$ using a multiplier.",
+          "a": "Multiplier $= 0.85$<br>$80 \\times 0.85 = 68$<br>$\\boldsymbol{68}$",
+          "q2": "Decrease $60$ by $10\\%$ using a multiplier.",
+          "a2": "Multiplier $= 0.9$<br>$60 \\times 0.9 = 54$<br>$\\boldsymbol{54}$",
+          "q3": "Decrease $50$ by $25\\%$ using a multiplier.",
+          "a3": "Multiplier $= 0.75$<br>$50 \\times 0.75 = 37.5$<br>$\\boldsymbol{37.5}$"
         },
         {
-          "unit": "Calculation",
-          "topic": "Subtracting decimals",
-          "id": "sub-dec",
-          "q": "Work out $5.3 - 2.17$.",
-          "a": "$5.3 - 2.17 = 3.13$<br>$\\boldsymbol{3.13}$",
-          "q2": "Work out $6.4 - 1.85$.",
-          "a2": "$6.4 - 1.85 = 4.55$<br>$\\boldsymbol{4.55}$",
-          "q3": "Work out $7.2 - 3.46$.",
-          "a3": "$7.2 - 3.46 = 3.74$<br>$\\boldsymbol{3.74}$"
+          "unit": "Money",
+          "topic": "Calculating with money",
+          "id": "calculating-with-money",
+          "q": "Work out $\\text{£}3.45+\\text{£}7.80$.",
+          "a": "$\\text{£}3.45+\\text{£}7.80=\\text{£}11.25$<br>$\\boldsymbol{\\text{£}11.25}$",
+          "q2": "Work out $\\text{£}2.60+\\text{£}4.75$.",
+          "a2": "$\\text{£}2.60+\\text{£}4.75=\\text{£}7.35$<br>$\\boldsymbol{\\text{£}7.35}$",
+          "q3": "Work out $\\text{£}9.99+\\text{£}1.50$.",
+          "a3": "$\\text{£}9.99+\\text{£}1.50=\\text{£}11.49$<br>$\\boldsymbol{\\text{£}11.49}$"
         },
         {
-          "unit": "Calculation",
-          "topic": "Multiplying by powers of ten",
-          "id": "mult-powers",
-          "q": "Work out $3.4 \\times 100$.",
-          "a": "Move the digits $2$ places left.<br>$\\boldsymbol{340}$",
-          "q2": "Work out $0.27 \\times 1000$.",
-          "a2": "Move the digits $3$ places left.<br>$\\boldsymbol{270}$",
-          "q3": "Work out $5.8 \\times 100$.",
-          "a3": "Move the digits $2$ places left.<br>$\\boldsymbol{580}$"
+          "unit": "Money",
+          "topic": "Best buys",
+          "id": "best-buys",
+          "q": "Which is better value: $\\text{£}2.40$ for $6$, or $\\text{£}3.00$ for $8$?",
+          "a": "$\\text{£}2.40 \\div 6 = 40$p each<br>$\\text{£}3.00 \\div 8 = 37.5$p each<br>$\\boldsymbol{\\text{£3.00 for 8}}$",
+          "q2": "Which is better value: $\\text{£}1.80$ for $4$, or $\\text{£}2.50$ for $5$?",
+          "a2": "$\\text{£}1.80 \\div 4 = 45$p each<br>$\\text{£}2.50 \\div 5 = 50$p each<br>$\\boldsymbol{\\text{£1.80 for 4}}$",
+          "q3": "Which is better value: $\\text{£}4.20$ for $6$, or $\\text{£}5.20$ for $8$?",
+          "a3": "$\\text{£}4.20 \\div 6 = 70$p each<br>$\\text{£}5.20 \\div 8 = 65$p each<br>$\\boldsymbol{\\text{£5.20 for 8}}$"
         },
         {
-          "unit": "Calculation",
-          "topic": "Dividing by powers of ten",
-          "id": "div-powers",
-          "q": "Work out $340 \\div 100$.",
-          "a": "Move the digits $2$ places right.<br>$\\boldsymbol{3.4}$",
-          "q2": "Work out $58 \\div 1000$.",
-          "a2": "Move the digits $3$ places right.<br>$\\boldsymbol{0.058}$",
-          "q3": "Work out $720 \\div 100$.",
-          "a3": "Move the digits $2$ places right.<br>$\\boldsymbol{7.2}$"
+          "unit": "Indices",
+          "topic": "Index laws – multiplying",
+          "id": "index-laws-multiplying",
+          "q": "Simplify $a^{3} \\times a^{4}$.",
+          "a": "Same base, add the powers.<br>$3 + 4 = 7$<br>$\\boldsymbol{a^{7}}$",
+          "q2": "Simplify $x^{2} \\times x^{5}$.",
+          "a2": "Same base, add the powers.<br>$2 + 5 = 7$<br>$\\boldsymbol{x^{7}}$",
+          "q3": "Simplify $m^{6} \\times m^{1}$.",
+          "a3": "Same base, add the powers.<br>$6 + 1 = 7$<br>$\\boldsymbol{m^{7}}$"
         },
         {
-          "unit": "Calculation",
-          "topic": "Multiplication",
-          "id": "multiplication",
-          "q": "Work out $23 \\times 14$.",
-          "a": "$23 \\times 10 = 230$<br>$23 \\times 4 = 92$<br>$230 + 92 = 322$<br>$\\boldsymbol{322}$",
-          "q2": "Work out $36 \\times 15$.",
-          "a2": "$36 \\times 10 = 360$<br>$36 \\times 5 = 180$<br>$360 + 180 = 540$<br>$\\boldsymbol{540}$",
-          "q3": "Work out $42 \\times 13$.",
-          "a3": "$42 \\times 10 = 420$<br>$42 \\times 3 = 126$<br>$420 + 126 = 546$<br>$\\boldsymbol{546}$"
+          "unit": "Indices",
+          "topic": "Index laws – dividing",
+          "id": "index-laws-dividing",
+          "q": "Simplify $a^{7} \\div a^{3}$.",
+          "a": "Same base, subtract the powers.<br>$7 - 3 = 4$<br>$\\boldsymbol{a^{4}}$",
+          "q2": "Simplify $x^{9} \\div x^{4}$.",
+          "a2": "Same base, subtract the powers.<br>$9 - 4 = 5$<br>$\\boldsymbol{x^{5}}$",
+          "q3": "Simplify $n^{5} \\div n^{2}$.",
+          "a3": "Same base, subtract the powers.<br>$5 - 2 = 3$<br>$\\boldsymbol{n^{3}}$"
         },
         {
-          "unit": "Calculation",
-          "topic": "Short division with decimals",
-          "id": "short-div",
-          "q": "Work out $9.6 \\div 4$.",
-          "a": "$9.6 \\div 4 = 2.4$<br>$\\boldsymbol{2.4}$",
-          "q2": "Work out $8.55 \\div 5$.",
-          "a2": "$8.55 \\div 5 = 1.71$<br>$\\boldsymbol{1.71}$",
-          "q3": "Work out $7.2 \\div 6$.",
-          "a3": "$7.2 \\div 6 = 1.2$<br>$\\boldsymbol{1.2}$"
+          "unit": "Indices",
+          "topic": "Index laws – brackets",
+          "id": "index-laws-brackets",
+          "q": "Simplify $(a^{3})^{2}$.",
+          "a": "Multiply the powers.<br>$3 \\times 2 = 6$<br>$\\boldsymbol{a^{6}}$",
+          "q2": "Simplify $(x^{4})^{3}$.",
+          "a2": "Multiply the powers.<br>$4 \\times 3 = 12$<br>$\\boldsymbol{x^{12}}$",
+          "q3": "Simplify $(b^{2})^{5}$.",
+          "a3": "Multiply the powers.<br>$2 \\times 5 = 10$<br>$\\boldsymbol{b^{10}}$"
         },
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Ordering negatives",
-          "id": "ordering-neg",
-          "q": "Write in order, smallest first: $-5,\\; 2,\\; -1,\\; 0$.",
-          "a": "$\\boldsymbol{-5,\\; -1,\\; 0,\\; 2}$",
-          "q2": "Write in order, smallest first: $-8,\\; 3,\\; -2,\\; 1$.",
-          "a2": "$\\boldsymbol{-8,\\; -2,\\; 1,\\; 3}$",
-          "q3": "Write in order, smallest first: $-4,\\; 5,\\; -7,\\; 0$.",
-          "a3": "$\\boldsymbol{-7,\\; -4,\\; 0,\\; 5}$"
+          "unit": "Indices",
+          "topic": "Index laws – negative powers to fractions",
+          "id": "index-laws-negative-powers-to-fractions",
+          "q": "Write $x^{-2}$ as a fraction.",
+          "a": "A negative power is the reciprocal.<br>$\\boldsymbol{\\dfrac{1}{x^{2}}}$",
+          "q2": "Write $a^{-3}$ as a fraction.",
+          "a2": "A negative power is the reciprocal.<br>$\\boldsymbol{\\dfrac{1}{a^{3}}}$",
+          "q3": "Write $n^{-4}$ as a fraction.",
+          "a3": "A negative power is the reciprocal.<br>$\\boldsymbol{\\dfrac{1}{n^{4}}}$"
         },
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Zero pairs",
-          "id": "zero-pairs",
-          "q": "Which number makes a zero pair with $-6$?",
-          "a": "$-6 + 6 = 0$<br>$\\boldsymbol{+6}$",
-          "q2": "Which number makes a zero pair with $-9$?",
-          "a2": "$-9 + 9 = 0$<br>$\\boldsymbol{+9}$",
-          "q3": "Which number makes a zero pair with $-4$?",
-          "a3": "$-4 + 4 = 0$<br>$\\boldsymbol{+4}$"
+          "unit": "Indices",
+          "topic": "Simplifying algebraic fractions",
+          "id": "simplifying-algebraic-fractions",
+          "q": "Simplify $\\dfrac{6a^{3}}{2a}$.",
+          "a": "$\\dfrac{6}{2}=3$<br>$a^{3} \\div a = a^{2}$<br>$\\boldsymbol{3a^{2}}$",
+          "q2": "Simplify $\\dfrac{10x^{5}}{2x^{2}}$.",
+          "a2": "$\\dfrac{10}{2}=5$<br>$x^{5} \\div x^{2} = x^{3}$<br>$\\boldsymbol{5x^{3}}$",
+          "q3": "Simplify $\\dfrac{12m^{4}}{3m}$.",
+          "a3": "$\\dfrac{12}{3}=4$<br>$m^{4} \\div m = m^{3}$<br>$\\boldsymbol{4m^{3}}$"
         },
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Adding negatives",
-          "id": "adding-neg",
-          "q": "Work out $-2 + (-4)$.",
-          "a": "Adding $-4$ moves left by $4$.<br>$\\boldsymbol{-6}$",
-          "q2": "Work out $-5 + (-3)$.",
-          "a2": "Adding $-3$ moves left by $3$.<br>$\\boldsymbol{-8}$",
-          "q3": "Work out $-7 + (-2)$.",
-          "a3": "Adding $-2$ moves left by $2$.<br>$\\boldsymbol{-9}$"
+          "unit": "Equations",
+          "topic": "Solving in the form x+a/b=c",
+          "id": "solving-in-the-form-x-a-b-c",
+          "q": "Solve $\\dfrac{x+3}{5} = 4$.",
+          "a": "$x + 3 = 20$<br>$x = 20 - 3$<br>$\\boldsymbol{x=17}$",
+          "q2": "Solve $\\dfrac{x+2}{3} = 6$.",
+          "a2": "$x + 2 = 18$<br>$x = 18 - 2$<br>$\\boldsymbol{x=16}$",
+          "q3": "Solve $\\dfrac{x+5}{4} = 3$.",
+          "a3": "$x + 5 = 12$<br>$x = 12 - 5$<br>$\\boldsymbol{x=7}$"
         },
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Subtracting negatives",
-          "id": "subbing-neg",
-          "q": "Work out $5 - (-3)$.",
-          "a": "$5 - (-3) = 5 + 3$<br>$\\boldsymbol{8}$",
-          "q2": "Work out $7 - (-4)$.",
-          "a2": "$7 - (-4) = 7 + 4$<br>$\\boldsymbol{11}$",
-          "q3": "Work out $2 - (-9)$.",
-          "a3": "$2 - (-9) = 2 + 9$<br>$\\boldsymbol{11}$"
+          "unit": "Equations",
+          "topic": "Solving equations with brackets",
+          "id": "solving-equations-with-brackets",
+          "q": "Solve $3(x+2) = 21$.",
+          "a": "$3x + 6 = 21$<br>$3x = 15$<br>$\\boldsymbol{x=5}$",
+          "q2": "Solve $4(x+1) = 20$.",
+          "a2": "$4x + 4 = 20$<br>$4x = 16$<br>$\\boldsymbol{x=4}$",
+          "q3": "Solve $5(x+3) = 40$.",
+          "a3": "$5x + 15 = 40$<br>$5x = 25$<br>$\\boldsymbol{x=5}$"
         },
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Adding & subtracting (mixed)",
-          "id": "mixed-neg-1",
-          "q": "Work out $-3 - (-7)$.",
-          "a": "$-3 - (-7) = -3 + 7$<br>$\\boldsymbol{4}$",
-          "q2": "Work out $-6 - (-2)$.",
-          "a2": "$-6 - (-2) = -6 + 2$<br>$\\boldsymbol{-4}$",
-          "q3": "Work out $-1 - (-8)$.",
-          "a3": "$-1 - (-8) = -1 + 8$<br>$\\boldsymbol{7}$"
+          "unit": "Equations",
+          "topic": "Solving equations (unknown denominator)",
+          "id": "solving-equations-unknown-denominator",
+          "q": "Solve $\\dfrac{12}{x} = 3$.",
+          "a": "$12 = 3x$<br>$x = 12 \\div 3$<br>$\\boldsymbol{x=4}$",
+          "q2": "Solve $\\dfrac{20}{x} = 4$.",
+          "a2": "$20 = 4x$<br>$x = 20 \\div 4$<br>$\\boldsymbol{x=5}$",
+          "q3": "Solve $\\dfrac{18}{x} = 6$.",
+          "a3": "$18 = 6x$<br>$x = 18 \\div 6$<br>$\\boldsymbol{x=3}$"
         },
         {
-          "unit": "Order of Operations",
-          "topic": "Order of operations 1",
-          "id": "bidmas-1",
-          "q": "Work out $3 + 4 \\times 2$.",
-          "a": "$4 \\times 2 = 8$<br>$3 + 8 = 11$<br>$\\boldsymbol{11}$",
-          "q2": "Work out $5 + 6 \\times 3$.",
-          "a2": "$6 \\times 3 = 18$<br>$5 + 18 = 23$<br>$\\boldsymbol{23}$",
-          "q3": "Work out $8 + 2 \\times 7$.",
-          "a3": "$2 \\times 7 = 14$<br>$8 + 14 = 22$<br>$\\boldsymbol{22}$"
+          "unit": "Equations",
+          "topic": "Solving equations (unknown both sides)",
+          "id": "solving-equations-unknown-both-sides",
+          "q": "Solve $5x + 3 = 2x + 18$.",
+          "a": "$5x - 2x = 18 - 3$<br>$3x = 15$<br>$\\boldsymbol{x=5}$",
+          "q2": "Solve $7x + 4 = 3x + 20$.",
+          "a2": "$7x - 3x = 20 - 4$<br>$4x = 16$<br>$\\boldsymbol{x=4}$",
+          "q3": "Solve $6x + 1 = 2x + 17$.",
+          "a3": "$6x - 2x = 17 - 1$<br>$4x = 16$<br>$\\boldsymbol{x=4}$"
         },
         {
-          "unit": "Order of Operations",
-          "topic": "Order of operations 2",
-          "id": "bidmas-2",
-          "q": "Work out $2 \\times (2+3)^{2}$.",
-          "a": "$2+3 = 5$<br>$5^{2} = 25$<br>$2 \\times 25 = 50$<br>$\\boldsymbol{50}$",
-          "q2": "Work out $3 \\times (1+3)^{2}$.",
-          "a2": "$1+3 = 4$<br>$4^{2} = 16$<br>$3 \\times 16 = 48$<br>$\\boldsymbol{48}$",
-          "q3": "Work out $4 \\times (2+1)^{2}$.",
-          "a3": "$2+1 = 3$<br>$3^{2} = 9$<br>$4 \\times 9 = 36$<br>$\\boldsymbol{36}$"
+          "unit": "Equations",
+          "topic": "Constructing and solving",
+          "id": "constructing-and-solving",
+          "q": "A number plus $7$ is $20$. Find the number.",
+          "a": "$x + 7 = 20$<br>$x = 20 - 7$<br>$\\boldsymbol{13}$",
+          "q2": "A number plus $9$ is $31$. Find the number.",
+          "a2": "$x + 9 = 31$<br>$x = 31 - 9$<br>$\\boldsymbol{22}$",
+          "q3": "A number plus $12$ is $40$. Find the number.",
+          "a3": "$x + 12 = 40$<br>$x = 40 - 12$<br>$\\boldsymbol{28}$"
         },
         {
-          "unit": "Order of Operations",
-          "topic": "Squares and roots",
-          "id": "squares-roots",
-          "q": "Work out $12^{2}$.",
-          "a": "$12 \\times 12 = 144$<br>$\\boldsymbol{144}$",
-          "q2": "Work out $13^{2}$.",
-          "a2": "$13 \\times 13 = 169$<br>$\\boldsymbol{169}$",
-          "q3": "Work out $11^{2}$.",
-          "a3": "$11 \\times 11 = 121$<br>$\\boldsymbol{121}$"
+          "unit": "Sequences",
+          "topic": "Term to term rule",
+          "id": "term-to-term-rule",
+          "q": "Write the term-to-term rule for $2,\\ 5,\\ 8,\\ 11$.",
+          "a": "$\\boldsymbol{+3}$",
+          "q2": "Write the term-to-term rule for $20,\\ 16,\\ 12,\\ 8$.",
+          "a2": "$\\boldsymbol{-4}$",
+          "q3": "Write the term-to-term rule for $3,\\ 6,\\ 12,\\ 24$.",
+          "a3": "$\\boldsymbol{\\times 2}$"
         },
         {
-          "unit": "Order of Operations",
-          "topic": "Cubes and roots",
-          "id": "cubes-roots",
-          "q": "Work out $4^{3}$.",
-          "a": "$4 \\times 4 \\times 4 = 64$<br>$\\boldsymbol{64}$",
-          "q2": "Work out $5^{3}$.",
-          "a2": "$5 \\times 5 \\times 5 = 125$<br>$\\boldsymbol{125}$",
-          "q3": "Work out $3^{3}$.",
-          "a3": "$3 \\times 3 \\times 3 = 27$<br>$\\boldsymbol{27}$"
+          "unit": "Sequences",
+          "topic": "Generating sequences",
+          "id": "generating-sequences",
+          "q": "The first term is $3$ and the rule is $+4$. Write the first four terms.",
+          "a": "$\\boldsymbol{3,\\ 7,\\ 11,\\ 15}$",
+          "q2": "The first term is $5$ and the rule is $+6$. Write the first four terms.",
+          "a2": "$\\boldsymbol{5,\\ 11,\\ 17,\\ 23}$",
+          "q3": "The first term is $8$ and the rule is $+3$. Write the first four terms.",
+          "a3": "$\\boldsymbol{8,\\ 11,\\ 14,\\ 17}$"
         },
         {
-          "unit": "Order of Operations",
-          "topic": "Commutativity and Associativity",
-          "id": "commutativity",
-          "q": "Does $8 - 3$ equal $3 - 8$?",
-          "a": "$8 - 3 = 5$<br>$3 - 8 = -5$<br>$\\boldsymbol{No}$",
-          "q2": "Does $9 - 2$ equal $2 - 9$?",
-          "a2": "$9 - 2 = 7$<br>$2 - 9 = -7$<br>$\\boldsymbol{No}$",
-          "q3": "Does $6 - 4$ equal $4 - 6$?",
-          "a3": "$6 - 4 = 2$<br>$4 - 6 = -2$<br>$\\boldsymbol{No}$"
+          "unit": "Sequences",
+          "topic": "Problem Solving with Patterns",
+          "id": "problem-solving-with-sequences",
+          "q": "The sequence is $4,\\ 7,\\ 10,\\ 13,\\ \\ldots$ What is the first term greater than $50$?",
+          "a": "Term-to-term rule $+3$.<br>Keep adding until the term is greater than $50$.<br>$\\boldsymbol{52}$",
+          "q2": "The sequence is $5,\\ 9,\\ 13,\\ 17,\\ \\ldots$ What is the first term greater than $30$?",
+          "a2": "Term-to-term rule $+4$.<br>Keep adding until the term is greater than $30$.<br>$\\boldsymbol{33}$",
+          "q3": "The sequence is $2,\\ 9,\\ 16,\\ 23,\\ \\ldots$ What is the first term greater than $40$?",
+          "a3": "Term-to-term rule $+7$.<br>Keep adding until the term is greater than $40$.<br>$\\boldsymbol{44}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Algebraic notation & terminology",
-          "id": "alg-notation",
-          "q": "Write $4 \\times a \\times a$ in algebraic notation.",
-          "a": "$a \\times a = a^{2}$<br>$\\boldsymbol{4a^{2}}$",
-          "q2": "Write $7 \\times b \\times b$ in algebraic notation.",
-          "a2": "$b \\times b = b^{2}$<br>$\\boldsymbol{7b^{2}}$",
-          "q3": "Write $5 \\times n \\times n$ in algebraic notation.",
-          "a3": "$n \\times n = n^{2}$<br>$\\boldsymbol{5n^{2}}$"
+          "unit": "Sequences",
+          "topic": "Special sequences",
+          "id": "special-sequences",
+          "q": "What type of special sequence is $1,\\ 4,\\ 9,\\ 16,\\ 25$?",
+          "a": "$\\boldsymbol{\\text{Square numbers}}$",
+          "q2": "What type of special sequence is $1,\\ 8,\\ 27,\\ 64,\\ 125$?",
+          "a2": "$\\boldsymbol{\\text{Cube numbers}}$",
+          "q3": "What type of special sequence is $1,\\ 1,\\ 2,\\ 3,\\ 5,\\ 8$?",
+          "a3": "$\\boldsymbol{\\text{Fibonacci}}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Algebra tiles",
-          "id": "alg-tiles",
-          "q": "Tiles show $+2x$, $-2x$ and $+3$. What is left after zero pairs cancel?",
-          "a": "$+2x$ and $-2x$ cancel.<br>$\\boldsymbol{3}$",
-          "q2": "Tiles show $+4x$, $-4x$ and $+5$. What is left after zero pairs cancel?",
-          "a2": "$+4x$ and $-4x$ cancel.<br>$\\boldsymbol{5}$",
-          "q3": "Tiles show $+3x$, $-3x$ and $+7$. What is left after zero pairs cancel?",
-          "a3": "$+3x$ and $-3x$ cancel.<br>$\\boldsymbol{7}$"
+          "unit": "Sequences",
+          "topic": "Nth term ascending",
+          "id": "nth-term-ascending",
+          "q": "Find the $n$th term of $3,\\ 7,\\ 11,\\ 15$.",
+          "a": "Common difference $= 4$<br>Term $1$: $4\\times 1 + (-1) = 3$<br>$\\boldsymbol{4n-1}$",
+          "q2": "Find the $n$th term of $2,\\ 7,\\ 12,\\ 17$.",
+          "a2": "Common difference $= 5$<br>Term $1$: $5\\times 1 + (-3) = 2$<br>$\\boldsymbol{5n-3}$",
+          "q3": "Find the $n$th term of $7,\\ 10,\\ 13,\\ 16$.",
+          "a3": "Common difference $= 3$<br>Term $1$: $3\\times 1 + (4) = 7$<br>$\\boldsymbol{3n+4}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Collecting like terms",
-          "id": "like-terms",
-          "q": "Simplify $4y + 6x + 6y - 2x$.",
-          "a": "$4y + 6y = 10y$<br>$6x - 2x = 4x$<br>$\\boldsymbol{10y+4x}$",
-          "q2": "Simplify $3a + 5b + 4a - 2b$.",
-          "a2": "$3a + 4a = 7a$<br>$5b - 2b = 3b$<br>$\\boldsymbol{7a+3b}$",
-          "q3": "Simplify $7p - 2q + 3p + 5q$.",
-          "a3": "$7p + 3p = 10p$<br>$-2q + 5q = 3q$<br>$\\boldsymbol{10p+3q}$"
+          "unit": "Sequences",
+          "topic": "Nth term descending",
+          "id": "nth-term-descending",
+          "q": "Find the $n$th term of $20,\\ 17,\\ 14,\\ 11$.",
+          "a": "Common difference $= -3$<br>Term $1$: $-3\\times 1 + 23 = 20$<br>$\\boldsymbol{23-3n}$",
+          "q2": "Find the $n$th term of $19,\\ 15,\\ 11,\\ 7$.",
+          "a2": "Common difference $= -4$<br>Term $1$: $-4\\times 1 + 23 = 19$<br>$\\boldsymbol{23-4n}$",
+          "q3": "Find the $n$th term of $11,\\ 9,\\ 7,\\ 5$.",
+          "a3": "Common difference $= -2$<br>Term $1$: $-2\\times 1 + 13 = 11$<br>$\\boldsymbol{13-2n}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Forming expressions",
-          "id": "forming-exp",
-          "q": "Write an expression for $5$ less than $x$.",
-          "a": "Start with $x$, then subtract $5$.<br>$\\boldsymbol{x-5}$",
-          "q2": "Write an expression for $8$ less than $n$.",
-          "a2": "Start with $n$, then subtract $8$.<br>$\\boldsymbol{n-8}$",
-          "q3": "Write an expression for $3$ less than $y$.",
-          "a3": "Start with $y$, then subtract $3$.<br>$\\boldsymbol{y-3}$"
+          "unit": "Sequences",
+          "topic": "Is it in the sequence?",
+          "id": "is-it-in-the-sequence",
+          "q": "Is $41$ in the sequence with $n$th term $4n-1$?",
+          "a": "$4n-1 = 41$<br>$4n = 42$<br>$n = 10.5$<br>$\\boldsymbol{\\text{No}}$",
+          "q2": "Is $20$ in the sequence with $n$th term $3n+2$?",
+          "a2": "$3n+2 = 20$<br>$3n = 18$<br>$n = 6$<br>$\\boldsymbol{\\text{Yes}}$",
+          "q3": "Is $33$ in the sequence with $n$th term $5n-2$?",
+          "a3": "$5n-2 = 33$<br>$5n = 35$<br>$n = 7$<br>$\\boldsymbol{\\text{Yes}}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Substitution",
-          "id": "substitution",
-          "q": "Work out $4x + 6y$ when $x = 3$ and $y = 5$.",
-          "a": "$4(3) + 6(5)$<br>$= 12 + 30$<br>$\\boldsymbol{42}$",
-          "q2": "Work out $3x + 5y$ when $x = 4$ and $y = 2$.",
-          "a2": "$3(4) + 5(2)$<br>$= 12 + 10$<br>$\\boldsymbol{22}$",
-          "q3": "Work out $2x + 7y$ when $x = 5$ and $y = 3$.",
-          "a3": "$2(5) + 7(3)$<br>$= 10 + 21$<br>$\\boldsymbol{31}$"
+          "unit": "Ratio",
+          "topic": "Intro to ratio",
+          "id": "intro-to-ratio",
+          "q": "In the ratio $3:2$ of red to blue, what does the $3$ stand for?",
+          "a": "$\\boldsymbol{\\text{3 red for every 2 blue}}$",
+          "q2": "In the ratio $5:1$ of girls to boys, what does the $5$ stand for?",
+          "a2": "$\\boldsymbol{\\text{5 girls for every 1 boy}}$",
+          "q3": "In the ratio $4:3$ of flour to sugar, what does the $4$ stand for?",
+          "a3": "$\\boldsymbol{\\text{4 parts flour for every 3 parts sugar}}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Function machines",
-          "id": "fn-machines",
-          "q": "A function machine does $\\times 3$, then $+ 2$. The input is $5$. What is the output?",
-          "a": "$5 \\times 3 = 15$<br>$15 + 2 = 17$<br>$\\boldsymbol{17}$",
-          "q2": "A function machine does $\\times 5$, then $+ 3$. The input is $4$. What is the output?",
-          "a2": "$4 \\times 5 = 20$<br>$20 + 3 = 23$<br>$\\boldsymbol{23}$",
-          "q3": "A function machine does $\\times 2$, then $+ 7$. The input is $6$. What is the output?",
-          "a3": "$6 \\times 2 = 12$<br>$12 + 7 = 19$<br>$\\boldsymbol{19}$"
+          "unit": "Ratio",
+          "topic": "Simplifying ratios",
+          "id": "simplifying-ratios",
+          "q": "Simplify $12:8$.",
+          "a": "Divide both parts by $4$.<br>$\\boldsymbol{3:2}$",
+          "q2": "Simplify $18:24$.",
+          "a2": "Divide both parts by $6$.<br>$\\boldsymbol{3:4}$",
+          "q3": "Simplify $15:25$.",
+          "a3": "Divide both parts by $5$.<br>$\\boldsymbol{3:5}$"
         },
         {
-          "unit": "Solving Equations",
-          "topic": "Solving one step (adding)",
-          "id": "solve-add",
-          "q": "Solve $x + 7 = 12$.",
-          "a": "$x = 12 - 7$<br>$\\boldsymbol{x=5}$",
-          "q2": "Solve $x + 9 = 20$.",
-          "a2": "$x = 20 - 9$<br>$\\boldsymbol{x=11}$",
-          "q3": "Solve $x + 4 = 15$.",
-          "a3": "$x = 15 - 4$<br>$\\boldsymbol{x=11}$"
+          "unit": "Ratio",
+          "topic": "Equivalent ratios",
+          "id": "equivalent-ratios",
+          "q": "Write a ratio equivalent to $2:3$ by multiplying both parts by $4$.",
+          "a": "$\\boldsymbol{8:12}$",
+          "q2": "Write a ratio equivalent to $5:2$ by multiplying both parts by $3$.",
+          "a2": "$\\boldsymbol{15:6}$",
+          "q3": "Write a ratio equivalent to $3:7$ by multiplying both parts by $2$.",
+          "a3": "$\\boldsymbol{6:14}$"
         },
         {
-          "unit": "Solving Equations",
-          "topic": "Solving one step (multiplying)",
-          "id": "solve-mult",
-          "q": "Solve $3x = 15$.",
-          "a": "$x = 15 \\div 3$<br>$\\boldsymbol{x=5}$",
-          "q2": "Solve $4x = 28$.",
-          "a2": "$x = 28 \\div 4$<br>$\\boldsymbol{x=7}$",
-          "q3": "Solve $5x = 35$.",
-          "a3": "$x = 35 \\div 5$<br>$\\boldsymbol{x=7}$"
+          "unit": "Ratio",
+          "topic": "Applying ratios",
+          "id": "applying-ratios",
+          "q": "Flour to sugar is $2:3$. If flour is $10$ kg, how much sugar is needed?",
+          "a": "$2$ parts flour : $3$ parts sugar.<br>$\\boldsymbol{15\\ \\text{kg}}$",
+          "q2": "Flour to sugar is $4:5$. If flour is $12$ kg, how much sugar is needed?",
+          "a2": "$4$ parts flour : $5$ parts sugar.<br>$\\boldsymbol{15\\ \\text{kg}}$",
+          "q3": "Flour to sugar is $3:2$. If sugar is $8$ kg, how much flour is needed?",
+          "a3": "$3$ parts flour : $2$ parts sugar.<br>$\\boldsymbol{12\\ \\text{kg}}$"
         },
         {
-          "unit": "Solving Equations",
-          "topic": "Solving two step (multiply)",
-          "id": "solve-2-mult",
-          "q": "Solve $2x + 6 = 18$.",
-          "a": "$2x = 12$<br>$x = 12 \\div 2$<br>$\\boldsymbol{x=6}$",
-          "q2": "Solve $3x + 5 = 26$.",
-          "a2": "$3x = 21$<br>$x = 21 \\div 3$<br>$\\boldsymbol{x=7}$",
-          "q3": "Solve $4x + 3 = 23$.",
-          "a3": "$4x = 20$<br>$x = 20 \\div 4$<br>$\\boldsymbol{x=5}$"
+          "unit": "Ratio",
+          "topic": "Writing ratio in the form 1:n",
+          "id": "writing-ratio-in-the-form-1-n",
+          "q": "Write $4:10$ in the form $1:n$.",
+          "a": "Divide both parts by $4$.<br>$\\boldsymbol{1:2.5}$",
+          "q2": "Write $5:8$ in the form $1:n$.",
+          "a2": "Divide both parts by $5$.<br>$\\boldsymbol{1:1.6}$",
+          "q3": "Write $2:7$ in the form $1:n$.",
+          "a3": "Divide both parts by $2$.<br>$\\boldsymbol{1:3.5}$"
         },
         {
-          "unit": "Solving Equations",
-          "topic": "Solving two step (divide)",
-          "id": "solve-2-div",
-          "q": "Solve $\\dfrac{x}{3} + 4 = 7$.",
-          "a": "$\\dfrac{x}{3} = 3$<br>$x = 3 \\times 3$<br>$\\boldsymbol{x=9}$",
-          "q2": "Solve $\\dfrac{x}{4} + 2 = 5$.",
-          "a2": "$\\dfrac{x}{4} = 3$<br>$x = 3 \\times 4$<br>$\\boldsymbol{x=12}$",
-          "q3": "Solve $\\dfrac{x}{5} + 6 = 8$.",
-          "a3": "$\\dfrac{x}{5} = 2$<br>$x = 2 \\times 5$<br>$\\boldsymbol{x=10}$"
+          "unit": "Ratio",
+          "topic": "Ratio to fraction",
+          "id": "ratio-to-fraction",
+          "q": "Write $3:5$ as two fractions of the whole.",
+          "a": "Total parts $= 8$<br>$\\boldsymbol{\\dfrac{3}{8}\\ \\text{and}\\ \\dfrac{5}{8}}$",
+          "q2": "Write $2:7$ as two fractions of the whole.",
+          "a2": "Total parts $= 9$<br>$\\boldsymbol{\\dfrac{2}{9}\\ \\text{and}\\ \\dfrac{7}{9}}$",
+          "q3": "Write $4:1$ as two fractions of the whole.",
+          "a3": "Total parts $= 5$<br>$\\boldsymbol{\\dfrac{4}{5}\\ \\text{and}\\ \\dfrac{1}{5}}$"
         },
         {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Multiplying positive × negative",
-          "id": "pos-neg-mult",
-          "q": "Work out $3 \\times (-4)$.",
-          "a": "$3 \\times 4 = 12$<br>Positive $\\times$ negative is negative.<br>$\\boldsymbol{-12}$",
-          "q2": "Work out $6 \\times (-5)$.",
-          "a2": "$6 \\times 5 = 30$<br>Positive $\\times$ negative is negative.<br>$\\boldsymbol{-30}$",
-          "q3": "Work out $7 \\times (-2)$.",
-          "a3": "$7 \\times 2 = 14$<br>Positive $\\times$ negative is negative.<br>$\\boldsymbol{-14}$"
+          "unit": "Ratio",
+          "topic": "Fraction to ratio",
+          "id": "fraction-to-ratio",
+          "q": "$\\dfrac{2}{5}$ of a class are boys. Write the ratio of boys to girls.",
+          "a": "Girls $= \\dfrac{3}{5}$<br>$\\boldsymbol{2:3}$",
+          "q2": "$\\dfrac{3}{8}$ of a class are boys. Write the ratio of boys to girls.",
+          "a2": "Girls $= \\dfrac{5}{8}$<br>$\\boldsymbol{3:5}$",
+          "q3": "$\\dfrac{5}{9}$ of a class are boys. Write the ratio of boys to girls.",
+          "a3": "Girls $= \\dfrac{4}{9}$<br>$\\boldsymbol{5:4}$"
         },
         {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Multiplying negative × negative",
-          "id": "neg-neg-mult",
-          "q": "Work out $(-3) \\times (-4)$.",
-          "a": "$3 \\times 4 = 12$<br>Negative $\\times$ negative is positive.<br>$\\boldsymbol{12}$",
-          "q2": "Work out $(-6) \\times (-5)$.",
-          "a2": "$6 \\times 5 = 30$<br>Negative $\\times$ negative is positive.<br>$\\boldsymbol{30}$",
-          "q3": "Work out $(-7) \\times (-2)$.",
-          "a3": "$7 \\times 2 = 14$<br>Negative $\\times$ negative is positive.<br>$\\boldsymbol{14}$"
+          "unit": "Ratio",
+          "topic": "Sharing ratio (whole)",
+          "id": "sharing-ratio-whole",
+          "q": "Share $\\text{£}40$ in the ratio $3:5$.",
+          "a": "$3+5=8$ parts<br>$1$ part $=\\text{£}5$<br>$\\boldsymbol{\\text{£}15:\\text{£}25}$",
+          "q2": "Share $\\text{£}56$ in the ratio $3:4$.",
+          "a2": "$3+4=7$ parts<br>$1$ part $=\\text{£}8$<br>$\\boldsymbol{\\text{£}24:\\text{£}32}$",
+          "q3": "Share $\\text{£}72$ in the ratio $1:5$.",
+          "a3": "$1+5=6$ parts<br>$1$ part $=\\text{£}12$<br>$\\boldsymbol{\\text{£}12:\\text{£}60}$"
         },
         {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Dividing with negatives",
-          "id": "div-neg",
-          "q": "Work out $-18 \\div 6$.",
-          "a": "$18 \\div 6 = 3$<br>Different signs, so the answer is negative.<br>$\\boldsymbol{-3}$",
-          "q2": "Work out $-28 \\div 7$.",
-          "a2": "$28 \\div 7 = 4$<br>Different signs, so the answer is negative.<br>$\\boldsymbol{-4}$",
-          "q3": "Work out $-36 \\div 4$.",
-          "a3": "$36 \\div 4 = 9$<br>Different signs, so the answer is negative.<br>$\\boldsymbol{-9}$"
+          "unit": "Ratio",
+          "topic": "Sharing ratio (part)",
+          "id": "sharing-ratio-part",
+          "q": "A ratio is $2:3$. The first share is $\\text{£}12$. What is the total?",
+          "a": "$1$ part $=\\text{£}6$<br>$5$ parts $=\\text{£}30$<br>$\\boldsymbol{\\text{£}30}$",
+          "q2": "A ratio is $4:1$. The first share is $\\text{£}20$. What is the total?",
+          "a2": "$1$ part $=\\text{£}5$<br>$5$ parts $=\\text{£}25$<br>$\\boldsymbol{\\text{£}25}$",
+          "q3": "A ratio is $5:3$. The first share is $\\text{£}15$. What is the total?",
+          "a3": "$1$ part $=\\text{£}3$<br>$8$ parts $=\\text{£}24$<br>$\\boldsymbol{\\text{£}24}$"
         },
         {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Mixed negatives",
-          "id": "mixed-neg-2",
-          "q": "Work out $(-2) \\times 5 \\times (-3)$.",
-          "a": "$(-2) \\times 5 = -10$<br>$-10 \\times (-3) = 30$<br>$\\boldsymbol{30}$",
-          "q2": "Work out $(-4) \\times 3 \\times (-2)$.",
-          "a2": "$(-4) \\times 3 = -12$<br>$-12 \\times (-2) = 24$<br>$\\boldsymbol{24}$",
-          "q3": "Work out $(-5) \\times 2 \\times (-4)$.",
-          "a3": "$(-5) \\times 2 = -10$<br>$-10 \\times (-4) = 40$<br>$\\boldsymbol{40}$"
+          "unit": "Ratio",
+          "topic": "Sharing ratio (difference)",
+          "id": "sharing-ratio-difference",
+          "q": "A ratio is $3:5$. The shares differ by $\\text{£}20$. Find the two shares.",
+          "a": "Difference $= 2$ parts $=\\text{£}20$<br>$1$ part $=\\text{£}10$<br>$\\boldsymbol{\\text{£}30:\\text{£}50}$",
+          "q2": "A ratio is $2:7$. The shares differ by $\\text{£}30$. Find the two shares.",
+          "a2": "Difference $= 5$ parts $=\\text{£}30$<br>$1$ part $=\\text{£}6$<br>$\\boldsymbol{\\text{£}12:\\text{£}42}$",
+          "q3": "A ratio is $1:4$. The shares differ by $\\text{£}18$. Find the two shares.",
+          "a3": "Difference $= 3$ parts $=\\text{£}18$<br>$1$ part $=\\text{£}6$<br>$\\boldsymbol{\\text{£}6:\\text{£}24}$"
         },
         {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Negatives on a calculator",
-          "id": "neg-calc",
-          "q": "Work out $(-6)^{2}$.",
-          "a": "$(-6) \\times (-6) = 36$<br>$\\boldsymbol{36}$",
-          "q2": "Work out $(-8)^{2}$.",
-          "a2": "$(-8) \\times (-8) = 64$<br>$\\boldsymbol{64}$",
-          "q3": "Work out $(-9)^{2}$.",
-          "a3": "$(-9) \\times (-9) = 81$<br>$\\boldsymbol{81}$"
+          "unit": "Ratio",
+          "topic": "Sharing ratio (mixed)",
+          "id": "sharing-ratio-mixed",
+          "q": "Share $\\text{£}60$ in the ratio $2:3$.",
+          "a": "$5$ parts, $1$ part $=\\text{£}12$<br>$\\boldsymbol{\\text{£}24:\\text{£}36}$",
+          "q2": "Ratio $3:5$. The smaller share is $\\text{£}12$. Find the larger share.",
+          "a2": "$1$ part $=\\text{£}4$<br>$\\boldsymbol{\\text{£}20}$",
+          "q3": "Ratio $4:7$. The shares differ by $\\text{£}15$. Find the smaller share.",
+          "a3": "$3$ parts $=\\text{£}15$, $1$ part $=\\text{£}5$<br>$\\boldsymbol{\\text{£}20}$"
+        },
+        {
+          "unit": "Ratio",
+          "topic": "Maps and scales",
+          "id": "maps-and-scales",
+          "q": "A map scale is $1:25000$. A road is $4$ cm on the map. How long is it in real life?",
+          "a": "$4 \\times 25000 = 100000$ cm<br>$100000$ cm $= 1$ km<br>$\\boldsymbol{1\\ \\text{km}}$",
+          "q2": "A map scale is $1:50000$. A road is $3$ cm on the map. How long is it in real life?",
+          "a2": "$3 \\times 50000 = 150000$ cm<br>$150000$ cm $= 1.5$ km<br>$\\boldsymbol{1.5\\ \\text{km}}$",
+          "q3": "A map scale is $1:10000$. A road is $6$ cm on the map. How long is it in real life?",
+          "a3": "$6 \\times 10000 = 60000$ cm<br>$60000$ cm $= 0.6$ km<br>$\\boldsymbol{0.6\\ \\text{km}}$"
         }
       ]
     }
   ],
   "u0": [
     {
-      "u": "Number Sense",
-      "l": "Number Sense",
+      "u": "Percentages",
+      "l": "Percentages",
       "qs": [
         {
-          "unit": "Number Sense",
-          "topic": "Integer place value",
-          "id": "int-place-value",
-          "q": "Write the value of the digit $7$ in $47\\,362$.",
-          "a": "The $7$ is in the thousands column.<br>$\\boldsymbol{7000}$",
-          "q2": "Write the value of the digit $8$ in $82\\,045$.",
-          "a2": "The $8$ is in the ten thousands column.<br>$\\boldsymbol{80000}$",
-          "q3": "Write the value of the digit $5$ in $15\\,208$.",
-          "a3": "The $5$ is in the thousands column.<br>$\\boldsymbol{5000}$"
+          "unit": "Percentages",
+          "topic": "Percentage of amounts",
+          "id": "percentage-of-amounts",
+          "q": "Work out $15\\%$ of $60$.",
+          "a": "$\\dfrac{15}{100} \\times 60 = 9$<br>$\\boldsymbol{9}$",
+          "q2": "Work out $25\\%$ of $80$.",
+          "a2": "$\\dfrac{25}{100} \\times 80 = 20$<br>$\\boldsymbol{20}$",
+          "q3": "Work out $20\\%$ of $45$.",
+          "a3": "$\\dfrac{20}{100} \\times 45 = 9$<br>$\\boldsymbol{9}$"
         },
         {
-          "unit": "Number Sense",
-          "topic": "Decimal place value",
-          "id": "dec-place-value",
-          "q": "Write the value of the digit $6$ in $3.068$.",
-          "a": "The $6$ is in the hundredths column.<br>$\\boldsymbol{0.06}$",
-          "q2": "Write the value of the digit $4$ in $5.074$.",
-          "a2": "The $4$ is in the thousandths column.<br>$\\boldsymbol{0.004}$",
-          "q3": "Write the value of the digit $5$ in $2.519$.",
-          "a3": "The $5$ is in the tenths column.<br>$\\boldsymbol{0.5}$"
+          "unit": "Percentages",
+          "topic": "Percentage increase (non calc)",
+          "id": "percentage-increase-non-calc",
+          "q": "Increase $40$ by $20\\%$.",
+          "a": "$20\\%$ of $40 = 8$<br>$40 + 8 = 48$<br>$\\boldsymbol{48}$",
+          "q2": "Increase $50$ by $10\\%$.",
+          "a2": "$10\\%$ of $50 = 5$<br>$50 + 5 = 55$<br>$\\boldsymbol{55}$",
+          "q3": "Increase $60$ by $25\\%$.",
+          "a3": "$25\\%$ of $60 = 15$<br>$60 + 15 = 75$<br>$\\boldsymbol{75}$"
         },
         {
-          "unit": "Number Sense",
-          "topic": "Rounding to powers of ten",
-          "id": "rounding-powers",
-          "q": "Round $47\\,386$ to the nearest $1\\,000$.",
-          "a": "The hundreds digit is less than 5, so the column stays.<br>$\\boldsymbol{47\\,000}$",
-          "q2": "Round $26\\,850$ to the nearest $100$.",
-          "a2": "The tens digit is 5 or more, so round up.<br>$\\boldsymbol{26\\,900}$",
-          "q3": "Round $39\\,420$ to the nearest $1\\,000$.",
-          "a3": "The hundreds digit is less than 5, so the column stays.<br>$\\boldsymbol{39\\,000}$"
+          "unit": "Percentages",
+          "topic": "Percentage decrease (non calc)",
+          "id": "percentage-decrease-non-calc",
+          "q": "Decrease $80$ by $15\\%$.",
+          "a": "$15\\%$ of $80 = 12$<br>$80 - 12 = 68$<br>$\\boldsymbol{68}$",
+          "q2": "Decrease $40$ by $10\\%$.",
+          "a2": "$10\\%$ of $40 = 4$<br>$40 - 4 = 36$<br>$\\boldsymbol{36}$",
+          "q3": "Decrease $90$ by $20\\%$.",
+          "a3": "$20\\%$ of $90 = 18$<br>$90 - 18 = 72$<br>$\\boldsymbol{72}$"
         },
         {
-          "unit": "Number Sense",
-          "topic": "Rounding to integers",
-          "id": "rounding-int",
-          "q": "Round $8.74$ to the nearest whole number.",
-          "a": "The tenths digit is $7$, so round up.<br>$\\boldsymbol{9}$",
-          "q2": "Round $6.48$ to the nearest whole number.",
-          "a2": "The tenths digit is $4$, so round down.<br>$\\boldsymbol{6}$",
-          "q3": "Round $12.51$ to the nearest whole number.",
-          "a3": "The tenths digit is $5$, so round up.<br>$\\boldsymbol{13}$"
+          "unit": "Percentages",
+          "topic": "Percentage of amount (multipliers)",
+          "id": "percentage-of-amount-multipliers",
+          "q": "Work out $15\\%$ of $60$ using a multiplier.",
+          "a": "Multiplier $= 0.15$<br>$60 \\times 0.15 = 9$<br>$\\boldsymbol{9}$",
+          "q2": "Work out $12\\%$ of $50$ using a multiplier.",
+          "a2": "Multiplier $= 0.12$<br>$50 \\times 0.12 = 6$<br>$\\boldsymbol{6}$",
+          "q3": "Work out $35\\%$ of $80$ using a multiplier.",
+          "a3": "Multiplier $= 0.35$<br>$80 \\times 0.35 = 28$<br>$\\boldsymbol{28}$"
         },
         {
-          "unit": "Number Sense",
-          "topic": "Rounding to decimal places",
-          "id": "rounding-dp",
-          "q": "Round $3.476$ to $1$ decimal place.",
-          "a": "The next digit is $7$, so round up.<br>$\\boldsymbol{3.5}$",
-          "q2": "Round $8.264$ to $2$ decimal places.",
-          "a2": "The next digit is $4$, so the digit stays.<br>$\\boldsymbol{8.26}$",
-          "q3": "Round $5.851$ to $1$ decimal place.",
-          "a3": "The next digit is $5$, so round up.<br>$\\boldsymbol{5.9}$"
+          "unit": "Percentages",
+          "topic": "Percentage increase (multipliers)",
+          "id": "percentage-increase-multipliers",
+          "q": "Increase $40$ by $20\\%$ using a multiplier.",
+          "a": "Multiplier $= 1.2$<br>$40 \\times 1.2 = 48$<br>$\\boldsymbol{48}$",
+          "q2": "Increase $80$ by $10\\%$ using a multiplier.",
+          "a2": "Multiplier $= 1.1$<br>$80 \\times 1.1 = 88$<br>$\\boldsymbol{88}$",
+          "q3": "Increase $25$ by $40\\%$ using a multiplier.",
+          "a3": "Multiplier $= 1.4$<br>$25 \\times 1.4 = 35$<br>$\\boldsymbol{35}$"
+        },
+        {
+          "unit": "Percentages",
+          "topic": "Percentage decrease (multipliers)",
+          "id": "percentage-decrease-multipliers",
+          "q": "Decrease $80$ by $15\\%$ using a multiplier.",
+          "a": "Multiplier $= 0.85$<br>$80 \\times 0.85 = 68$<br>$\\boldsymbol{68}$",
+          "q2": "Decrease $60$ by $10\\%$ using a multiplier.",
+          "a2": "Multiplier $= 0.9$<br>$60 \\times 0.9 = 54$<br>$\\boldsymbol{54}$",
+          "q3": "Decrease $50$ by $25\\%$ using a multiplier.",
+          "a3": "Multiplier $= 0.75$<br>$50 \\times 0.75 = 37.5$<br>$\\boldsymbol{37.5}$"
         }
       ]
     }
   ],
   "u1": [
     {
-      "u": "Calculation",
-      "l": "Calculation",
+      "u": "Money",
+      "l": "Money",
       "qs": [
         {
-          "unit": "Calculation",
-          "topic": "Adding decimals",
-          "id": "add-dec",
-          "q": "Work out $3.47 + 1.6$.",
-          "a": "$3.47 + 1.6 = 5.07$<br>$\\boldsymbol{5.07}$",
-          "q2": "Work out $2.85 + 0.9$.",
-          "a2": "$2.85 + 0.9 = 3.75$<br>$\\boldsymbol{3.75}$",
-          "q3": "Work out $4.06 + 2.7$.",
-          "a3": "$4.06 + 2.7 = 6.76$<br>$\\boldsymbol{6.76}$"
+          "unit": "Money",
+          "topic": "Calculating with money",
+          "id": "calculating-with-money",
+          "q": "Work out $\\text{£}3.45+\\text{£}7.80$.",
+          "a": "$\\text{£}3.45+\\text{£}7.80=\\text{£}11.25$<br>$\\boldsymbol{\\text{£}11.25}$",
+          "q2": "Work out $\\text{£}2.60+\\text{£}4.75$.",
+          "a2": "$\\text{£}2.60+\\text{£}4.75=\\text{£}7.35$<br>$\\boldsymbol{\\text{£}7.35}$",
+          "q3": "Work out $\\text{£}9.99+\\text{£}1.50$.",
+          "a3": "$\\text{£}9.99+\\text{£}1.50=\\text{£}11.49$<br>$\\boldsymbol{\\text{£}11.49}$"
         },
         {
-          "unit": "Calculation",
-          "topic": "Subtracting decimals",
-          "id": "sub-dec",
-          "q": "Work out $5.3 - 2.17$.",
-          "a": "$5.3 - 2.17 = 3.13$<br>$\\boldsymbol{3.13}$",
-          "q2": "Work out $6.4 - 1.85$.",
-          "a2": "$6.4 - 1.85 = 4.55$<br>$\\boldsymbol{4.55}$",
-          "q3": "Work out $7.2 - 3.46$.",
-          "a3": "$7.2 - 3.46 = 3.74$<br>$\\boldsymbol{3.74}$"
-        },
-        {
-          "unit": "Calculation",
-          "topic": "Multiplying by powers of ten",
-          "id": "mult-powers",
-          "q": "Work out $3.4 \\times 100$.",
-          "a": "Move the digits $2$ places left.<br>$\\boldsymbol{340}$",
-          "q2": "Work out $0.27 \\times 1000$.",
-          "a2": "Move the digits $3$ places left.<br>$\\boldsymbol{270}$",
-          "q3": "Work out $5.8 \\times 100$.",
-          "a3": "Move the digits $2$ places left.<br>$\\boldsymbol{580}$"
-        },
-        {
-          "unit": "Calculation",
-          "topic": "Dividing by powers of ten",
-          "id": "div-powers",
-          "q": "Work out $340 \\div 100$.",
-          "a": "Move the digits $2$ places right.<br>$\\boldsymbol{3.4}$",
-          "q2": "Work out $58 \\div 1000$.",
-          "a2": "Move the digits $3$ places right.<br>$\\boldsymbol{0.058}$",
-          "q3": "Work out $720 \\div 100$.",
-          "a3": "Move the digits $2$ places right.<br>$\\boldsymbol{7.2}$"
-        },
-        {
-          "unit": "Calculation",
-          "topic": "Multiplication",
-          "id": "multiplication",
-          "q": "Work out $23 \\times 14$.",
-          "a": "$23 \\times 10 = 230$<br>$23 \\times 4 = 92$<br>$230 + 92 = 322$<br>$\\boldsymbol{322}$",
-          "q2": "Work out $36 \\times 15$.",
-          "a2": "$36 \\times 10 = 360$<br>$36 \\times 5 = 180$<br>$360 + 180 = 540$<br>$\\boldsymbol{540}$",
-          "q3": "Work out $42 \\times 13$.",
-          "a3": "$42 \\times 10 = 420$<br>$42 \\times 3 = 126$<br>$420 + 126 = 546$<br>$\\boldsymbol{546}$"
-        },
-        {
-          "unit": "Calculation",
-          "topic": "Short division with decimals",
-          "id": "short-div",
-          "q": "Work out $9.6 \\div 4$.",
-          "a": "$9.6 \\div 4 = 2.4$<br>$\\boldsymbol{2.4}$",
-          "q2": "Work out $8.55 \\div 5$.",
-          "a2": "$8.55 \\div 5 = 1.71$<br>$\\boldsymbol{1.71}$",
-          "q3": "Work out $7.2 \\div 6$.",
-          "a3": "$7.2 \\div 6 = 1.2$<br>$\\boldsymbol{1.2}$"
+          "unit": "Money",
+          "topic": "Best buys",
+          "id": "best-buys",
+          "q": "Which is better value: $\\text{£}2.40$ for $6$, or $\\text{£}3.00$ for $8$?",
+          "a": "$\\text{£}2.40 \\div 6 = 40$p each<br>$\\text{£}3.00 \\div 8 = 37.5$p each<br>$\\boldsymbol{\\text{£3.00 for 8}}$",
+          "q2": "Which is better value: $\\text{£}1.80$ for $4$, or $\\text{£}2.50$ for $5$?",
+          "a2": "$\\text{£}1.80 \\div 4 = 45$p each<br>$\\text{£}2.50 \\div 5 = 50$p each<br>$\\boldsymbol{\\text{£1.80 for 4}}$",
+          "q3": "Which is better value: $\\text{£}4.20$ for $6$, or $\\text{£}5.20$ for $8$?",
+          "a3": "$\\text{£}4.20 \\div 6 = 70$p each<br>$\\text{£}5.20 \\div 8 = 65$p each<br>$\\boldsymbol{\\text{£5.20 for 8}}$"
         }
       ]
     }
   ],
   "u2": [
     {
-      "u": "Negatives 1 — Add & Subtract",
-      "l": "Negatives 1 — Add & Subtract",
+      "u": "Indices",
+      "l": "Indices",
       "qs": [
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Ordering negatives",
-          "id": "ordering-neg",
-          "q": "Write in order, smallest first: $-5,\\; 2,\\; -1,\\; 0$.",
-          "a": "$\\boldsymbol{-5,\\; -1,\\; 0,\\; 2}$",
-          "q2": "Write in order, smallest first: $-8,\\; 3,\\; -2,\\; 1$.",
-          "a2": "$\\boldsymbol{-8,\\; -2,\\; 1,\\; 3}$",
-          "q3": "Write in order, smallest first: $-4,\\; 5,\\; -7,\\; 0$.",
-          "a3": "$\\boldsymbol{-7,\\; -4,\\; 0,\\; 5}$"
+          "unit": "Indices",
+          "topic": "Index laws – multiplying",
+          "id": "index-laws-multiplying",
+          "q": "Simplify $a^{3} \\times a^{4}$.",
+          "a": "Same base, add the powers.<br>$3 + 4 = 7$<br>$\\boldsymbol{a^{7}}$",
+          "q2": "Simplify $x^{2} \\times x^{5}$.",
+          "a2": "Same base, add the powers.<br>$2 + 5 = 7$<br>$\\boldsymbol{x^{7}}$",
+          "q3": "Simplify $m^{6} \\times m^{1}$.",
+          "a3": "Same base, add the powers.<br>$6 + 1 = 7$<br>$\\boldsymbol{m^{7}}$"
         },
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Zero pairs",
-          "id": "zero-pairs",
-          "q": "Which number makes a zero pair with $-6$?",
-          "a": "$-6 + 6 = 0$<br>$\\boldsymbol{+6}$",
-          "q2": "Which number makes a zero pair with $-9$?",
-          "a2": "$-9 + 9 = 0$<br>$\\boldsymbol{+9}$",
-          "q3": "Which number makes a zero pair with $-4$?",
-          "a3": "$-4 + 4 = 0$<br>$\\boldsymbol{+4}$"
+          "unit": "Indices",
+          "topic": "Index laws – dividing",
+          "id": "index-laws-dividing",
+          "q": "Simplify $a^{7} \\div a^{3}$.",
+          "a": "Same base, subtract the powers.<br>$7 - 3 = 4$<br>$\\boldsymbol{a^{4}}$",
+          "q2": "Simplify $x^{9} \\div x^{4}$.",
+          "a2": "Same base, subtract the powers.<br>$9 - 4 = 5$<br>$\\boldsymbol{x^{5}}$",
+          "q3": "Simplify $n^{5} \\div n^{2}$.",
+          "a3": "Same base, subtract the powers.<br>$5 - 2 = 3$<br>$\\boldsymbol{n^{3}}$"
         },
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Adding negatives",
-          "id": "adding-neg",
-          "q": "Work out $-2 + (-4)$.",
-          "a": "Adding $-4$ moves left by $4$.<br>$\\boldsymbol{-6}$",
-          "q2": "Work out $-5 + (-3)$.",
-          "a2": "Adding $-3$ moves left by $3$.<br>$\\boldsymbol{-8}$",
-          "q3": "Work out $-7 + (-2)$.",
-          "a3": "Adding $-2$ moves left by $2$.<br>$\\boldsymbol{-9}$"
+          "unit": "Indices",
+          "topic": "Index laws – brackets",
+          "id": "index-laws-brackets",
+          "q": "Simplify $(a^{3})^{2}$.",
+          "a": "Multiply the powers.<br>$3 \\times 2 = 6$<br>$\\boldsymbol{a^{6}}$",
+          "q2": "Simplify $(x^{4})^{3}$.",
+          "a2": "Multiply the powers.<br>$4 \\times 3 = 12$<br>$\\boldsymbol{x^{12}}$",
+          "q3": "Simplify $(b^{2})^{5}$.",
+          "a3": "Multiply the powers.<br>$2 \\times 5 = 10$<br>$\\boldsymbol{b^{10}}$"
         },
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Subtracting negatives",
-          "id": "subbing-neg",
-          "q": "Work out $5 - (-3)$.",
-          "a": "$5 - (-3) = 5 + 3$<br>$\\boldsymbol{8}$",
-          "q2": "Work out $7 - (-4)$.",
-          "a2": "$7 - (-4) = 7 + 4$<br>$\\boldsymbol{11}$",
-          "q3": "Work out $2 - (-9)$.",
-          "a3": "$2 - (-9) = 2 + 9$<br>$\\boldsymbol{11}$"
+          "unit": "Indices",
+          "topic": "Index laws – negative powers to fractions",
+          "id": "index-laws-negative-powers-to-fractions",
+          "q": "Write $x^{-2}$ as a fraction.",
+          "a": "A negative power is the reciprocal.<br>$\\boldsymbol{\\dfrac{1}{x^{2}}}$",
+          "q2": "Write $a^{-3}$ as a fraction.",
+          "a2": "A negative power is the reciprocal.<br>$\\boldsymbol{\\dfrac{1}{a^{3}}}$",
+          "q3": "Write $n^{-4}$ as a fraction.",
+          "a3": "A negative power is the reciprocal.<br>$\\boldsymbol{\\dfrac{1}{n^{4}}}$"
         },
         {
-          "unit": "Negatives 1 — Add & Subtract",
-          "topic": "Adding & subtracting (mixed)",
-          "id": "mixed-neg-1",
-          "q": "Work out $-3 - (-7)$.",
-          "a": "$-3 - (-7) = -3 + 7$<br>$\\boldsymbol{4}$",
-          "q2": "Work out $-6 - (-2)$.",
-          "a2": "$-6 - (-2) = -6 + 2$<br>$\\boldsymbol{-4}$",
-          "q3": "Work out $-1 - (-8)$.",
-          "a3": "$-1 - (-8) = -1 + 8$<br>$\\boldsymbol{7}$"
+          "unit": "Indices",
+          "topic": "Simplifying algebraic fractions",
+          "id": "simplifying-algebraic-fractions",
+          "q": "Simplify $\\dfrac{6a^{3}}{2a}$.",
+          "a": "$\\dfrac{6}{2}=3$<br>$a^{3} \\div a = a^{2}$<br>$\\boldsymbol{3a^{2}}$",
+          "q2": "Simplify $\\dfrac{10x^{5}}{2x^{2}}$.",
+          "a2": "$\\dfrac{10}{2}=5$<br>$x^{5} \\div x^{2} = x^{3}$<br>$\\boldsymbol{5x^{3}}$",
+          "q3": "Simplify $\\dfrac{12m^{4}}{3m}$.",
+          "a3": "$\\dfrac{12}{3}=4$<br>$m^{4} \\div m = m^{3}$<br>$\\boldsymbol{4m^{3}}$"
         }
       ]
     }
   ],
   "u3": [
     {
-      "u": "Order of Operations",
-      "l": "Order of Operations",
+      "u": "Equations",
+      "l": "Equations",
       "qs": [
         {
-          "unit": "Order of Operations",
-          "topic": "Order of operations 1",
-          "id": "bidmas-1",
-          "q": "Work out $3 + 4 \\times 2$.",
-          "a": "$4 \\times 2 = 8$<br>$3 + 8 = 11$<br>$\\boldsymbol{11}$",
-          "q2": "Work out $5 + 6 \\times 3$.",
-          "a2": "$6 \\times 3 = 18$<br>$5 + 18 = 23$<br>$\\boldsymbol{23}$",
-          "q3": "Work out $8 + 2 \\times 7$.",
-          "a3": "$2 \\times 7 = 14$<br>$8 + 14 = 22$<br>$\\boldsymbol{22}$"
+          "unit": "Equations",
+          "topic": "Solving in the form x+a/b=c",
+          "id": "solving-in-the-form-x-a-b-c",
+          "q": "Solve $\\dfrac{x+3}{5} = 4$.",
+          "a": "$x + 3 = 20$<br>$x = 20 - 3$<br>$\\boldsymbol{x=17}$",
+          "q2": "Solve $\\dfrac{x+2}{3} = 6$.",
+          "a2": "$x + 2 = 18$<br>$x = 18 - 2$<br>$\\boldsymbol{x=16}$",
+          "q3": "Solve $\\dfrac{x+5}{4} = 3$.",
+          "a3": "$x + 5 = 12$<br>$x = 12 - 5$<br>$\\boldsymbol{x=7}$"
         },
         {
-          "unit": "Order of Operations",
-          "topic": "Order of operations 2",
-          "id": "bidmas-2",
-          "q": "Work out $2 \\times (2+3)^{2}$.",
-          "a": "$2+3 = 5$<br>$5^{2} = 25$<br>$2 \\times 25 = 50$<br>$\\boldsymbol{50}$",
-          "q2": "Work out $3 \\times (1+3)^{2}$.",
-          "a2": "$1+3 = 4$<br>$4^{2} = 16$<br>$3 \\times 16 = 48$<br>$\\boldsymbol{48}$",
-          "q3": "Work out $4 \\times (2+1)^{2}$.",
-          "a3": "$2+1 = 3$<br>$3^{2} = 9$<br>$4 \\times 9 = 36$<br>$\\boldsymbol{36}$"
+          "unit": "Equations",
+          "topic": "Solving equations with brackets",
+          "id": "solving-equations-with-brackets",
+          "q": "Solve $3(x+2) = 21$.",
+          "a": "$3x + 6 = 21$<br>$3x = 15$<br>$\\boldsymbol{x=5}$",
+          "q2": "Solve $4(x+1) = 20$.",
+          "a2": "$4x + 4 = 20$<br>$4x = 16$<br>$\\boldsymbol{x=4}$",
+          "q3": "Solve $5(x+3) = 40$.",
+          "a3": "$5x + 15 = 40$<br>$5x = 25$<br>$\\boldsymbol{x=5}$"
         },
         {
-          "unit": "Order of Operations",
-          "topic": "Squares and roots",
-          "id": "squares-roots",
-          "q": "Work out $12^{2}$.",
-          "a": "$12 \\times 12 = 144$<br>$\\boldsymbol{144}$",
-          "q2": "Work out $13^{2}$.",
-          "a2": "$13 \\times 13 = 169$<br>$\\boldsymbol{169}$",
-          "q3": "Work out $11^{2}$.",
-          "a3": "$11 \\times 11 = 121$<br>$\\boldsymbol{121}$"
+          "unit": "Equations",
+          "topic": "Solving equations (unknown denominator)",
+          "id": "solving-equations-unknown-denominator",
+          "q": "Solve $\\dfrac{12}{x} = 3$.",
+          "a": "$12 = 3x$<br>$x = 12 \\div 3$<br>$\\boldsymbol{x=4}$",
+          "q2": "Solve $\\dfrac{20}{x} = 4$.",
+          "a2": "$20 = 4x$<br>$x = 20 \\div 4$<br>$\\boldsymbol{x=5}$",
+          "q3": "Solve $\\dfrac{18}{x} = 6$.",
+          "a3": "$18 = 6x$<br>$x = 18 \\div 6$<br>$\\boldsymbol{x=3}$"
         },
         {
-          "unit": "Order of Operations",
-          "topic": "Cubes and roots",
-          "id": "cubes-roots",
-          "q": "Work out $4^{3}$.",
-          "a": "$4 \\times 4 \\times 4 = 64$<br>$\\boldsymbol{64}$",
-          "q2": "Work out $5^{3}$.",
-          "a2": "$5 \\times 5 \\times 5 = 125$<br>$\\boldsymbol{125}$",
-          "q3": "Work out $3^{3}$.",
-          "a3": "$3 \\times 3 \\times 3 = 27$<br>$\\boldsymbol{27}$"
+          "unit": "Equations",
+          "topic": "Solving equations (unknown both sides)",
+          "id": "solving-equations-unknown-both-sides",
+          "q": "Solve $5x + 3 = 2x + 18$.",
+          "a": "$5x - 2x = 18 - 3$<br>$3x = 15$<br>$\\boldsymbol{x=5}$",
+          "q2": "Solve $7x + 4 = 3x + 20$.",
+          "a2": "$7x - 3x = 20 - 4$<br>$4x = 16$<br>$\\boldsymbol{x=4}$",
+          "q3": "Solve $6x + 1 = 2x + 17$.",
+          "a3": "$6x - 2x = 17 - 1$<br>$4x = 16$<br>$\\boldsymbol{x=4}$"
         },
         {
-          "unit": "Order of Operations",
-          "topic": "Commutativity and Associativity",
-          "id": "commutativity",
-          "q": "Does $8 - 3$ equal $3 - 8$?",
-          "a": "$8 - 3 = 5$<br>$3 - 8 = -5$<br>$\\boldsymbol{No}$",
-          "q2": "Does $9 - 2$ equal $2 - 9$?",
-          "a2": "$9 - 2 = 7$<br>$2 - 9 = -7$<br>$\\boldsymbol{No}$",
-          "q3": "Does $6 - 4$ equal $4 - 6$?",
-          "a3": "$6 - 4 = 2$<br>$4 - 6 = -2$<br>$\\boldsymbol{No}$"
+          "unit": "Equations",
+          "topic": "Constructing and solving",
+          "id": "constructing-and-solving",
+          "q": "A number plus $7$ is $20$. Find the number.",
+          "a": "$x + 7 = 20$<br>$x = 20 - 7$<br>$\\boldsymbol{13}$",
+          "q2": "A number plus $9$ is $31$. Find the number.",
+          "a2": "$x + 9 = 31$<br>$x = 31 - 9$<br>$\\boldsymbol{22}$",
+          "q3": "A number plus $12$ is $40$. Find the number.",
+          "a3": "$x + 12 = 40$<br>$x = 40 - 12$<br>$\\boldsymbol{28}$"
         }
       ]
     }
   ],
   "u4": [
     {
-      "u": "Expressions",
-      "l": "Expressions",
+      "u": "Sequences",
+      "l": "Sequences",
       "qs": [
         {
-          "unit": "Expressions",
-          "topic": "Algebraic notation & terminology",
-          "id": "alg-notation",
-          "q": "Write $4 \\times a \\times a$ in algebraic notation.",
-          "a": "$a \\times a = a^{2}$<br>$\\boldsymbol{4a^{2}}$",
-          "q2": "Write $7 \\times b \\times b$ in algebraic notation.",
-          "a2": "$b \\times b = b^{2}$<br>$\\boldsymbol{7b^{2}}$",
-          "q3": "Write $5 \\times n \\times n$ in algebraic notation.",
-          "a3": "$n \\times n = n^{2}$<br>$\\boldsymbol{5n^{2}}$"
+          "unit": "Sequences",
+          "topic": "Term to term rule",
+          "id": "term-to-term-rule",
+          "q": "Write the term-to-term rule for $2,\\ 5,\\ 8,\\ 11$.",
+          "a": "$\\boldsymbol{+3}$",
+          "q2": "Write the term-to-term rule for $20,\\ 16,\\ 12,\\ 8$.",
+          "a2": "$\\boldsymbol{-4}$",
+          "q3": "Write the term-to-term rule for $3,\\ 6,\\ 12,\\ 24$.",
+          "a3": "$\\boldsymbol{\\times 2}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Algebra tiles",
-          "id": "alg-tiles",
-          "q": "Tiles show $+2x$, $-2x$ and $+3$. What is left after zero pairs cancel?",
-          "a": "$+2x$ and $-2x$ cancel.<br>$\\boldsymbol{3}$",
-          "q2": "Tiles show $+4x$, $-4x$ and $+5$. What is left after zero pairs cancel?",
-          "a2": "$+4x$ and $-4x$ cancel.<br>$\\boldsymbol{5}$",
-          "q3": "Tiles show $+3x$, $-3x$ and $+7$. What is left after zero pairs cancel?",
-          "a3": "$+3x$ and $-3x$ cancel.<br>$\\boldsymbol{7}$"
+          "unit": "Sequences",
+          "topic": "Generating sequences",
+          "id": "generating-sequences",
+          "q": "The first term is $3$ and the rule is $+4$. Write the first four terms.",
+          "a": "$\\boldsymbol{3,\\ 7,\\ 11,\\ 15}$",
+          "q2": "The first term is $5$ and the rule is $+6$. Write the first four terms.",
+          "a2": "$\\boldsymbol{5,\\ 11,\\ 17,\\ 23}$",
+          "q3": "The first term is $8$ and the rule is $+3$. Write the first four terms.",
+          "a3": "$\\boldsymbol{8,\\ 11,\\ 14,\\ 17}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Collecting like terms",
-          "id": "like-terms",
-          "q": "Simplify $4y + 6x + 6y - 2x$.",
-          "a": "$4y + 6y = 10y$<br>$6x - 2x = 4x$<br>$\\boldsymbol{10y+4x}$",
-          "q2": "Simplify $3a + 5b + 4a - 2b$.",
-          "a2": "$3a + 4a = 7a$<br>$5b - 2b = 3b$<br>$\\boldsymbol{7a+3b}$",
-          "q3": "Simplify $7p - 2q + 3p + 5q$.",
-          "a3": "$7p + 3p = 10p$<br>$-2q + 5q = 3q$<br>$\\boldsymbol{10p+3q}$"
+          "unit": "Sequences",
+          "topic": "Problem Solving with Patterns",
+          "id": "problem-solving-with-sequences",
+          "q": "The sequence is $4,\\ 7,\\ 10,\\ 13,\\ \\ldots$ What is the first term greater than $50$?",
+          "a": "Term-to-term rule $+3$.<br>Keep adding until the term is greater than $50$.<br>$\\boldsymbol{52}$",
+          "q2": "The sequence is $5,\\ 9,\\ 13,\\ 17,\\ \\ldots$ What is the first term greater than $30$?",
+          "a2": "Term-to-term rule $+4$.<br>Keep adding until the term is greater than $30$.<br>$\\boldsymbol{33}$",
+          "q3": "The sequence is $2,\\ 9,\\ 16,\\ 23,\\ \\ldots$ What is the first term greater than $40$?",
+          "a3": "Term-to-term rule $+7$.<br>Keep adding until the term is greater than $40$.<br>$\\boldsymbol{44}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Forming expressions",
-          "id": "forming-exp",
-          "q": "Write an expression for $5$ less than $x$.",
-          "a": "Start with $x$, then subtract $5$.<br>$\\boldsymbol{x-5}$",
-          "q2": "Write an expression for $8$ less than $n$.",
-          "a2": "Start with $n$, then subtract $8$.<br>$\\boldsymbol{n-8}$",
-          "q3": "Write an expression for $3$ less than $y$.",
-          "a3": "Start with $y$, then subtract $3$.<br>$\\boldsymbol{y-3}$"
+          "unit": "Sequences",
+          "topic": "Special sequences",
+          "id": "special-sequences",
+          "q": "What type of special sequence is $1,\\ 4,\\ 9,\\ 16,\\ 25$?",
+          "a": "$\\boldsymbol{\\text{Square numbers}}$",
+          "q2": "What type of special sequence is $1,\\ 8,\\ 27,\\ 64,\\ 125$?",
+          "a2": "$\\boldsymbol{\\text{Cube numbers}}$",
+          "q3": "What type of special sequence is $1,\\ 1,\\ 2,\\ 3,\\ 5,\\ 8$?",
+          "a3": "$\\boldsymbol{\\text{Fibonacci}}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Substitution",
-          "id": "substitution",
-          "q": "Work out $4x + 6y$ when $x = 3$ and $y = 5$.",
-          "a": "$4(3) + 6(5)$<br>$= 12 + 30$<br>$\\boldsymbol{42}$",
-          "q2": "Work out $3x + 5y$ when $x = 4$ and $y = 2$.",
-          "a2": "$3(4) + 5(2)$<br>$= 12 + 10$<br>$\\boldsymbol{22}$",
-          "q3": "Work out $2x + 7y$ when $x = 5$ and $y = 3$.",
-          "a3": "$2(5) + 7(3)$<br>$= 10 + 21$<br>$\\boldsymbol{31}$"
+          "unit": "Sequences",
+          "topic": "Nth term ascending",
+          "id": "nth-term-ascending",
+          "q": "Find the $n$th term of $3,\\ 7,\\ 11,\\ 15$.",
+          "a": "Common difference $= 4$<br>Term $1$: $4\\times 1 + (-1) = 3$<br>$\\boldsymbol{4n-1}$",
+          "q2": "Find the $n$th term of $2,\\ 7,\\ 12,\\ 17$.",
+          "a2": "Common difference $= 5$<br>Term $1$: $5\\times 1 + (-3) = 2$<br>$\\boldsymbol{5n-3}$",
+          "q3": "Find the $n$th term of $7,\\ 10,\\ 13,\\ 16$.",
+          "a3": "Common difference $= 3$<br>Term $1$: $3\\times 1 + (4) = 7$<br>$\\boldsymbol{3n+4}$"
         },
         {
-          "unit": "Expressions",
-          "topic": "Function machines",
-          "id": "fn-machines",
-          "q": "A function machine does $\\times 3$, then $+ 2$. The input is $5$. What is the output?",
-          "a": "$5 \\times 3 = 15$<br>$15 + 2 = 17$<br>$\\boldsymbol{17}$",
-          "q2": "A function machine does $\\times 5$, then $+ 3$. The input is $4$. What is the output?",
-          "a2": "$4 \\times 5 = 20$<br>$20 + 3 = 23$<br>$\\boldsymbol{23}$",
-          "q3": "A function machine does $\\times 2$, then $+ 7$. The input is $6$. What is the output?",
-          "a3": "$6 \\times 2 = 12$<br>$12 + 7 = 19$<br>$\\boldsymbol{19}$"
+          "unit": "Sequences",
+          "topic": "Nth term descending",
+          "id": "nth-term-descending",
+          "q": "Find the $n$th term of $20,\\ 17,\\ 14,\\ 11$.",
+          "a": "Common difference $= -3$<br>Term $1$: $-3\\times 1 + 23 = 20$<br>$\\boldsymbol{23-3n}$",
+          "q2": "Find the $n$th term of $19,\\ 15,\\ 11,\\ 7$.",
+          "a2": "Common difference $= -4$<br>Term $1$: $-4\\times 1 + 23 = 19$<br>$\\boldsymbol{23-4n}$",
+          "q3": "Find the $n$th term of $11,\\ 9,\\ 7,\\ 5$.",
+          "a3": "Common difference $= -2$<br>Term $1$: $-2\\times 1 + 13 = 11$<br>$\\boldsymbol{13-2n}$"
+        },
+        {
+          "unit": "Sequences",
+          "topic": "Is it in the sequence?",
+          "id": "is-it-in-the-sequence",
+          "q": "Is $41$ in the sequence with $n$th term $4n-1$?",
+          "a": "$4n-1 = 41$<br>$4n = 42$<br>$n = 10.5$<br>$\\boldsymbol{\\text{No}}$",
+          "q2": "Is $20$ in the sequence with $n$th term $3n+2$?",
+          "a2": "$3n+2 = 20$<br>$3n = 18$<br>$n = 6$<br>$\\boldsymbol{\\text{Yes}}$",
+          "q3": "Is $33$ in the sequence with $n$th term $5n-2$?",
+          "a3": "$5n-2 = 33$<br>$5n = 35$<br>$n = 7$<br>$\\boldsymbol{\\text{Yes}}$"
         }
       ]
     }
   ],
   "u5": [
     {
-      "u": "Solving Equations",
-      "l": "Solving Equations",
+      "u": "Ratio",
+      "l": "Ratio",
       "qs": [
         {
-          "unit": "Solving Equations",
-          "topic": "Solving one step (adding)",
-          "id": "solve-add",
-          "q": "Solve $x + 7 = 12$.",
-          "a": "$x = 12 - 7$<br>$\\boldsymbol{x=5}$",
-          "q2": "Solve $x + 9 = 20$.",
-          "a2": "$x = 20 - 9$<br>$\\boldsymbol{x=11}$",
-          "q3": "Solve $x + 4 = 15$.",
-          "a3": "$x = 15 - 4$<br>$\\boldsymbol{x=11}$"
+          "unit": "Ratio",
+          "topic": "Intro to ratio",
+          "id": "intro-to-ratio",
+          "q": "In the ratio $3:2$ of red to blue, what does the $3$ stand for?",
+          "a": "$\\boldsymbol{\\text{3 red for every 2 blue}}$",
+          "q2": "In the ratio $5:1$ of girls to boys, what does the $5$ stand for?",
+          "a2": "$\\boldsymbol{\\text{5 girls for every 1 boy}}$",
+          "q3": "In the ratio $4:3$ of flour to sugar, what does the $4$ stand for?",
+          "a3": "$\\boldsymbol{\\text{4 parts flour for every 3 parts sugar}}$"
         },
         {
-          "unit": "Solving Equations",
-          "topic": "Solving one step (multiplying)",
-          "id": "solve-mult",
-          "q": "Solve $3x = 15$.",
-          "a": "$x = 15 \\div 3$<br>$\\boldsymbol{x=5}$",
-          "q2": "Solve $4x = 28$.",
-          "a2": "$x = 28 \\div 4$<br>$\\boldsymbol{x=7}$",
-          "q3": "Solve $5x = 35$.",
-          "a3": "$x = 35 \\div 5$<br>$\\boldsymbol{x=7}$"
+          "unit": "Ratio",
+          "topic": "Simplifying ratios",
+          "id": "simplifying-ratios",
+          "q": "Simplify $12:8$.",
+          "a": "Divide both parts by $4$.<br>$\\boldsymbol{3:2}$",
+          "q2": "Simplify $18:24$.",
+          "a2": "Divide both parts by $6$.<br>$\\boldsymbol{3:4}$",
+          "q3": "Simplify $15:25$.",
+          "a3": "Divide both parts by $5$.<br>$\\boldsymbol{3:5}$"
         },
         {
-          "unit": "Solving Equations",
-          "topic": "Solving two step (multiply)",
-          "id": "solve-2-mult",
-          "q": "Solve $2x + 6 = 18$.",
-          "a": "$2x = 12$<br>$x = 12 \\div 2$<br>$\\boldsymbol{x=6}$",
-          "q2": "Solve $3x + 5 = 26$.",
-          "a2": "$3x = 21$<br>$x = 21 \\div 3$<br>$\\boldsymbol{x=7}$",
-          "q3": "Solve $4x + 3 = 23$.",
-          "a3": "$4x = 20$<br>$x = 20 \\div 4$<br>$\\boldsymbol{x=5}$"
+          "unit": "Ratio",
+          "topic": "Equivalent ratios",
+          "id": "equivalent-ratios",
+          "q": "Write a ratio equivalent to $2:3$ by multiplying both parts by $4$.",
+          "a": "$\\boldsymbol{8:12}$",
+          "q2": "Write a ratio equivalent to $5:2$ by multiplying both parts by $3$.",
+          "a2": "$\\boldsymbol{15:6}$",
+          "q3": "Write a ratio equivalent to $3:7$ by multiplying both parts by $2$.",
+          "a3": "$\\boldsymbol{6:14}$"
         },
         {
-          "unit": "Solving Equations",
-          "topic": "Solving two step (divide)",
-          "id": "solve-2-div",
-          "q": "Solve $\\dfrac{x}{3} + 4 = 7$.",
-          "a": "$\\dfrac{x}{3} = 3$<br>$x = 3 \\times 3$<br>$\\boldsymbol{x=9}$",
-          "q2": "Solve $\\dfrac{x}{4} + 2 = 5$.",
-          "a2": "$\\dfrac{x}{4} = 3$<br>$x = 3 \\times 4$<br>$\\boldsymbol{x=12}$",
-          "q3": "Solve $\\dfrac{x}{5} + 6 = 8$.",
-          "a3": "$\\dfrac{x}{5} = 2$<br>$x = 2 \\times 5$<br>$\\boldsymbol{x=10}$"
-        }
-      ]
-    }
-  ],
-  "u6": [
-    {
-      "u": "Negatives 2 — Multiply & Divide",
-      "l": "Negatives 2 — Multiply & Divide",
-      "qs": [
-        {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Multiplying positive × negative",
-          "id": "pos-neg-mult",
-          "q": "Work out $3 \\times (-4)$.",
-          "a": "$3 \\times 4 = 12$<br>Positive $\\times$ negative is negative.<br>$\\boldsymbol{-12}$",
-          "q2": "Work out $6 \\times (-5)$.",
-          "a2": "$6 \\times 5 = 30$<br>Positive $\\times$ negative is negative.<br>$\\boldsymbol{-30}$",
-          "q3": "Work out $7 \\times (-2)$.",
-          "a3": "$7 \\times 2 = 14$<br>Positive $\\times$ negative is negative.<br>$\\boldsymbol{-14}$"
+          "unit": "Ratio",
+          "topic": "Applying ratios",
+          "id": "applying-ratios",
+          "q": "Flour to sugar is $2:3$. If flour is $10$ kg, how much sugar is needed?",
+          "a": "$2$ parts flour : $3$ parts sugar.<br>$\\boldsymbol{15\\ \\text{kg}}$",
+          "q2": "Flour to sugar is $4:5$. If flour is $12$ kg, how much sugar is needed?",
+          "a2": "$4$ parts flour : $5$ parts sugar.<br>$\\boldsymbol{15\\ \\text{kg}}$",
+          "q3": "Flour to sugar is $3:2$. If sugar is $8$ kg, how much flour is needed?",
+          "a3": "$3$ parts flour : $2$ parts sugar.<br>$\\boldsymbol{12\\ \\text{kg}}$"
         },
         {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Multiplying negative × negative",
-          "id": "neg-neg-mult",
-          "q": "Work out $(-3) \\times (-4)$.",
-          "a": "$3 \\times 4 = 12$<br>Negative $\\times$ negative is positive.<br>$\\boldsymbol{12}$",
-          "q2": "Work out $(-6) \\times (-5)$.",
-          "a2": "$6 \\times 5 = 30$<br>Negative $\\times$ negative is positive.<br>$\\boldsymbol{30}$",
-          "q3": "Work out $(-7) \\times (-2)$.",
-          "a3": "$7 \\times 2 = 14$<br>Negative $\\times$ negative is positive.<br>$\\boldsymbol{14}$"
+          "unit": "Ratio",
+          "topic": "Writing ratio in the form 1:n",
+          "id": "writing-ratio-in-the-form-1-n",
+          "q": "Write $4:10$ in the form $1:n$.",
+          "a": "Divide both parts by $4$.<br>$\\boldsymbol{1:2.5}$",
+          "q2": "Write $5:8$ in the form $1:n$.",
+          "a2": "Divide both parts by $5$.<br>$\\boldsymbol{1:1.6}$",
+          "q3": "Write $2:7$ in the form $1:n$.",
+          "a3": "Divide both parts by $2$.<br>$\\boldsymbol{1:3.5}$"
         },
         {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Dividing with negatives",
-          "id": "div-neg",
-          "q": "Work out $-18 \\div 6$.",
-          "a": "$18 \\div 6 = 3$<br>Different signs, so the answer is negative.<br>$\\boldsymbol{-3}$",
-          "q2": "Work out $-28 \\div 7$.",
-          "a2": "$28 \\div 7 = 4$<br>Different signs, so the answer is negative.<br>$\\boldsymbol{-4}$",
-          "q3": "Work out $-36 \\div 4$.",
-          "a3": "$36 \\div 4 = 9$<br>Different signs, so the answer is negative.<br>$\\boldsymbol{-9}$"
+          "unit": "Ratio",
+          "topic": "Ratio to fraction",
+          "id": "ratio-to-fraction",
+          "q": "Write $3:5$ as two fractions of the whole.",
+          "a": "Total parts $= 8$<br>$\\boldsymbol{\\dfrac{3}{8}\\ \\text{and}\\ \\dfrac{5}{8}}$",
+          "q2": "Write $2:7$ as two fractions of the whole.",
+          "a2": "Total parts $= 9$<br>$\\boldsymbol{\\dfrac{2}{9}\\ \\text{and}\\ \\dfrac{7}{9}}$",
+          "q3": "Write $4:1$ as two fractions of the whole.",
+          "a3": "Total parts $= 5$<br>$\\boldsymbol{\\dfrac{4}{5}\\ \\text{and}\\ \\dfrac{1}{5}}$"
         },
         {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Mixed negatives",
-          "id": "mixed-neg-2",
-          "q": "Work out $(-2) \\times 5 \\times (-3)$.",
-          "a": "$(-2) \\times 5 = -10$<br>$-10 \\times (-3) = 30$<br>$\\boldsymbol{30}$",
-          "q2": "Work out $(-4) \\times 3 \\times (-2)$.",
-          "a2": "$(-4) \\times 3 = -12$<br>$-12 \\times (-2) = 24$<br>$\\boldsymbol{24}$",
-          "q3": "Work out $(-5) \\times 2 \\times (-4)$.",
-          "a3": "$(-5) \\times 2 = -10$<br>$-10 \\times (-4) = 40$<br>$\\boldsymbol{40}$"
+          "unit": "Ratio",
+          "topic": "Fraction to ratio",
+          "id": "fraction-to-ratio",
+          "q": "$\\dfrac{2}{5}$ of a class are boys. Write the ratio of boys to girls.",
+          "a": "Girls $= \\dfrac{3}{5}$<br>$\\boldsymbol{2:3}$",
+          "q2": "$\\dfrac{3}{8}$ of a class are boys. Write the ratio of boys to girls.",
+          "a2": "Girls $= \\dfrac{5}{8}$<br>$\\boldsymbol{3:5}$",
+          "q3": "$\\dfrac{5}{9}$ of a class are boys. Write the ratio of boys to girls.",
+          "a3": "Girls $= \\dfrac{4}{9}$<br>$\\boldsymbol{5:4}$"
         },
         {
-          "unit": "Negatives 2 — Multiply & Divide",
-          "topic": "Negatives on a calculator",
-          "id": "neg-calc",
-          "q": "Work out $(-6)^{2}$.",
-          "a": "$(-6) \\times (-6) = 36$<br>$\\boldsymbol{36}$",
-          "q2": "Work out $(-8)^{2}$.",
-          "a2": "$(-8) \\times (-8) = 64$<br>$\\boldsymbol{64}$",
-          "q3": "Work out $(-9)^{2}$.",
-          "a3": "$(-9) \\times (-9) = 81$<br>$\\boldsymbol{81}$"
+          "unit": "Ratio",
+          "topic": "Sharing ratio (whole)",
+          "id": "sharing-ratio-whole",
+          "q": "Share $\\text{£}40$ in the ratio $3:5$.",
+          "a": "$3+5=8$ parts<br>$1$ part $=\\text{£}5$<br>$\\boldsymbol{\\text{£}15:\\text{£}25}$",
+          "q2": "Share $\\text{£}56$ in the ratio $3:4$.",
+          "a2": "$3+4=7$ parts<br>$1$ part $=\\text{£}8$<br>$\\boldsymbol{\\text{£}24:\\text{£}32}$",
+          "q3": "Share $\\text{£}72$ in the ratio $1:5$.",
+          "a3": "$1+5=6$ parts<br>$1$ part $=\\text{£}12$<br>$\\boldsymbol{\\text{£}12:\\text{£}60}$"
+        },
+        {
+          "unit": "Ratio",
+          "topic": "Sharing ratio (part)",
+          "id": "sharing-ratio-part",
+          "q": "A ratio is $2:3$. The first share is $\\text{£}12$. What is the total?",
+          "a": "$1$ part $=\\text{£}6$<br>$5$ parts $=\\text{£}30$<br>$\\boldsymbol{\\text{£}30}$",
+          "q2": "A ratio is $4:1$. The first share is $\\text{£}20$. What is the total?",
+          "a2": "$1$ part $=\\text{£}5$<br>$5$ parts $=\\text{£}25$<br>$\\boldsymbol{\\text{£}25}$",
+          "q3": "A ratio is $5:3$. The first share is $\\text{£}15$. What is the total?",
+          "a3": "$1$ part $=\\text{£}3$<br>$8$ parts $=\\text{£}24$<br>$\\boldsymbol{\\text{£}24}$"
+        },
+        {
+          "unit": "Ratio",
+          "topic": "Sharing ratio (difference)",
+          "id": "sharing-ratio-difference",
+          "q": "A ratio is $3:5$. The shares differ by $\\text{£}20$. Find the two shares.",
+          "a": "Difference $= 2$ parts $=\\text{£}20$<br>$1$ part $=\\text{£}10$<br>$\\boldsymbol{\\text{£}30:\\text{£}50}$",
+          "q2": "A ratio is $2:7$. The shares differ by $\\text{£}30$. Find the two shares.",
+          "a2": "Difference $= 5$ parts $=\\text{£}30$<br>$1$ part $=\\text{£}6$<br>$\\boldsymbol{\\text{£}12:\\text{£}42}$",
+          "q3": "A ratio is $1:4$. The shares differ by $\\text{£}18$. Find the two shares.",
+          "a3": "Difference $= 3$ parts $=\\text{£}18$<br>$1$ part $=\\text{£}6$<br>$\\boldsymbol{\\text{£}6:\\text{£}24}$"
+        },
+        {
+          "unit": "Ratio",
+          "topic": "Sharing ratio (mixed)",
+          "id": "sharing-ratio-mixed",
+          "q": "Share $\\text{£}60$ in the ratio $2:3$.",
+          "a": "$5$ parts, $1$ part $=\\text{£}12$<br>$\\boldsymbol{\\text{£}24:\\text{£}36}$",
+          "q2": "Ratio $3:5$. The smaller share is $\\text{£}12$. Find the larger share.",
+          "a2": "$1$ part $=\\text{£}4$<br>$\\boldsymbol{\\text{£}20}$",
+          "q3": "Ratio $4:7$. The shares differ by $\\text{£}15$. Find the smaller share.",
+          "a3": "$3$ parts $=\\text{£}15$, $1$ part $=\\text{£}5$<br>$\\boldsymbol{\\text{£}20}$"
+        },
+        {
+          "unit": "Ratio",
+          "topic": "Maps and scales",
+          "id": "maps-and-scales",
+          "q": "A map scale is $1:25000$. A road is $4$ cm on the map. How long is it in real life?",
+          "a": "$4 \\times 25000 = 100000$ cm<br>$100000$ cm $= 1$ km<br>$\\boldsymbol{1\\ \\text{km}}$",
+          "q2": "A map scale is $1:50000$. A road is $3$ cm on the map. How long is it in real life?",
+          "a2": "$3 \\times 50000 = 150000$ cm<br>$150000$ cm $= 1.5$ km<br>$\\boldsymbol{1.5\\ \\text{km}}$",
+          "q3": "A map scale is $1:10000$. A road is $6$ cm on the map. How long is it in real life?",
+          "a3": "$6 \\times 10000 = 60000$ cm<br>$60000$ cm $= 0.6$ km<br>$\\boldsymbol{0.6\\ \\text{km}}$"
         }
       ]
     }
@@ -1368,6 +1383,11 @@ function currentQs() {
   return topic ? (topic[currentStyle] || topic.qs || []) : [];
 }
 function qCount() { return currentQs().length; }
+function boardTitle() {
+  if (typeof BOARD_TITLE === 'string' && BOARD_TITLE) return BOARD_TITLE;
+  const pack = DATA.all && DATA.all[0];
+  return (pack && pack.u) ? String(pack.u).replace(' · ', ' ') : 'Cycle revision';
+}
 function verOf(q) {
   if (q && q.q3) return 3;
   if (q && q.q2) return 2;
@@ -1448,7 +1468,7 @@ function printSheet() {
   if (!topic) return;
 
   const qs     = currentQs();
-  const title  = (topic.u || '') + (topic.l && topic.l !== topic.u ? ' \u2014 ' + topic.l : '') + ' \u2014 Year 7 Cycle 1';
+  const title  = (topic.u || '') + (topic.l && topic.l !== topic.u ? ' \u2014 ' + topic.l : '') + ' \u2014 ' + boardTitle();
   const activeVer = versions[0] || 1;
 
   // Pre-render KaTeX in the parent page (already loaded) using temp elements
@@ -1629,7 +1649,7 @@ function renderGrid(keepFocusQ) {
   document.getElementById('ttopic').textContent = topic.l;
   const strandLabel = STRAND_LABELS[STRAND_KEYS.indexOf(currentStrand)];
   document.getElementById('toplabel').textContent =
-    'Year 7 Cycle 1 — ' + strandLabel + ' · ' + qs.length + ' topics';
+    boardTitle() + ' — ' + strandLabel + ' · ' + qs.length + ' topics';
 
   grid.innerHTML = '';
   const cols = 3;
@@ -2311,20 +2331,21 @@ function toggleCard(idx) {
   revealed[idx] = !revealed[idx];
   const ans = document.getElementById('ans' + idx);
   if (!ans) return;
-  if (revealed[idx]) { ans.classList.add('show'); card.classList.add('rev'); }
+  if (revealed[idx]) { ans.classList.add('show'); card.classList.add('rev'); reRenderMath(); }
   else               { ans.classList.remove('show'); card.classList.remove('rev'); }
 }
 
 function revealAll() {
-  for (let i = 0; i < qs.length; i++) {
+  for (let i = 0; i < qCount(); i++) {
     revealed[i] = true;
     const ans = document.getElementById('ans' + i);
     const card = document.getElementById('card' + i);
     if (ans && card && !card.classList.contains('qhidden')) { ans.classList.add('show'); card.classList.add('rev'); }
   }
+  reRenderMath();
 }
 function hideAll() {
-  for (let i = 0; i < qs.length; i++) {
+  for (let i = 0; i < qCount(); i++) {
     revealed[i] = false;
     const ans = document.getElementById('ans' + i);
     const card = document.getElementById('card' + i);
@@ -2462,6 +2483,10 @@ function closeKbd(e) {
 }
 
 // ── INIT ──
+(function applyHash() {
+  const h = (location.hash || '').replace(/^#/, '');
+  if (h && UNIT_KEYS.indexOf(h) !== -1) currentStrand = h;
+})();
 buildStrandBar();
 populateTopicSelect();
 renderGrid();

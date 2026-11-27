@@ -453,6 +453,13 @@ header .sub { font-size: 12px; color: rgba(255,255,255,0.4); }
 .out-btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
 .out-btn.primary:hover { background: #333; }
 .out-hint { font-size: 11px; color: #bbb; }
+.rev-board-cta {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 12px 14px; margin-bottom: 16px;
+  background: #f4f7fb; border: 1px solid #c5d8f5; border-radius: 3px;
+}
+.rev-board-cta-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+.rev-board-cta-notes { font-size: 11px; color: var(--ink-soft); margin-top: 2px; line-height: 1.5; }
 
 .gen-out { display: none; margin-top: 16px; border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; }
 .gen-out.visible { display: block; }
@@ -1050,6 +1057,11 @@ const SOW = {
           ]
         }
       ],
+      cycleBoard: {
+        href: "y7-cycle-1-revision.html",
+        label: "Cycle 1 lesson board",
+        notes: "One fluency question per topic, three versions, classroom display (Show 6, Focus, print and pen)"
+      },
       // Cycle 1 test resources
       cycleTest: {
         id: "cycle1-test",
@@ -1253,6 +1265,28 @@ function goBack() {
 function cycleCol(id) { return {1:'var(--c1)',2:'var(--c2)',3:'var(--c3)'}[id]; }
 function cycleClass(id) { return {1:'c1',2:'c2',3:'c3'}[id]; }
 function numClass(id) { return {1:'c1-num',2:'c2-num',3:'c3-num'}[id]; }
+function cycleBoardHref(cycle, unitId) {
+  if (!cycle.cycleBoard) return '';
+  const idx = unitId ? cycle.units.findIndex(u => u.id === unitId) : -1;
+  return cycle.cycleBoard.href + (idx >= 0 ? '#u' + idx : '');
+}
+function cycleTestResources(cycle) {
+  const res = Object.assign({}, (cycle.cycleTest && cycle.cycleTest.resources) || {});
+  if (!cycle.cycleBoard) return res;
+  const board = {
+    label: cycle.cycleBoard.label,
+    icon: '⚡',
+    link: cycle.cycleBoard.href,
+    notes: cycle.cycleBoard.notes
+  };
+  const ordered = {};
+  Object.entries(res).forEach(([k, v]) => {
+    ordered[k] = v;
+    if (k === 'revision') ordered.lessonBoard = board;
+  });
+  if (!ordered.lessonBoard) ordered.lessonBoard = board;
+  return ordered;
+}
 
 function buildHomeUnits() {
   SOW.cycles.forEach(cycle => {
@@ -1304,7 +1338,7 @@ function buildHomeUnits() {
     const ct = cycle.cycleTest;
     const div = document.createElement('div');
     div.className = 'unit ct-unit';
-    const res = ct.resources;
+    const res = cycleTestResources(cycle);
     const rows = Object.entries(res).map(([key, r]) => `
       <div class="test-row" onclick="openCycleTest(${cycle.id})">
         <span class="test-row-icon">${r.icon}</span>
@@ -1458,7 +1492,7 @@ function openSection(cycleId, unitId, fromBack) {
       </div>
     </div>
     <div class="revision-card-body">
-      <div class="revision-card-desc">Tick the topics you want to include, then generate a Do Now question set or a printable revision test.</div>
+      <div class="revision-card-desc">${cycle.cycleBoard ? 'Open the cycle lesson board, or tick topics to generate a Do Now or revision test.' : 'Tick the topics you want to include, then generate a Do Now question set or a printable revision test.'}</div>
     </div>
     <div class="revision-card-footer">More output options coming soon</div>`;
   grid.appendChild(revCard);
@@ -1660,19 +1694,31 @@ function openRevisionPage(cycleId, unitId, fromBack) {
   const unitTestBtn = unitTestLink
     ? `<button class="out-btn" onclick="window.open('${unitTestLink}','_blank')">🎯 Unit Test (Dr Frost)</button>`
     : `<button class="out-btn" disabled title="Link not yet added" style="opacity:0.5;cursor:not-allowed">🎯 Unit Test — link not yet added</button>`;
+  const board = cycle.cycleBoard;
+  const boardHref = cycleBoardHref(cycle, unitId);
+  const boardCta = board
+    ? `<div class="rev-board-cta">
+        <div>
+          <div class="rev-board-cta-title">⚡ ${board.label}</div>
+          <div class="rev-board-cta-notes">${board.notes}</div>
+        </div>
+        <a class="out-btn primary" href="${boardHref}" target="_blank" rel="noopener">Open board</a>
+      </div>`
+    : '';
 
   panel.innerHTML = `
     <div class="rev-panel-header">
       <div><h3>📋 Revision Resources</h3><div class="rev-panel-sub">Tick the topics to include</div></div>
     </div>
     <div class="rev-panel-body">
+      ${boardCta}
       <div class="topic-check-grid">${checks}</div>
       <div class="output-row">
         <button class="out-btn primary" onclick="generateDoNow('${unitId}')">⚡ Generate Do Now</button>
         <button class="out-btn" onclick="generateRevTest('${unitId}')">🖨 Build Revision Test</button>
         ${unitTestBtn}
       </div>
-      <div class="out-hint">More output options coming soon</div>
+      <div class="out-hint">${board ? 'The lesson board is the whole-cycle classroom display. Tick topics below for a printable Do Now or test.' : 'More output options coming soon'}</div>
       <div class="gen-out" id="gen-out-${unitId}"></div>
     </div>`;
   body.appendChild(panel);
@@ -1759,7 +1805,7 @@ function openCycleTest(cycleId, fromBack) {
   const grid = document.createElement('div');
   grid.className = 'test-resource-grid';
 
-  Object.entries(ct.resources).forEach(([key, r]) => {
+  Object.entries(cycleTestResources(cycle)).forEach(([key, r]) => {
     const card = document.createElement('div');
     card.className = 'test-resource-card';
     const linkHtml = r.link

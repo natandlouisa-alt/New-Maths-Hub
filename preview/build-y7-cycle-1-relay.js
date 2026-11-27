@@ -2,10 +2,8 @@
 /**
  * Year 7 Cycle 1 revision board (preview).
  * One fluency question per topic, three versions, Do Now classroom controls.
- * Nothing is inserted into y7index.
  */
-const fs = require('fs');
-const path = require('path');
+
 
 const NAMES = ['ones', 'tens', 'hundreds', 'thousands', 'ten thousands', 'hundred thousands', 'millions'];
 
@@ -58,6 +56,7 @@ function thou(n) {
   return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\\,');
 }
 function final(expr) { return `$\\boldsymbol{${expr}}$`; }
+function finalText(s) { return `$\\boldsymbol{\\text{${s}}}$`; }
 function lines(arr) { return arr.join('<br>'); }
 function decDigit(numStr, digit) {
   const dec = numStr.split('.')[1];
@@ -244,7 +243,7 @@ add('Order of Operations', 'Cubes and roots', 'cubes-roots', three(({ n }) => {
 
 add('Order of Operations', 'Commutativity and Associativity', 'commutativity', three(({ a, b }) => {
   const left = a - b, right = b - a;
-  return { q: `Does $${a} - ${b}$ equal $${b} - ${a}$?`, a: lines([`$${a} - ${b} = ${left}$`, `$${b} - ${a} = ${right}$`, final('No')]) };
+  return { q: `Does $${a} - ${b}$ equal $${b} - ${a}$?`, a: lines([`$${a} - ${b} = ${left}$`, `$${b} - ${a} = ${right}$`, finalText('No')]) };
 }, [{ a: 8, b: 3 }, { a: 9, b: 2 }, { a: 6, b: 4 }]));
 
 // ── Expressions ───────────────────────────────────────────
@@ -328,52 +327,5 @@ add('Negatives 2 — Multiply & Divide', 'Negatives on a calculator', 'neg-calc'
 
 if (items.length !== 36) throw new Error('expected 36 items, got ' + items.length);
 
-const units = [];
-for (const it of items) {
-  let u = units.find(x => x.name === it.unit);
-  if (!u) { u = { name: it.unit, qs: [] }; units.push(u); }
-  u.qs.push(it);
-}
-
-const UNIT_KEYS = ['all', ...units.map((_, i) => 'u' + i)];
-const UNIT_LABELS = ['Whole cycle', ...units.map(u => u.name.replace(' — Add & Subtract', '').replace(' — Multiply & Divide', ''))];
-
-const DATA = { all: [{ u: 'Year 7 · Cycle 1', l: 'Whole cycle', qs: items }] };
-units.forEach((u, i) => {
-  DATA['u' + i] = [{ u: u.name, l: u.name, qs: u.qs }];
-});
-
-const css = fs.readFileSync(path.join(__dirname, 'do-now-app.css'), 'utf8');
-const runtime = fs.readFileSync(path.join(__dirname, 'do-now-app.js'), 'utf8');
-const body = fs.readFileSync(path.join(__dirname, 'do-now-body.html'), 'utf8');
-
-const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Year 7 Cycle 1 revision — preview</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<style>
-${css}
-</style>
-</head>
-${body}
-<script>
-const UNIT_KEYS = ${JSON.stringify(UNIT_KEYS)};
-const UNIT_LABELS = ${JSON.stringify(UNIT_LABELS)};
-const DATA = ${JSON.stringify(DATA, null, 2)};
-${runtime}
-</script>
-<div id="pz"></div>
-</body>
-</html>
-`;
-
-const out = path.join(__dirname, 'y7-cycle-1-relay.html');
-fs.writeFileSync(out, html);
-console.log('wrote', out);
-console.log('items', items.length, 'units', units.map(u => u.name + ' ' + u.qs.length).join(' | '));
+const { writeBoard } = require('./assemble-board');
+writeBoard({ year: 7, cycle: 1, items, tag: 'Year 7' });
