@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 7 Cycle 1 relay — preview</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root { --ink:#1a1a1a; --c1:#1a3a5c; --bg:#f7f7f5; --card:#fff; --rule:#e2e2e2; --soft:#888; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: var(--bg); color: var(--ink); }
+  header { background: var(--ink); color: #fff; min-height: 52px; display: flex; align-items: center; gap: 14px; padding: 8px 20px; flex-wrap: wrap; }
+  header h1 { font-size: 15px; margin: 0; font-weight: 700; }
+  header .tag { font-size: 11px; letter-spacing: .04em; text-transform: uppercase; background: #b45309; color: #fff; border-radius: 3px; padding: 3px 8px; font-weight: 700; }
+  header .sub { color: rgba(255,255,255,.55); font-size: 12px; }
+  header .spacer { flex: 1; }
+  button, select { font-family: inherit; cursor: pointer; }
+  .bar-btn { background: rgba(255,255,255,.12); color: #fff; border: 0; border-radius: 3px; padding: 6px 10px; font-size: 12px; font-weight: 700; }
+  .bar-btn[aria-pressed="true"] { background: #fff; color: var(--ink); }
+  main { height: calc(100% - 52px); display: flex; flex-direction: column; }
+  .progress { display: flex; gap: 4px; padding: 10px 20px 0; flex-wrap: wrap; }
+  .dot { width: 18px; height: 6px; border-radius: 3px; background: #ddd; border: 0; padding: 0; }
+  .dot.on { background: var(--c1); }
+  .dot.past { background: #8aa0b8; }
+  .stage { flex: 1; display: flex; flex-direction: column; padding: 12px 28px 20px; min-height: 0; }
+  .meta { color: var(--c1); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .topic { margin-top: 4px; font-size: 16px; color: #333; }
+  .count { color: var(--soft); font-weight: 600; font-size: 13px; margin-left: 8px; }
+  .q { margin-top: 28px; font-size: 40px; line-height: 1.35; }
+  .q .katex { font-size: 1em; }
+  .reveal { margin-top: auto; }
+  .show { width: 100%; text-align: left; background: var(--card); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px; font-size: 16px; font-weight: 700; color: var(--c1); }
+  .answer { display: none; background: #fffbf0; border: 1px solid #ead9a8; border-radius: 6px; padding: 16px 18px 14px; }
+  .answer.show { display: block; }
+  .answer .work { font-size: 28px; line-height: 1.45; }
+  .note { margin-top: 10px; font-size: 14px; color: #5c4a12; }
+  .note strong { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+  .nav { display: flex; gap: 8px; margin-top: 12px; }
+  .nav button { background: var(--c1); color: #fff; border: 0; border-radius: 4px; padding: 10px 16px; font-weight: 700; font-size: 14px; }
+  .nav button.ghost { background: #fff; color: var(--ink); border: 1px solid var(--rule); }
+  .keys { margin-top: 8px; color: var(--soft); font-size: 12px; }
+  #all { display: none; padding: 20px 28px 48px; }
+  #all.open { display: block; }
+  main.hidden { display: none; }
+  .card { background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; margin: 0 0 12px; }
+  .card h2 { font-size: 13px; margin: 0 0 8px; color: var(--c1); text-transform: uppercase; letter-spacing: .04em; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pair h3 { margin: 0 0 6px; font-size: 12px; color: var(--soft); }
+  .aq { font-size: 18px; }
+  .aa { margin-top: 8px; background: #fffbf0; border-radius: 4px; padding: 8px 10px; font-size: 16px; }
+  .notes { background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; margin-bottom: 16px; font-size: 14px; line-height: 1.5; }
+  .notes h2 { margin: 0 0 8px; font-size: 15px; }
+  @media (max-width: 800px) { .q { font-size: 28px; } .pair { grid-template-columns: 1fr; } .answer .work { font-size: 22px; } }
+</style>
+</head>
+<body>
+<header>
+  <span class="tag">Preview</span>
+  <h1>Year 7 · Cycle 1 relay</h1>
+  <span class="sub">Not on the year page</span>
+  <span class="spacer"></span>
+  <button class="bar-btn" id="vBtn" type="button">V1</button>
+  <button class="bar-btn" id="allBtn" type="button" aria-pressed="false">All 36</button>
+</header>
+<main id="lesson">
+  <div class="progress" id="dots"></div>
+  <div class="stage">
+    <div><span class="meta" id="unit"></span><span class="count" id="count"></span></div>
+    <div class="topic" id="topic"></div>
+    <div class="q" id="q"></div>
+    <div class="reveal">
+      <button class="show" id="showBtn" type="button">Show answer</button>
+      <div class="answer" id="answer">
+        <div class="work" id="work"></div>
+        <div class="note"><strong>Teacher note</strong><span id="note"></span></div>
+      </div>
+      <div class="nav">
+        <button class="ghost" id="prev" type="button">Previous</button>
+        <button id="next" type="button">Next</button>
+      </div>
+      <div class="keys">Arrow keys move. Space shows the answer. V switches to the other set of numbers.</div>
+    </div>
+  </div>
+</main>
+<div id="all"></div>
+<script>
+const ITEMS = [{"unit":"Number Sense","topic":"Integer place value","id":"int-place-value","note":"The digit’s column decides its value. A longer number is not automatically bigger.","v1":{"q":"Write the value of the digit $7$ in $47\\,362$.","a":"The $7$ is in the thousands column.<br>$\\boldsymbol{7000}$"},"v2":{"q":"Write the value of the digit $8$ in $82\\,045$.","a":"The $8$ is in the ten thousands column.<br>$\\boldsymbol{80000}$"}},{"unit":"Number Sense","topic":"Decimal place value","id":"dec-place-value","note":"A zero on the end of a decimal does not change the value. 0.5 and 0.50 are equal.","v1":{"q":"Write the value of the digit $6$ in $3.068$.","a":"The $6$ is in the hundredths column.<br>$\\boldsymbol{0.06}$"},"v2":{"q":"Write the value of the digit $4$ in $5.074$.","a":"The $4$ is in the thousandths column.<br>$\\boldsymbol{0.004}$"}},{"unit":"Number Sense","topic":"Rounding to powers of ten","id":"rounding-powers","note":"Look at the single digit just to the right of the column you are rounding to.","v1":{"q":"Round $47\\,386$ to the nearest $1\\,000$.","a":"The hundreds digit is $3$, so the thousands digit stays.<br>$\\boldsymbol{47\\,000}$"},"v2":{"q":"Round $26\\,850$ to the nearest $100$.","a":"The tens digit is $5$, so round up.<br>$\\boldsymbol{26\\,900}$"}},{"unit":"Number Sense","topic":"Rounding to integers","id":"rounding-int","note":"Only the first decimal digit decides. 5 or more rounds up.","v1":{"q":"Round $8.74$ to the nearest whole number.","a":"The tenths digit is $7$, so round up.<br>$\\boldsymbol{9}$"},"v2":{"q":"Round $6.48$ to the nearest whole number.","a":"The tenths digit is $4$, so round down.<br>$\\boldsymbol{6}$"}},{"unit":"Number Sense","topic":"Rounding to decimal places","id":"rounding-dp","note":"Count the decimal places, then look at only the next digit.","v1":{"q":"Round $3.476$ to $1$ decimal place.","a":"The hundredths digit is $7$, so round up.<br>$\\boldsymbol{3.5}$"},"v2":{"q":"Round $8.264$ to $2$ decimal places.","a":"The thousandths digit is $4$, so the hundredths digit stays.<br>$\\boldsymbol{8.26}$"}},{"unit":"Calculation","topic":"Adding decimals","id":"add-dec","note":"Line up the decimal points. A missing hundredth can be written as 0.","v1":{"q":"Work out $3.47 + 1.6$.","a":"$3.47 + 1.60 = 5.07$<br>$\\boldsymbol{5.07}$"},"v2":{"q":"Work out $2.85 + 0.9$.","a":"$2.85 + 0.90 = 3.75$<br>$\\boldsymbol{3.75}$"}},{"unit":"Calculation","topic":"Subtracting decimals","id":"sub-dec","note":"Line up the decimal points, then borrow in the usual way.","v1":{"q":"Work out $5.3 - 2.17$.","a":"$5.30 - 2.17 = 3.13$<br>$\\boldsymbol{3.13}$"},"v2":{"q":"Work out $6.4 - 1.85$.","a":"$6.40 - 1.85 = 4.55$<br>$\\boldsymbol{4.55}$"}},{"unit":"Calculation","topic":"Multiplying by powers of ten","id":"mult-powers","note":"Multiplying by 100 moves every digit two places to the left.","v1":{"q":"Work out $3.4 \\times 100$.","a":"Move the digits $2$ places left.<br>$\\boldsymbol{340}$"},"v2":{"q":"Work out $0.27 \\times 1000$.","a":"Move the digits $3$ places left.<br>$\\boldsymbol{270}$"}},{"unit":"Calculation","topic":"Dividing by powers of ten","id":"div-powers","note":"Dividing by a power of ten moves the digits to the right.","v1":{"q":"Work out $340 \\div 100$.","a":"Move the digits $2$ places right.<br>$\\boldsymbol{3.4}$"},"v2":{"q":"Work out $58 \\div 1000$.","a":"Move the digits $3$ places right.<br>$\\boldsymbol{0.058}$"}},{"unit":"Calculation","topic":"Multiplication","id":"multiplication","note":"When multiplying by the tens digit, the row is a multiple of ten.","v1":{"q":"Work out $23 \\times 14$.","a":"$23 \\times 10 = 230$<br>$23 \\times 4 = 92$<br>$230 + 92 = 322$<br>$\\boldsymbol{322}$"},"v2":{"q":"Work out $36 \\times 15$.","a":"$36 \\times 10 = 360$<br>$36 \\times 5 = 180$<br>$360 + 180 = 540$<br>$\\boldsymbol{540}$"}},{"unit":"Calculation","topic":"Short division with decimals","id":"short-div","note":"Carry the remainder to the next digit, and keep the decimal point in line.","v1":{"q":"Work out $9.6 \\div 4$.","a":"$9.6 \\div 4 = 2.4$<br>$\\boldsymbol{2.4}$"},"v2":{"q":"Work out $8.55 \\div 5$.","a":"$8.55 \\div 5 = 1.71$<br>$\\boldsymbol{1.71}$"}},{"unit":"Negatives 1 — Add & Subtract","topic":"Ordering negatives","id":"ordering-neg","note":"Further left is smaller. −8 is less than −3.","v1":{"q":"Write in order, smallest first: $-5,\\; 2,\\; -1,\\; 0$.","a":"$\\boldsymbol{-5,\\; -1,\\; 0,\\; 2}$"},"v2":{"q":"Write in order, smallest first: $-8,\\; 3,\\; -2,\\; 1$.","a":"$\\boldsymbol{-8,\\; -2,\\; 1,\\; 3}$"}},{"unit":"Negatives 1 — Add & Subtract","topic":"Zero pairs","id":"zero-pairs","note":"A number and its opposite cancel completely. Nothing is left over.","v1":{"q":"Which number makes a zero pair with $-6$?","a":"$-6 + 6 = 0$<br>$\\boldsymbol{+6}$"},"v2":{"q":"Which number makes a zero pair with $-9$?","a":"$-9 + 9 = 0$<br>$\\boldsymbol{+9}$"}},{"unit":"Negatives 1 — Add & Subtract","topic":"Adding negatives","id":"adding-neg","note":"Adding a negative moves left. The result gets smaller.","v1":{"q":"Work out $-2 + (-4)$.","a":"Adding $-4$ moves left by $4$.<br>$\\boldsymbol{-6}$"},"v2":{"q":"Work out $-5 + (-3)$.","a":"Adding $-3$ moves left by $3$.<br>$\\boldsymbol{-8}$"}},{"unit":"Negatives 1 — Add & Subtract","topic":"Subtracting negatives","id":"subbing-neg","note":"Subtracting a negative is the same as adding.","v1":{"q":"Work out $5 - (-3)$.","a":"$5 - (-3) = 5 + 3$<br>$\\boldsymbol{8}$"},"v2":{"q":"Work out $7 - (-4)$.","a":"$7 - (-4) = 7 + 4$<br>$\\boldsymbol{11}$"}},{"unit":"Negatives 1 — Add & Subtract","topic":"Adding & subtracting (mixed)","id":"mixed-neg-1","note":"Simplify each pair of signs first. − (−) becomes +.","v1":{"q":"Work out $-3 - (-7)$.","a":"$-3 - (-7) = -3 + 7$<br>$\\boldsymbol{4}$"},"v2":{"q":"Work out $-6 - (-2)$.","a":"$-6 - (-2) = -6 + 2$<br>$\\boldsymbol{-4}$"}},{"unit":"Order of Operations","topic":"Order of operations 1","id":"bidmas-1","note":"Multiply before you add. Do not work strictly left to right.","v1":{"q":"Work out $3 + 4 \\times 2$.","a":"$4 \\times 2 = 8$<br>$3 + 8 = 11$<br>$\\boldsymbol{11}$"},"v2":{"q":"Work out $5 + 6 \\times 3$.","a":"$6 \\times 3 = 18$<br>$5 + 18 = 23$<br>$\\boldsymbol{23}$"}},{"unit":"Order of Operations","topic":"Order of operations 2","id":"bidmas-2","note":"Finish everything inside the brackets before you square.","v1":{"q":"Work out $2 \\times (2+3)^{2}$.","a":"$2+3 = 5$<br>$5^{2} = 25$<br>$2 \\times 25 = 50$<br>$\\boldsymbol{50}$"},"v2":{"q":"Work out $3 \\times (1+3)^{2}$.","a":"$1+3 = 4$<br>$4^{2} = 16$<br>$3 \\times 16 = 48$<br>$\\boldsymbol{48}$"}},{"unit":"Order of Operations","topic":"Squares and roots","id":"squares-roots","note":"Squaring means multiply a number by itself, not by 2.","v1":{"q":"Work out $12^{2}$.","a":"$12 \\times 12 = 144$<br>$\\boldsymbol{144}$"},"v2":{"q":"Work out $13^{2}$.","a":"$13 \\times 13 = 169$<br>$\\boldsymbol{169}$"}},{"unit":"Order of Operations","topic":"Cubes and roots","id":"cubes-roots","note":"Cubing means multiply a number by itself three times, not by 3.","v1":{"q":"Work out $4^{3}$.","a":"$4 \\times 4 \\times 4 = 64$<br>$\\boldsymbol{64}$"},"v2":{"q":"Work out $5^{3}$.","a":"$5 \\times 5 \\times 5 = 125$<br>$\\boldsymbol{125}$"}},{"unit":"Order of Operations","topic":"Commutativity and Associativity","id":"commutativity","note":"Addition can swap order. Subtraction cannot.","v1":{"q":"Does $8 - 3$ equal $3 - 8$?","a":"$8 - 3 = 5$<br>$3 - 8 = -5$<br>$\\boldsymbol{No}$"},"v2":{"q":"Does $9 - 2$ equal $2 - 9$?","a":"$9 - 2 = 7$<br>$2 - 9 = -7$<br>$\\boldsymbol{No}$"}},{"unit":"Expressions","topic":"Algebraic notation & terminology","id":"alg-notation","note":"a × a is a². It is not 2a. Write the number first.","v1":{"q":"Write $4 \\times a \\times a$ in algebraic notation.","a":"$a \\times a = a^{2}$<br>$\\boldsymbol{4a^{2}}$"},"v2":{"q":"Write $7 \\times b \\times b$ in algebraic notation.","a":"$b \\times b = b^{2}$<br>$\\boldsymbol{7b^{2}}$"}},{"unit":"Expressions","topic":"Algebra tiles","id":"alg-tiles","note":"An x-tile and a unit tile are different. They do not combine. Opposite tiles cancel.","v1":{"q":"Tiles show $+2x$, $-2x$ and $+3$. What is left after zero pairs cancel?","a":"$+2x$ and $-2x$ cancel.<br>$\\boldsymbol{3}$"},"v2":{"q":"Tiles show $+4x$, $-4x$ and $+5$. What is left after zero pairs cancel?","a":"$+4x$ and $-4x$ cancel.<br>$\\boldsymbol{5}$"}},{"unit":"Expressions","topic":"Collecting like terms","id":"like-terms","note":"Only terms with the same letter combine. 3x + 2y stays as two terms.","v1":{"q":"Simplify $4y + 6x + 6y - 2x$.","a":"$4y + 6y = 10y$<br>$6x - 2x = 4x$<br>$\\boldsymbol{10y+4x}$"},"v2":{"q":"Simplify $3a + 5b + 4a - 2b$.","a":"$3a + 4a = 7a$<br>$5b - 2b = 3b$<br>$\\boldsymbol{7a+3b}$"}},{"unit":"Expressions","topic":"Forming expressions","id":"forming-exp","note":"“5 less than x” starts at x and subtracts 5. It is x − 5.","v1":{"q":"Write an expression for $5$ less than $x$.","a":"Start with $x$, then subtract $5$.<br>$\\boldsymbol{x-5}$"},"v2":{"q":"Write an expression for $8$ less than $n$.","a":"Start with $n$, then subtract $8$.<br>$\\boldsymbol{n-8}$"}},{"unit":"Expressions","topic":"Substitution","id":"substitution","note":"Replace every letter, and put the value in brackets.","v1":{"q":"Work out $4x + 6y$ when $x = 3$ and $y = 5$.","a":"$4(3) + 6(5)$<br>$= 12 + 30$<br>$\\boldsymbol{42}$"},"v2":{"q":"Work out $3x + 5y$ when $x = 4$ and $y = 2$.","a":"$3(4) + 5(2)$<br>$= 12 + 10$<br>$\\boldsymbol{22}$"}},{"unit":"Expressions","topic":"Function machines","id":"fn-machines","note":"Do the operations in order. To go backwards, undo the last one first.","v1":{"q":"A function machine does $\\times 3$, then $+ 2$. The input is $5$. What is the output?","a":"$5 \\times 3 = 15$<br>$15 + 2 = 17$<br>$\\boldsymbol{17}$"},"v2":{"q":"A function machine does $\\times 5$, then $+ 3$. The input is $4$. What is the output?","a":"$4 \\times 5 = 20$<br>$20 + 3 = 23$<br>$\\boldsymbol{23}$"}},{"unit":"Solving Equations","topic":"Solving one step (adding)","id":"solve-add","note":"Do the opposite to both sides.","v1":{"q":"Solve $x + 7 = 12$.","a":"$x = 12 - 7$<br>$\\boldsymbol{x=5}$"},"v2":{"q":"Solve $x + 9 = 20$.","a":"$x = 20 - 9$<br>$\\boldsymbol{x=11}$"}},{"unit":"Solving Equations","topic":"Solving one step (multiplying)","id":"solve-mult","note":"Undo × by dividing both sides. Do not subtract the coefficient.","v1":{"q":"Solve $3x = 15$.","a":"$x = 15 \\div 3$<br>$\\boldsymbol{x=5}$"},"v2":{"q":"Solve $4x = 28$.","a":"$x = 28 \\div 4$<br>$\\boldsymbol{x=7}$"}},{"unit":"Solving Equations","topic":"Solving two step (multiply)","id":"solve-2-mult","note":"Undo the add or subtract first, then divide.","v1":{"q":"Solve $2x + 6 = 18$.","a":"$2x = 12$<br>$x = 12 \\div 2$<br>$\\boldsymbol{x=6}$"},"v2":{"q":"Solve $3x + 5 = 26$.","a":"$3x = 21$<br>$x = 21 \\div 3$<br>$\\boldsymbol{x=7}$"}},{"unit":"Solving Equations","topic":"Solving two step (divide)","id":"solve-2-div","note":"Undo the add or subtract first, then multiply.","v1":{"q":"Solve $\\dfrac{x}{3} + 4 = 7$.","a":"$\\dfrac{x}{3} = 3$<br>$x = 3 \\times 3$<br>$\\boldsymbol{x=9}$"},"v2":{"q":"Solve $\\dfrac{x}{4} + 2 = 5$.","a":"$\\dfrac{x}{4} = 3$<br>$x = 3 \\times 4$<br>$\\boldsymbol{x=12}$"}},{"unit":"Negatives 2 — Multiply & Divide","topic":"Multiplying positive × negative","id":"pos-neg-mult","note":"A positive times a negative is negative.","v1":{"q":"Work out $3 \\times (-4)$.","a":"$3 \\times 4 = 12$<br>Positive $\\times$ negative is negative.<br>$\\boldsymbol{-12}$"},"v2":{"q":"Work out $6 \\times (-5)$.","a":"$6 \\times 5 = 30$<br>Positive $\\times$ negative is negative.<br>$\\boldsymbol{-30}$"}},{"unit":"Negatives 2 — Multiply & Divide","topic":"Multiplying negative × negative","id":"neg-neg-mult","note":"A negative times a negative is positive.","v1":{"q":"Work out $(-3) \\times (-4)$.","a":"$3 \\times 4 = 12$<br>Negative $\\times$ negative is positive.<br>$\\boldsymbol{12}$"},"v2":{"q":"Work out $(-6) \\times (-5)$.","a":"$6 \\times 5 = 30$<br>Negative $\\times$ negative is positive.<br>$\\boldsymbol{30}$"}},{"unit":"Negatives 2 — Multiply & Divide","topic":"Dividing with negatives","id":"div-neg","note":"Division uses the same sign rules as multiplication.","v1":{"q":"Work out $-18 \\div 6$.","a":"$18 \\div 6 = 3$<br>Different signs, so the answer is negative.<br>$\\boldsymbol{-3}$"},"v2":{"q":"Work out $-28 \\div 7$.","a":"$28 \\div 7 = 4$<br>Different signs, so the answer is negative.<br>$\\boldsymbol{-4}$"}},{"unit":"Negatives 2 — Multiply & Divide","topic":"Mixed negatives","id":"mixed-neg-2","note":"Track the sign after each multiply. An even count of negatives gives a positive.","v1":{"q":"Work out $(-2) \\times 5 \\times (-3)$.","a":"$(-2) \\times 5 = -10$<br>$-10 \\times (-3) = 30$<br>$\\boldsymbol{30}$"},"v2":{"q":"Work out $(-4) \\times 3 \\times (-2)$.","a":"$(-4) \\times 3 = -12$<br>$-12 \\times (-2) = 24$<br>$\\boldsymbol{24}$"}},{"unit":"Negatives 2 — Multiply & Divide","topic":"Negatives on a calculator","id":"neg-calc","note":"Use the (−) key and brackets. The minus key is for subtraction. −6² means −(6²).","v1":{"q":"Work out $(-6)^{2}$.","a":"$(-6) \\times (-6) = 36$<br>$\\boldsymbol{36}$"},"v2":{"q":"Work out $(-8)^{2}$.","a":"$(-8) \\times (-8) = 64$<br>$\\boldsymbol{64}$"}}];
+let i = 0;
+let version = 'v1';
+let revealed = false;
+let allMode = false;
+
+function renderMath(el) {
+  if (!window.renderMathInElement) return;
+  renderMathInElement(el, { delimiters: [{ left: '$', right: '$', display: false }], throwOnError: false });
+}
+
+function side(item) { return item[version]; }
+
+function paint() {
+  const item = ITEMS[i];
+  document.getElementById('unit').textContent = item.unit;
+  document.getElementById('topic').textContent = item.topic;
+  document.getElementById('count').textContent = (i + 1) + ' of ' + ITEMS.length;
+  document.getElementById('q').innerHTML = side(item).q;
+  document.getElementById('work').innerHTML = side(item).a;
+  document.getElementById('note').textContent = item.note;
+  document.getElementById('showBtn').style.display = revealed ? 'none' : 'block';
+  document.getElementById('answer').classList.toggle('show', revealed);
+  document.getElementById('vBtn').textContent = version.toUpperCase();
+  document.getElementById('next').textContent = i === ITEMS.length - 1 ? 'End' : 'Next';
+  const dots = document.getElementById('dots');
+  dots.innerHTML = '';
+  ITEMS.forEach((it, n) => {
+    const b = document.createElement('button');
+    b.className = 'dot' + (n === i ? ' on' : n < i ? ' past' : '');
+    b.type = 'button';
+    b.title = it.topic;
+    b.addEventListener('click', () => { i = n; revealed = false; paint(); });
+    dots.appendChild(b);
+  });
+  renderMath(document.getElementById('lesson'));
+  const hash = (i + 1) + '/' + version + (revealed ? '/show' : '');
+  if (location.hash.slice(1) !== hash && !allMode) history.replaceState(null, '', '#' + hash);
+}
+
+function paintAll() {
+  const root = document.getElementById('all');
+  const slips = '<div class="notes"><h2>Notes for you</h2><p>One fluency question for each of the 36 Cycle 1 topics. V2 is the same skill with different numbers. Answers were worked out in code, then checked again.</p><p>Four examples already on the scheme do not calculate, so they were not copied: 347 + 16 = 507, 53 − 217 = 313, 23 × 54 ÷ 100 = 1242, and 25 ÷ 4 = 625. The decimal-places example 24362 → 24 is missing a decimal point.</p><p>These are the one-step questions, the kind a class can answer in about 45 seconds. Say insert when you want this on the Year 7 page.</p></div>';
+  let html = slips;
+  let unit = '';
+  ITEMS.forEach((it, n) => {
+    if (it.unit !== unit) { unit = it.unit; html += '<h2 style="font-size:18px;margin:18px 0 8px">' + unit + '</h2>'; }
+    html += '<article class="card"><h2>' + (n + 1) + '. ' + it.topic + '</h2><div class="pair"><div><h3>V1</h3><div class="aq">' + it.v1.q + '</div><div class="aa">' + it.v1.a + '</div></div><div><h3>V2</h3><div class="aq">' + it.v2.q + '</div><div class="aa">' + it.v2.a + '</div></div></div><div class="note"><strong>Teacher note</strong>' + it.note + '</div></article>';
+  });
+  root.innerHTML = html;
+  renderMath(root);
+}
+
+function readHash() {
+  const h = location.hash.replace('#', '');
+  if (h === 'all') { allMode = true; return; }
+  const m = h.match(/^(\d+)\/(v1|v2)(\/show)?$/);
+  if (!m) return;
+  const n = Number(m[1]);
+  if (n >= 1 && n <= ITEMS.length) i = n - 1;
+  version = m[2];
+  revealed = !!m[3];
+}
+
+function setMode(all) {
+  allMode = all;
+  document.getElementById('lesson').classList.toggle('hidden', all);
+  document.getElementById('all').classList.toggle('open', all);
+  document.getElementById('allBtn').setAttribute('aria-pressed', all ? 'true' : 'false');
+  if (all) { paintAll(); history.replaceState(null, '', '#all'); }
+  else paint();
+}
+
+document.getElementById('showBtn').addEventListener('click', () => { revealed = true; paint(); });
+document.getElementById('next').addEventListener('click', () => { if (i < ITEMS.length - 1) { i++; revealed = false; paint(); } });
+document.getElementById('prev').addEventListener('click', () => { if (i > 0) { i--; revealed = false; paint(); } });
+document.getElementById('vBtn').addEventListener('click', () => { version = version === 'v1' ? 'v2' : 'v1'; revealed = false; paint(); });
+document.getElementById('allBtn').addEventListener('click', () => setMode(!allMode));
+document.addEventListener('keydown', (e) => {
+  if (allMode) return;
+  if (e.key === 'ArrowRight') { if (i < ITEMS.length - 1) { i++; revealed = false; paint(); } }
+  if (e.key === 'ArrowLeft') { if (i > 0) { i--; revealed = false; paint(); } }
+  if (e.key === ' ') { e.preventDefault(); revealed = !revealed; paint(); }
+  if (e.key === 'v' || e.key === 'V') { version = version === 'v1' ? 'v2' : 'v1'; revealed = false; paint(); }
+});
+
+function boot() {
+  readHash();
+  setMode(allMode);
+}
+if (document.readyState === 'complete') boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>
