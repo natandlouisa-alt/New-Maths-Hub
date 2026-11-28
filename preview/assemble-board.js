@@ -28,8 +28,9 @@ function checkKatex(items) {
   }
 }
 
-function writeBoard({ year, cycle, items, tag }) {
+function writeBoard({ year, cycle, items, tag, fileBase, title }) {
   checkKatex(items);
+  const boardTitle = title || `Year ${year} Cycle ${cycle}`;
   const units = [];
   for (const it of items) {
     let u = units.find(x => x.name === it.unit);
@@ -38,7 +39,7 @@ function writeBoard({ year, cycle, items, tag }) {
   }
   const UNIT_KEYS = ['all', ...units.map((_, i) => 'u' + i)];
   const UNIT_LABELS = ['Whole cycle', ...units.map(u => u.name.replace(/ — .*/, ''))];
-  const DATA = { all: [{ u: `Year ${year} · Cycle ${cycle}`, l: 'Whole cycle', qs: items }] };
+  const DATA = { all: [{ u: boardTitle.replace(' Cycle ', ' · Cycle '), l: 'Whole cycle', qs: items }] };
   units.forEach((u, i) => { DATA['u' + i] = [{ u: u.name, l: u.name, qs: u.qs }]; });
 
   const dir = __dirname;
@@ -52,7 +53,7 @@ function writeBoard({ year, cycle, items, tag }) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Year ${year} Cycle ${cycle} revision</title>
+<title>${boardTitle} revision</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -63,7 +64,7 @@ ${css}
 </head>
 ${body}
 <script>
-const BOARD_TITLE = ${JSON.stringify('Year ' + year + ' Cycle ' + cycle)};
+const BOARD_TITLE = ${JSON.stringify(boardTitle)};
 const UNIT_KEYS = ${JSON.stringify(UNIT_KEYS)};
 const UNIT_LABELS = ${JSON.stringify(UNIT_LABELS)};
 const DATA = ${JSON.stringify(DATA, null, 2)};
@@ -74,7 +75,7 @@ ${runtime}
 </html>
 `;
 
-  const name = `y${year}-cycle-${cycle}-revision.html`;
+  const name = `${fileBase || ('y' + year + '-cycle-' + cycle + '-revision')}.html`;
   const root = path.join(dir, '..', name);
   const preview = path.join(dir, name);
   fs.writeFileSync(root, html);
