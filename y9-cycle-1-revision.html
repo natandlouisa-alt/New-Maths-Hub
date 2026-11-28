@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 9 Cycle 1 revision</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:#fff;color:#000;min-height:100vh;display:flex;flex-direction:column}
+
+/* ── TOP BAR ── */
+#topwrap{position:sticky;top:0;z-index:200;transition:transform .35s ease;font-size:14px}
+#topwrap.hidden{transform:translateY(-100%)}
+#topbar{background:#111;color:#fff;display:flex;align-items:center;gap:8px;padding:9px 18px;flex-wrap:wrap;border-bottom:3px solid #000;font-size:14px}
+.tb{background:#2a2a2a;color:#fff;border:1px solid #555;border-radius:3px;padding:6px 10px;cursor:pointer;font-weight:700;font-size:11px;line-height:1;white-space:nowrap;font-family:'Outfit',sans-serif;transition:background .15s}
+.tb:hover{background:#444}
+.tbw{padding:6px 15px}
+.print-scale-wrap{display:inline-flex;align-items:center;gap:5px;background:#2a2a2a;border-radius:4px;padding:3px 8px;margin-left:2px}
+.print-scale-wrap label{font-size:9px;color:#888;font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase}
+.print-scale-input{width:52px;background:#3a3a3a;border:1px solid #555;border-radius:3px;color:#f5a623;font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;text-align:center;padding:2px 4px;-moz-appearance:textfield}
+.print-scale-input::-webkit-inner-spin-button,.print-scale-input::-webkit-outer-spin-button{opacity:1;cursor:pointer}
+.print-scale-input:focus{outline:none;border-color:#f5a623}
+.tbac{background:#fff!important;color:#000!important}
+.tbac:hover{background:#e8e8e8!important}
+.sep{width:1px;height:26px;background:#444;margin:0 3px;flex-shrink:0}
+#szdisplay{font-family:'JetBrains Mono',monospace;min-width:28px;text-align:center;font-size:11px;user-select:none;color:#fff}
+#toplabel{margin-left:6px;font-size:10px;opacity:.4;font-style:italic;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#szlabel,#dglabel{font-size:10px;opacity:.48;letter-spacing:1px;user-select:none}
+#dgdisplay{font-family:'JetBrains Mono',monospace;min-width:36px;text-align:center;font-size:11px;user-select:none;color:#fff}
+
+/* ── STRAND BAR ── */
+#strandbar{background:#1a1a1a;border-bottom:3px solid #000;padding:0;display:flex;align-items:stretch;overflow-x:auto}
+.strandbtn{flex:1;padding:14px 8px;background:transparent;color:#777;border:none;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;border-bottom:3px solid transparent;white-space:nowrap;position:relative}
+.strandbtn:hover{color:#bbb;background:rgba(255,255,255,.04)}
+.strandbtn.active{color:#fff;background:rgba(255,255,255,.06);border-bottom:3px solid #fff}
+.strandbtn .strbadge{display:inline-block;background:#333;color:#888;font-size:9px;font-family:'JetBrains Mono',monospace;padding:2px 6px;border-radius:2px;margin-left:6px;vertical-align:middle;letter-spacing:0;font-weight:400}
+#substrandbar{background:#111;border-bottom:2px solid #2a2a2a;padding:0;display:flex;align-items:stretch;overflow-x:auto;gap:0;flex-wrap:nowrap}
+.subsbtn{padding:8px 14px;background:transparent;color:#666;border:none;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .15s;border-bottom:2px solid transparent;white-space:nowrap}
+.subsbtn:hover{color:#aaa;background:#1a1a1a}
+.subsbtn.active{color:#f5a623;border-bottom-color:#f5a623}
+.subsbadge{background:#222;color:#666;font-size:8px;border-radius:2px;padding:1px 4px;margin-left:4px;font-family:'JetBrains Mono',monospace}
+.subsbtn.active .subsbadge{background:#3a2a00;color:#f5a623}
+.strandbtn.active .strbadge{background:#fff;color:#000}
+
+/* ── PANEL ── */
+#panel{background:#f0f0f0;border-bottom:3px solid #000;padding:16px 20px;display:none;gap:14px;flex-wrap:wrap;align-items:flex-end;font-size:14px}
+#panel.open{display:flex}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fl{font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:1.5px;opacity:.55}
+select{padding:9px 10px;border:2px solid #000;border-radius:0;background:#fff;font-family:'Outfit',sans-serif;cursor:pointer}
+#gobtn{background:#000;color:#fff;border:none;padding:11px 30px;font-size:15px;font-family:'Outfit',sans-serif;font-weight:700;cursor:pointer;letter-spacing:2px;text-transform:uppercase;height:46px;transition:background .15s}
+#gobtn:hover{background:#333}
+#atomnote{width:100%;margin:3px 0 0;font-size:10px;opacity:.5;font-style:italic}
+
+#strandbar.hidden{display:none}
+#togglebar{position:fixed;bottom:16px;right:16px;z-index:400;background:rgba(0,0,0,.18);color:rgba(0,0,0,.45);border:1px solid rgba(0,0,0,.12);border-radius:5px;padding:8px 10px;cursor:pointer;transition:all .2s;user-select:none;display:flex;flex-direction:column;gap:4px;line-height:0}
+#togglebar:hover{background:rgba(0,0,0,.32);color:rgba(0,0,0,.7);border-color:rgba(0,0,0,.25)}
+#togglebar span{display:block;width:18px;height:2px;background:currentColor;border-radius:1px}
+
+
+/* ── CONTENT ── */
+.ch:not(:first-child){border-left:1px solid #444}
+#titlestrip{padding:9px 18px 5px;border-bottom:1px solid #e2e2e2;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+#tunit{font-size:.6em;text-transform:uppercase;letter-spacing:2px;opacity:.32;font-weight:700}
+#ttopic{font-size:.84em;font-weight:800}
+#thint{font-size:.58em;opacity:.27;font-style:italic}
+#grid{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;border:none}
+.qcard{padding:10px 16px;cursor:pointer;background:#fff;display:flex;align-items:flex-start;gap:5px;transition:background .15s;user-select:none;border:none;min-height:0}
+.qcard:hover{background:#fafafa}
+.qcard.rev{background:#f6f6f6}
+.qrow{display:flex;gap:10px;align-items:baseline;flex:1;flex-wrap:wrap}
+.qnum{font-family:'JetBrains Mono',monospace;font-weight:700;color:#c5c5c5;font-size:.78em;min-width:22px;flex-shrink:0}
+.qtxt{font-weight:500;line-height:1.5}
+.qans{color:#0f4a0f;font-weight:600;line-height:1.5;font-size:.88em;display:none;margin-left:4px;white-space:nowrap}
+.qans.show{display:inline}
+.qansmark{font-weight:800;margin-right:2px}
+.katex{font-size:1em!important}
+
+/* ── CARD CONTROLS ── */
+.qcontrols{display:flex;gap:3px;margin-left:auto;flex-shrink:0;opacity:0;transition:opacity .15s}
+.qcard:hover .qcontrols{opacity:1}
+.qcbtn{background:#eee;border:1px solid #ddd;border-radius:2px;padding:2px 6px;font-size:9px;font-family:'JetBrains Mono',monospace;cursor:pointer;color:#666;line-height:1.2;transition:all .12s;white-space:nowrap;font-weight:600}
+.qcbtn:hover{background:#ddd;color:#333}
+.qcbtn.qcswap{color:#1a5276}
+.qcbtn.qcswap:hover{background:#d4e6f1}
+.qcbtn.qcedit{color:#7d6608}
+.qcbtn.qcedit:hover{background:#fef9e7}
+.qcbtn.qchide{color:#922b21}
+.qcbtn.qchide:hover{background:#fadbd8}
+.qver{font-size:8px;font-family:'JetBrains Mono',monospace;color:#999;font-weight:400;margin-left:4px}
+
+/* ── HIDDEN QUESTION ── */
+.qcard.qhidden{padding:6px 16px;opacity:.25;min-height:0;transition:all .2s}
+.qcard.qhidden .qrow{display:none}
+.qcard.qhidden .qcontrols{display:none}
+.qcard.qhidden .qhiddenbar{display:flex}
+.qhiddenbar{display:none;align-items:center;gap:8px;width:100%;cursor:pointer}
+.qhiddennum{font-family:'JetBrains Mono',monospace;font-weight:700;color:#c5c5c5;font-size:.78em}
+.qhiddenlbl{font-size:.7em;color:#aaa;font-style:italic}
+.qhiddenshow{font-size:9px;font-family:'JetBrains Mono',monospace;background:#eee;border:1px solid #ddd;border-radius:2px;padding:2px 8px;cursor:pointer;color:#666;margin-left:auto}
+.qhiddenshow:hover{background:#ddd}
+
+/* ── EDIT MODE ── */
+.qcard.editing{background:#fffde7;cursor:default;user-select:text}
+.qcard.editing .qcontrols{display:none}
+.qeditarea{width:100%;padding:6px 8px;border:1px solid #ccc;border-radius:2px;font-family:'Outfit',sans-serif;font-size:.9em;resize:vertical;min-height:28px;line-height:1.4}
+.qeditarea.qeditq{min-height:36px}
+.qeditarea.qedita{min-height:28px;color:#0f4a0f}
+.qeditbtns{display:flex;gap:6px;margin-top:6px}
+.qeditbtn{padding:4px 14px;font-size:10px;font-family:'Outfit',sans-serif;font-weight:700;border:none;border-radius:2px;cursor:pointer;letter-spacing:1px;text-transform:uppercase}
+.qeditbtn.save{background:#27ae60;color:#fff}
+.qeditbtn.save:hover{background:#229954}
+.qeditbtn.cancel{background:#bbb;color:#fff}
+.qeditbtn.cancel:hover{background:#999}
+
+/* ── EMPTY STATE ── */
+#emptystate{display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:60px 30px;text-align:center}
+#emptystate.show{display:flex}
+.empty-icon{font-size:52px;opacity:.12;line-height:1}
+.empty-title{font-size:1.3em;font-weight:800;letter-spacing:1px;opacity:.3;text-transform:uppercase}
+.empty-sub{font-size:.9em;opacity:.22;max-width:420px;line-height:1.6}
+
+/* ── FULLSCREEN MODE ── */
+body.fs #topwrap{display:none}
+body.fs #strandbar{display:none}
+body.fs #peekzone{display:none}
+body.fs #titlestrip{display:none}
+body.fs #grid{position:fixed;inset:0;z-index:300;overflow:auto;border:none}
+body.fs #grid .qcard{border:none}
+
+/* ── KEYBOARD SHORTCUT MODAL ── */
+#kbdoverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;align-items:center;justify-content:center}
+#kbdoverlay.open{display:flex}
+#kbdbox{background:#fff;border:3px solid #000;padding:32px 36px;max-width:580px;width:90%;font-family:'Outfit',sans-serif;position:relative}
+#kbdbox h2{font-size:1.3em;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;border-bottom:2px solid #000;padding-bottom:10px}
+#kbdclose{position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.4em;cursor:pointer;font-weight:700;line-height:1}
+.kbdgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}
+.kbdrow{display:flex;align-items:baseline;gap:10px;padding:4px 0;border-bottom:1px solid #eee}
+.kbdrow:last-child{border-bottom:none}
+kbd{background:#111;color:#fff;font-family:'JetBrains Mono',monospace;font-size:.72em;padding:3px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0}
+.kbddesc{font-size:.88em;opacity:.75}
+#kbdfooter{margin-top:14px;font-size:.72em;opacity:.4;font-style:italic;text-align:center}
+
+/* ── Visualiser mode: only the question, the live camera and the bottom-right button ── */
+body.vizmode #topwrap,body.vizmode #strandbar,body.vizmode #substrandbar,body.vizmode #titlestrip,body.vizmode #pentools,
+body.vizmode .fnav,body.vizmode #fkeys,body.vizmode #fprogress,body.vizmode #fdots,body.vizmode #penlayer,body.vizmode #panel{display:none!important}
+body.vizmode #focuswrap{background:transparent}
+body.vizmode:not(.focus3) #focuscard{position:fixed!important;left:var(--vzl)!important;top:var(--vzt)!important;width:calc(var(--vzw) * var(--vzs,1))!important;max-width:none!important;z-index:320;transition:none!important;
+  background:transparent;padding:10px 18px;max-height:calc(100vh - 24px);overflow:auto;transform:var(--vztf,none)}
+body.vizmode.vzanim #focuscard{transition:left 1.5s ease-in-out,top 1.5s ease-in-out,width 1.5s ease-in-out,transform 1.5s ease-in-out!important}
+body.vizmode #focuscard,body.vizmode.focus3 #focus3wrap{touch-action:none;cursor:grab}
+body.vizmode #focuscard,body.vizmode.focus3 #focus3wrap{overflow:visible!important;max-height:none!important;scrollbar-width:none}
+body.vizmode,body.vizmode *{scrollbar-width:none}
+body.vizmode ::-webkit-scrollbar{display:none}
+/* resize: text + diagrams scale by --vzs; the box widens with them */
+body.vizmode #focusq,body.vizmode #focusa,body.vizmode.focus3 .f3q,body.vizmode.focus3 .f3a{zoom:var(--vzs,1)}
+#vizsize{display:none;position:fixed;z-index:330;width:8px;height:8px;border-radius:2px;background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.35);cursor:nwse-resize;touch-action:none;box-sizing:border-box}
+#vizsize::after{content:'';position:absolute;inset:-12px}  /* bigger invisible area so it's easy to grab */
+#vizsize svg{display:none}
+body.focusmode:not(.penon) #vizsize{display:block}
+/* normal focus modes: size applies to every question in the set; position becomes free once moved */
+body.focusmode:not(.vizmode) #focusq,body.focusmode:not(.vizmode) #focusa,body.focusmode:not(.vizmode) .f3q,body.focusmode:not(.vizmode) .f3a{zoom:var(--vzs,1)}
+body.focusmode:not(.vizmode):not(.penon) #focuscard{max-width:calc(900px * var(--vzs,1))}
+body.focusmode:not(.vizmode):not(.penon) #focus3wrap{max-width:calc(1400px * var(--vzs,1))}
+body.focusmode:not(.vizmode) #focuscard,body.focusmode:not(.vizmode) #focus3wrap{touch-action:none}
+body.focusmode:not(.vizmode):not(.penon) #focuscard,body.focusmode:not(.vizmode):not(.penon) #focus3wrap{cursor:grab}
+body.focusmode.freepos:not(.vizmode):not(.focus3) #focuscard{position:fixed!important;left:var(--fpl)!important;top:var(--fpt)!important;width:calc(var(--fpw) * var(--vzs,1))!important;max-width:none!important;z-index:3;transition:none!important}
+body.focusmode.focus3.freepos3:not(.vizmode) #focus3wrap{position:fixed!important;left:var(--f3l)!important;top:var(--f3t)!important;width:calc(var(--f3w) * var(--vzs,1))!important;max-width:none!important;margin:0!important;z-index:3;animation:none}
+body.vizmode #vizsize{display:block}
+/* cut-out look: no panel, just the question with a thin white halo so it reads over the camera picture */
+body.vizmode #focuscard,body.vizmode .f3card{text-shadow:0 0 2px #fff,0 0 2px #fff,0 0 4px #fff,0 0 6px #fff}
+body.vizmode #focuscard svg,body.vizmode .f3card svg{filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff)}
+body.vizmode #focuscard .katex svg,body.vizmode .f3card .katex svg{filter:none}
+body.vizmode #focusa,body.vizmode .f3a{border-top-color:transparent}
+body.vizmode.focus3 .f3card.cur{box-shadow:none;border:none}
+/* everything inside the question is see-through too (given-value boxes, formula boxes, highlighted cells) */
+body.vizmode #focuscard *,body.vizmode .f3card *{background:transparent!important;box-shadow:none!important}
+body.vizmode #focuscard [style*="background"],body.vizmode .f3card [style*="background"],body.vizmode #focuscard .given,body.vizmode .f3card .given,body.vizmode #focuscard .fbox,body.vizmode .f3card .fbox{border:none!important}
+body.vzdragging,body.vzdragging *{cursor:grabbing!important;user-select:none}
+body.vizmode #togglebar{display:flex!important;z-index:500;background:rgba(21,101,192,.85);color:#fff;border-color:#1565c0}
+#vizbox{display:none;position:fixed;inset:0;z-index:310;background:#111;overflow:hidden}
+body.vizmode #vizbox{display:block}
+#vizvideo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .3s}
+#vizmsg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#ddd;font:600 16px Outfit,sans-serif;text-align:center;padding:20px}
+.vizctl{position:absolute;top:8px;z-index:2;background:rgba(0,0,0,.35);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:6px;width:34px;height:34px;font-size:17px;cursor:pointer;opacity:.45}
+.vizctl:hover{opacity:1}
+#vizrot{right:8px}
+.vizctl.vizbig{width:44px;height:38px;font:700 15px Outfit,sans-serif;opacity:.8;background:rgba(255,255,255,.85);color:#111;border-color:rgba(0,0,0,.2)}
+.vizctl.vizbig.on{background:#111;color:#fff}
+#vizver{right:104px}#vizthree{right:54px}#vizrot{top:8px}
+/* 3 at a time over the camera: stacked in the left half */
+body.vizmode.focus3 #focus3wrap{display:flex!important;flex-direction:column;align-items:stretch;gap:44px;position:fixed;left:2vw;width:calc(46vw * var(--vzs,1));top:50vh;transform:translateY(-50%);max-height:calc(100vh - 24px);overflow:auto;z-index:320;max-width:none}
+body.vizmode.focus3 .f3card{flex-direction:row;align-items:center;text-align:left;background:transparent;border:none;box-shadow:none;padding:10px 14px;gap:12px}
+body.vizmode.focus3 .f3q svg{width:min(100%, calc(320px * var(--dscale,1)))!important;height:auto!important;max-height:20vh!important}
+body.vizmode.focus3 .f3card{width:100%;box-sizing:border-box;flex-direction:column!important;align-items:stretch!important;text-align:center!important}
+body.vizmode.focus3 #focuscard{display:none!important}
+#vizpick{position:absolute;top:8px;left:8px;z-index:2;display:flex;gap:6px;opacity:.55;transition:opacity .2s}
+#vizpick:hover,#vizpick.show{opacity:1}
+#vizsel,#vizdetect{background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:6px;font:600 13px Outfit,sans-serif;padding:6px 8px;max-width:280px;cursor:pointer}
+#vizsel option{color:#000;background:#fff}
+/* ── PRINT ── */
+#pz{display:none}
+@media print{
+  #topwrap,#strandbar,#panel,#grid,#emptystate,#togglebar,#kbdoverlay{display:none!important}
+  #pz{display:block!important;font-family:Outfit,sans-serif;font-size:10pt;color:#000}
+  @page{size:A4 portrait;margin:12mm 12mm 10mm 12mm}
+  .pz-half{width:100%}
+  #pz{transform-origin:top left}
+  .pz-half+.pz-half{border-top:1.5px dashed #bbb;padding-top:4mm;margin-top:3mm}
+  .pz-title{font-size:8.5pt;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#fff;background:#111;padding:2.5mm 4mm;margin-bottom:2.5mm}
+  .pz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5mm 2mm}
+  .pz-q{display:flex;gap:2.5mm;align-items:flex-start;padding:1.5mm 2mm;border:0.5px solid #ddd;min-height:20mm;break-inside:avoid;page-break-inside:avoid}
+  .pz-n{font-family:monospace;font-weight:700;color:#bbb;font-size:7.5pt;min-width:14px;flex-shrink:0;padding-top:1px}
+  .pz-t{font-size:8.5pt;font-weight:500;line-height:1.35;flex:1}
+  .pz-t .katex{font-size:1em!important}
+  .pz-t svg{max-width:100%!important;height:auto!important;display:block}
+}
+
+/* ── 6-QUESTION BOARD MODE ─────────────────────────────────────────────── */
+body.mode6 .qcard[data-row="2"],
+body.mode6 .qcard[data-row="3"],
+body.mode6 .qcard[data-row="4"]{ display:none }
+body.mode6 #grid{ grid-template-rows:1fr 1fr }
+body.mode6 .qcard svg{ width:310px;height:auto }
+/* ── Diagram size (separate from text size): --dscale, 1 = normal ── */
+#grid .qcard svg:not(.katex svg){width:calc(var(--w) * var(--dscale,1));height:auto;max-width:100%}
+body.mode6 #grid .qcard svg:not(.katex svg){width:calc(310px * var(--dscale,1))}
+.pz-t svg:not(.katex svg){width:calc(var(--w) * var(--dscale,1))}
+body.mode6 .qtxt{ font-size:1.1em }
+body.mode6 .qnum{ font-size:.85em }
+body.mode6 .qans{ font-size:.95em }
+#btnview.active{ background:#f5a623;color:#000;font-weight:800 }
+.fbox{background:#f8f8f8;border:1.5px solid #e0e0e0;border-radius:5px;padding:4px 8px;font-size:.82em;margin-bottom:3px;text-align:center;display:block}
+.ptbl{border-collapse:collapse;width:100%;margin:3px 0 5px;font-size:.8em}.ptbl td,.ptbl th{border:1px solid #ddd;padding:2px 5px;text-align:center}.ptbl th{background:#f5f5f5;font-weight:700}.ptbl td.hi{background:#fff3e0;font-weight:700;color:#c07010}.pihi{color:#c07010;font-weight:700}
+
+/* ── FOCUS MODE ── */
+#focuswrap{display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;padding:24px 60px;position:relative;background:#fff}
+body.focusmode #focuswrap{display:flex;touch-action:pan-y}
+body.focusmode #titlestrip,body.focusmode #grid,body.focusmode #emptystate{display:none!important}
+#focuscard{width:100%;max-width:900px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:18px;user-select:none}
+#focusqnum{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#bbb;letter-spacing:3px;text-transform:uppercase}
+#focusq{font-size:calc(clamp(18px,2.8vw,34px) * var(--fscale,1));font-weight:600;line-height:1.45;max-width:820px;width:100%}
+.given{background:#f4f7fb;border-left:3px solid #1565c0;padding:5px 10px;margin:4px 0;border-radius:2px;line-height:1.8}
+#focusq table,#focusa table{margin:8px auto;border-collapse:collapse}
+#focusq td,#focusq th,#focusa td,#focusa th{border:1px solid #ccc;padding:5px 12px;text-align:center}
+#focusq svg{width:min(calc(580px * var(--fscale,1) * var(--dscale,1)),90vw)!important;height:auto!important;display:block;margin:4px auto}
+#focushint{font-size:11px;color:#ccc;font-family:'JetBrains Mono',monospace;letter-spacing:2px;text-transform:uppercase}
+#focusa{display:none;font-size:calc(clamp(16px,2.5vw,30px) * var(--fscale,1));font-weight:700;color:#0f4a0f;line-height:1.5;border-top:2px solid #e0e0e0;padding-top:14px;max-width:820px;width:100%;text-align:center}
+#focuswrap .katex{font-size:1.1em!important}
+#focusa.show{display:block}
+#focusqnum,#focushint,#fkeys{display:none!important}
+/* ── 3 at a time ── */
+#focus3wrap{display:none;width:100%;max-width:1400px;grid-template-columns:repeat(3,1fr);gap:28px;row-gap:44px;align-items:start;position:relative;z-index:2}
+body.focus3 #focuscard{display:none}
+body.focus3 #focus3wrap{display:grid}
+.f3card.cur{border-color:#1565c0;box-shadow:0 0 0 2px rgba(21,101,192,.25)}
+.f3card{background:rgba(255,255,255,.85);border:1.5px solid #e4e4e4;border-radius:10px;padding:16px 14px;text-align:center;cursor:pointer;user-select:none;display:flex;flex-direction:column;gap:10px;min-width:0}
+.f3num{display:none}
+.f3q{font-size:calc(clamp(15px,1.8vw,26px) * var(--fscale,1));font-weight:600;line-height:1.4;overflow-wrap:anywhere}
+.f3q svg{width:calc(100% * min(1, var(--dscale,1)))!important;height:auto!important;max-height:calc(34vh * var(--dscale,1));display:block;margin:4px auto}
+.f3q table{margin:6px auto;border-collapse:collapse}.f3q td,.f3q th{border:1px solid #ccc;padding:3px 8px}
+.f3a{display:none;font-size:calc(clamp(14px,1.6vw,24px) * var(--fscale,1));font-weight:700;color:#0f4a0f;border-top:2px solid #e0e0e0;padding-top:8px;line-height:1.45}
+.f3a.show{display:block}
+body.focus3.penon #focus3wrap{grid-template-columns:1fr;max-width:46%;gap:12px;row-gap:44px;margin-right:auto;margin-left:0;align-self:flex-start;animation:f3in .9s ease-in-out}
+body.focus3.penon #focuswrap{justify-content:flex-start;padding-top:80px}
+body.focus3.penon .f3card{flex-direction:row;align-items:center;text-align:left;padding:10px 12px;gap:12px}
+body.focus3.penon .f3q{font-size:calc(clamp(13px,1.35vw,20px) * var(--fscale,1));flex:1}
+body.focus3.penon .f3q svg{max-height:calc(var(--f3svg,18vh) * min(1, var(--dscale,1)));width:auto!important;max-width:100%}
+body.focus3.penon .f3card{max-height:var(--f3card,none);overflow:hidden}
+body.focus3.penon .f3a{border-top:none;border-left:2px solid #e0e0e0;padding:0 0 0 10px;font-size:calc(clamp(12px,1.2vw,18px) * var(--fscale,1))}
+@keyframes f3in{from{opacity:0;transform:translateX(12%)}to{opacity:1;transform:none}}
+#pentools .pensm{font:700 15px Outfit,sans-serif}
+#pentools .pensm.on{background:#111;border-color:#111;color:#fff}
+/* pen on: question slides into the left half, right half left free for working */
+#focuscard{position:relative;left:0;transition:max-width 1.5s ease-in-out,left 1.5s ease-in-out}
+body.penanim #focusq{transition:font-size 1.5s ease-in-out}
+body.penon #focuscard{max-width:46%;left:-25%}
+body.penon #focusq{font-size:calc(clamp(16px,2.3vw,30px) * var(--fscale,1))}
+body.penon #focusq svg{width:calc(100% * min(1, var(--dscale,1)))!important}
+#focuswrap::after{content:'';position:absolute;top:70px;bottom:40px;left:50%;border-left:2px dashed #d6d6d6;opacity:0;transition:opacity 1s ease .6s;pointer-events:none;z-index:1}
+body.penon #focuswrap::after{opacity:1}
+/* ── FOCUS PEN ── */
+#penlayer{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;touch-action:auto}
+body.penon #penlayer{pointer-events:auto;touch-action:none;cursor:crosshair}
+#pentools{position:absolute;top:14px;right:16px;z-index:10;display:flex;gap:6px;align-items:center}
+#pentools button{width:44px;height:44px;border-radius:50%;border:1.5px solid #ccc;background:#fff;color:#333;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.12);padding:0}
+#pentools button:active{transform:scale(.94)}
+#penbtn.on{background:#f5a623;border-color:#f5a623;color:#000}
+#rubberbtn.sel{background:#111;border-color:#111;color:#fff}
+#pentools .penextra{display:none}
+body.penon #pentools .penextra{display:flex}
+#pentools .pencol{width:30px;height:30px;border:3px solid #fff;box-shadow:0 0 0 1.5px #ccc}
+#pentools .pencol.sel{box-shadow:0 0 0 2.5px #111}
+#pentools .penw.sel,#pentools .pentog.on{background:#111;border-color:#111;color:#fff}
+#pentools .pentog{width:auto;border-radius:22px;padding:0 12px;font:700 12px Outfit,sans-serif;gap:6px;white-space:nowrap}
+#pentools .pensep{width:1px;height:30px;background:#ddd;margin:0 2px}
+body.penon #pentools .pensep{display:block}
+#focuswrap.squared{background-color:#fff;background-image:linear-gradient(#dfe7f0 1px,transparent 1px),linear-gradient(90deg,#dfe7f0 1px,transparent 1px);background-size:32px 32px;background-position:-1px -1px}
+.fnav{z-index:20}
+.fnav{position:fixed;bottom:28px;background:#111;color:#fff;border:none;width:52px;height:52px;border-radius:50%;font-size:22px;cursor:pointer;display:none;align-items:center;justify-content:center;transition:background .15s,transform .1s;box-shadow:0 2px 8px rgba(0,0,0,.25);user-select:none;font-weight:700}
+.fnav:hover{background:#f5a623;color:#000}
+.fnav:active{transform:scale(.94)}
+#fnavprev{left:28px}
+#fnavnext{right:28px}
+#fkeys{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:none;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#aaa;white-space:nowrap;z-index:1001;pointer-events:none}
+body.focusmode #fkeys{display:flex}
+.fkey{background:#eee;border:1px solid #ccc;border-radius:4px;padding:1px 6px;font-size:10px;color:#666;font-family:'JetBrains Mono',monospace}
+body.focusmode .fnav{display:flex}
+#fprogress{position:fixed;bottom:0;left:0;right:0;height:4px;background:#eee;display:none}
+#fprogressbar{height:4px;background:#f5a623;transition:width .25s}
+body.focusmode #fprogress{display:block}
+#fdots{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:none;gap:5px;align-items:center}
+body.focusmode #fdots{display:flex}
+.fdot{width:7px;height:7px;border-radius:50%;background:#ddd;cursor:pointer;transition:background .15s,transform .15s;flex-shrink:0}
+.fdot.cur{background:#f5a623;transform:scale(1.4)}
+.fdot.done{background:#999}
+#btnfocus.focuson{background:#f5a623!important;color:#000!important}
+
+.previewtag{background:#b45309;color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:2px;margin-right:4px}
+.qtopic{display:block;font-size:.58em;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#888;margin-bottom:2px}
+body.mode6 .qcard[data-row]:not([data-row="0"]):not([data-row="1"]){display:none}
+#fdots{flex-wrap:wrap;max-width:90vw;justify-content:center;row-gap:6px}
+#styleselwrap{display:none}
+.qans{white-space:normal;line-height:1.45}
+.qans.show{display:block;margin-top:4px}
+
+</style>
+</head>
+<body>
+
+<div id="topwrap">
+<div id="topbar">
+  <span class="previewtag">Year 9</span>
+  <span id="szlabel">SIZE</span>
+  <button class="tb" onclick="changeFont(-1)">−</button>
+  <span id="szdisplay">18</span>
+  <button class="tb" onclick="changeFont(1)">+</button>
+  <div class="sep"></div>
+  <span id="dglabel">DIAGRAM</span>
+  <button class="tb" onclick="changeDiagram(-1)" title="Smaller diagrams">−</button>
+  <span id="dgdisplay">100%</span>
+  <button class="tb" onclick="changeDiagram(1)" title="Bigger diagrams">+</button>
+  <div class="sep"></div>
+  <button class="tb tbw" onclick="revealAll()">Show Answers</button>
+  <button class="tb tbw" onclick="hideAll()">Hide Answers</button>
+  <div class="sep"></div>
+  <button class="tb tbw" onclick="showAllQs()">Show All Qs</button>
+  <button class="tb tbw" onclick="hideAllQs()">Hide All Qs</button>
+  <div class="sep"></div>
+  <button class="tb tbw" id="btnver" onclick="toggleAllVersions()">Switch to V2</button>
+  <div class="sep"></div>
+  <button class="tb tbw tbac" id="btnsettings" onclick="togglePanel()">⚙ Choose unit</button>
+  <div class="sep"></div>
+  <button class="tb tbw" onclick="exportHTML()" title="Download with edits saved">⬇ Save</button>
+  <div class="sep"></div>
+  <button class="tb tbw" onclick="printSheet()" title="Print worksheet — 2 sets per A4 page">🖨 Print</button>
+  <span class="print-scale-wrap">
+    <label>Scale</label>
+    <input type="number" class="print-scale-input" id="printScaleInput" min="50" max="100" step="5" value="90"
+      onchange="setPrintScale(Math.round(this.value/5)*5)" oninput="this.value=Math.min(100,Math.max(50,this.value))">
+    <label style="color:#666">%</label>
+  </span>
+  <div class="sep"></div>
+  <button class="tb" onclick="openKbd()" title="Keyboard shortcuts">?</button>
+  <div class="sep"></div>
+  <button class="tb tbw" id="btnview" onclick="toggleViewMode()" title="Toggle 6-question board view">Show 6</button>
+  <div class="sep"></div>
+  <button class="tb" id="btnfs" onclick="toggleFullscreen()" title="Fullscreen (F)">⛶</button>
+  <div class="sep"></div>
+  <button class="tb tbw" id="btnfocus" onclick="toggleFocusMode()" title="Focus: one question at a time">&#9654; Focus</button>
+  <span id="toplabel"></span>
+</div>
+<div id="panel">
+  <div class="fg" style="flex:3 1 320px">
+    <div class="fl">Unit</div>
+    <select id="topsel" style="font-size:15px" onchange="onTopicChange()"></select>
+  </div>
+  <div class="fg" id="styleselwrap" style="flex:2 1 220px">
+    <div class="fl">Question Style</div>
+    <select id="stylesel" style="font-size:15px" onchange="onStyleChange()">
+      <option value="qs">Cycle revision</option>
+    </select>
+  </div>
+  <button id="gobtn" onclick="loadQuestions()">Go</button>
+</div>
+</div>
+
+<div id="vizsize" title="Drag to make the question bigger or smaller"><svg viewBox="0 0 30 30" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><path d="M10 25L25 10M16 25L25 16M22 25L25 22"/></svg></div>
+<button id="togglebar" onclick="toggleTopBar()"><span></span><span></span><span></span></button>
+
+<div id="strandbar"></div>
+<div id="substrandbar" style="display:none"></div>
+
+<div id="kbdoverlay" onclick="closeKbd(event)">
+  <div id="kbdbox">
+    <button id="kbdclose" onclick="closeKbd()">✕</button>
+    <h2>Keyboard Shortcuts</h2>
+    <div class="kbdgrid">
+      <div class="kbdrow"><kbd>S</kbd><span class="kbddesc">Show all answers</span></div>
+      <div class="kbdrow"><kbd>H</kbd><span class="kbddesc">Hide all answers</span></div>
+      <div class="kbdrow"><kbd>T</kbd><span class="kbddesc">Toggle unit panel</span></div>
+      <div class="kbdrow"><kbd>Enter</kbd><span class="kbddesc">Load questions</span></div>
+      <div class="kbdrow"><kbd>V</kbd><span class="kbddesc">Switch V1 / V2 / V3</span></div>
+      <div class="kbdrow"><kbd>+</kbd> / <kbd>=</kbd><span class="kbddesc">Increase font size</span></div>
+      <div class="kbdrow"><kbd>−</kbd><span class="kbddesc">Decrease font size</span></div>
+      <div class="kbdrow"><kbd>1</kbd>–<kbd>8</kbd><span class="kbddesc">Switch unit</span></div>
+      <div class="kbdrow"><kbd>B</kbd><span class="kbddesc">Show / hide options bar</span></div>
+      <div class="kbdrow"><kbd>F</kbd><span class="kbddesc">Toggle fullscreen</span></div>
+      <div class="kbdrow"><kbd>?</kbd><span class="kbddesc">Show this help screen</span></div>
+      <div class="kbdrow"><kbd>Esc</kbd><span class="kbddesc">Close panel / modal</span></div>
+    </div>
+    <p id="kbdfooter">Use the button in the bottom-right corner to show/hide the bar</p>
+  </div>
+</div>
+
+<div id="titlestrip">
+  <div><span id="tunit"></span><span id="ttopic"></span></div>
+  <span id="thint">Tap any card to reveal its worked answer</span>
+</div>
+<div id="grid"></div>
+
+<div id="emptystate">
+  <div class="empty-icon">∅</div>
+  <div class="empty-title">No topics yet</div>
+  <div class="empty-sub">This unit doesn't have any questions yet.</div>
+</div>
+
+<div id="focuswrap">
+  <div id="focuscard" onclick="focusToggleReveal()">
+    <div id="focusqnum">Question 1 of 36</div>
+    <div id="focusq"></div>
+    <div id="focushint">tap to reveal</div>
+    <div id="focusa"></div>
+  </div>
+  <div id="focus3wrap"></div>
+  <div id="vizbox" onclick="event.stopPropagation()"><video id="vizvideo" autoplay playsinline muted></video><div id="vizmsg"></div>
+    <div id="vizpick"><select id="vizsel" title="Choose camera" onchange="vizChoose(this.value)"></select><button id="vizdetect" title="Look for cameras again" onclick="vizDetect(true)">&#10227; Detect</button></div>
+    <button class="vizctl" id="vizrot" title="Rotate the picture" onclick="vizRotate()">&#8635;</button>
+    <button class="vizctl vizbig" id="vizver" title="Switch V1 / V2 / V3" onclick="toggleAllVersions()">V1</button>
+    <button class="vizctl vizbig" id="vizthree" title="1 question / 3 questions" onclick="focusThree()">3</button></div>
+  <canvas id="penlayer"></canvas>
+  <div id="pentools" onclick="event.stopPropagation()">
+    <button class="penextra pencol sel" style="background:#111" title="Black" onclick="penColour('#111',this)"></button>
+    <button class="penextra pencol" style="background:#1565c0" title="Blue" onclick="penColour('#1565c0',this)"></button>
+    <button class="penextra pencol" style="background:#d32f2f" title="Red" onclick="penColour('#d32f2f',this)"></button>
+    <button class="penextra pencol" style="background:#2e7d32" title="Green" onclick="penColour('#2e7d32',this)"></button>
+    <button class="pensm" id="fverbtn" title="Switch V1 / V2 / V3" onclick="toggleAllVersions()">V1</button>
+    <button class="penextra penw" id="penfine" title="Fine pen" onclick="penWidth(1.8)"><span style="width:3px;height:3px;border-radius:50%;background:currentColor"></span></button>
+    <button class="penextra penw sel" id="penthin" title="Thin pen" onclick="penWidth(3.5)"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span></button>
+    <button class="penextra penw" id="penthick" title="Thick pen" onclick="penWidth(9)"><span style="width:14px;height:14px;border-radius:50%;background:currentColor"></span></button>
+    <button class="penextra" id="rubberbtn" title="Rubber" onclick="penRubber()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M16.2 3.8l4 4a1.5 1.5 0 0 1 0 2.1L11 19H6.5l-3-3a1.5 1.5 0 0 1 0-2.1L14.1 3.8a1.5 1.5 0 0 1 2.1 0z"/><path d="M9.5 8.5l6 6"/><path d="M11 19h9"/></svg></button>
+    <button class="penextra" title="Undo last line" onclick="penUndo()">&#8630;</button>
+    <button class="penextra" title="Clear this question" onclick="penClear()">&#128465;</button>
+    <span class="penextra pensep"></span>
+    <button class="penextra pentog on" id="stylusbtn" title="When on, only a stylus (or mouse) writes; a finger tap reveals the answer" onclick="penStylus()">&#9997; Stylus only</button>
+    <button class="pensm" id="threebtn" title="Show 3 questions at a time" onclick="focusThree()">3</button>
+    <button class="pensm" id="squaredbtn" title="Squared paper on/off" onclick="penSquared()"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="1.5" width="15" height="15"/><path d="M6.5 1.5v15M11.5 1.5v15M1.5 6.5h15M1.5 11.5h15"/></svg></button>
+    <button class="pensm" id="vizbtn" title="Visualiser: show only this question and the live camera" onclick="vizToggle()"><svg width="20" height="18" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 6h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="12" r="4"/></svg></button>
+    <button id="penbtn" title="Pen" onclick="penToggle()">&#9998;</button>
+  </div>
+</div>
+
+<button class="fnav" id="fnavprev" onclick="focusNav(-1)">&#8592;</button>
+<button class="fnav" id="fnavnext" onclick="focusNav(1)">&#8594;</button>
+<div id="fkeys"><span class="fkey">&#8592;</span> prev &nbsp;&nbsp; <span class="fkey">&#8594;</span> next &nbsp;&nbsp; <span class="fkey">Space</span> reveal &nbsp;&nbsp; <span class="fkey">Esc</span> exit</div>
+<div id="fprogress"><div id="fprogressbar"></div></div>
+<div id="fdots"></div>
+
+<script>
+const BOARD_TITLE = "Year 9 Cycle 1";
+const UNIT_KEYS = ["all","u0","u1","u2","u3","u4","u5","u6","u7"];
+const UNIT_LABELS = ["Whole cycle","Fractions & Percentages","Probability","Standard Form","Inequalities","Quadratics","Formulae","Constructions","Circles"];
+const DATA = {
+  "all": [
+    {
+      "u": "Year 9 · Cycle 1",
+      "l": "Whole cycle",
+      "qs": [
+        {
+          "unit": "Fractions & Percentages",
+          "topic": "Percentage change (formula)",
+          "id": "percentage-change-formula",
+          "q": "A price changes from $\\text{£}40$ to $\\text{£}46$. Work out the percentage change.",
+          "a": "Change $= 46-40=6$<br>$\\dfrac{6}{40}\\times 100 = 15$<br>$\\boldsymbol{15\\%\\ \\text{increase}}$",
+          "q2": "A price changes from $\\text{£}50$ to $\\text{£}40$. Work out the percentage change.",
+          "a2": "Change $= 40-50=-10$<br>$\\dfrac{-10}{50}\\times 100 = 20$<br>$\\boldsymbol{20\\%\\ \\text{decrease}}$",
+          "q3": "A price changes from $\\text{£}80$ to $\\text{£}100$. Work out the percentage change.",
+          "a3": "Change $= 100-80=20$<br>$\\dfrac{20}{80}\\times 100 = 25$<br>$\\boldsymbol{25\\%\\ \\text{increase}}$"
+        },
+        {
+          "unit": "Fractions & Percentages",
+          "topic": "Reverse percentages (Original amount)",
+          "id": "reverse-percentages",
+          "q": "After a $20\\%$ increase, an amount is $\\text{£}60$. Find the original amount.",
+          "a": "Multiplier $= 1.2$<br>Original $= 60 \\div 1.2 = 50$<br>$\\boldsymbol{\\text{£}50}$",
+          "q2": "After a $10\\%$ decrease, an amount is $\\text{£}72$. Find the original amount.",
+          "a2": "Multiplier $= 0.9$<br>Original $= 72 \\div 0.9 = 80$<br>$\\boldsymbol{\\text{£}80}$",
+          "q3": "After a $5\\%$ increase, an amount is $\\text{£}105$. Find the original amount.",
+          "a3": "Multiplier $= 1.05$<br>Original $= 105 \\div 1.05 = 100$<br>$\\boldsymbol{\\text{£}100}$"
+        },
+        {
+          "unit": "Fractions & Percentages",
+          "topic": "Simple Interest",
+          "id": "simple-interest",
+          "q": "Find the simple interest on $\\text{£}500$ at $4\\%$ for $3$ years.",
+          "a": "$I = \\dfrac{P \\times R \\times T}{100}$<br>$I = \\dfrac{500\\times 4\\times 3}{100} = 60$<br>$\\boldsymbol{\\text{£}60}$",
+          "q2": "Find the simple interest on $\\text{£}800$ at $5\\%$ for $2$ years.",
+          "a2": "$I = \\dfrac{P \\times R \\times T}{100}$<br>$I = \\dfrac{800\\times 5\\times 2}{100} = 80$<br>$\\boldsymbol{\\text{£}80}$",
+          "q3": "Find the simple interest on $\\text{£}600$ at $3\\%$ for $5$ years.",
+          "a3": "$I = \\dfrac{P \\times R \\times T}{100}$<br>$I = \\dfrac{600\\times 3\\times 5}{100} = 90$<br>$\\boldsymbol{\\text{£}90}$"
+        },
+        {
+          "unit": "Fractions & Percentages",
+          "topic": "Compound Interest",
+          "id": "compound-interest",
+          "q": "$\\text{£}500$ is invested at $4\\%$ compound interest for $2$ years. Find the total amount.",
+          "a": "Amount $= 500\\times 1.04^{2}$<br>$= 540.80$<br>$\\boldsymbol{\\text{£}540.80}$",
+          "q2": "$\\text{£}200$ is invested at $10\\%$ compound interest for $2$ years. Find the total amount.",
+          "a2": "Amount $= 200\\times 1.1^{2}$<br>$= 242$<br>$\\boldsymbol{\\text{£}242}$",
+          "q3": "$\\text{£}1000$ is invested at $5\\%$ compound interest for $2$ years. Find the total amount.",
+          "a3": "Amount $= 1000\\times 1.05^{2}$<br>$= 1102.50$<br>$\\boldsymbol{\\text{£}1102.50}$"
+        },
+        {
+          "unit": "Probability",
+          "topic": "Experimental probability",
+          "id": "experimental-probability",
+          "q": "A spinner lands on red $18$ times in $30$ spins. Write the experimental probability of red as a fraction in its simplest form.",
+          "a": "$\\dfrac{18}{30} = \\dfrac{3}{5}$<br>$\\boldsymbol{\\dfrac{3}{5}}$",
+          "q2": "A spinner lands on red $14$ times in $21$ spins. Write the experimental probability of red as a fraction in its simplest form.",
+          "a2": "$\\dfrac{14}{21} = \\dfrac{2}{3}$<br>$\\boldsymbol{\\dfrac{2}{3}}$",
+          "q3": "A spinner lands on red $21$ times in $28$ spins. Write the experimental probability of red as a fraction in its simplest form.",
+          "a3": "$\\dfrac{21}{28} = \\dfrac{3}{4}$<br>$\\boldsymbol{\\dfrac{3}{4}}$"
+        },
+        {
+          "unit": "Probability",
+          "topic": "Expected outcomes",
+          "id": "expected-outcomes",
+          "q": "$P(\\text{win})=\\dfrac{1}{4}$. In $80$ games, how many wins are expected?",
+          "a": "$\\dfrac{1}{4}\\times 80 = 20$<br>$\\boldsymbol{20}$",
+          "q2": "$P(\\text{win})=\\dfrac{1}{6}$. In $30$ games, how many wins are expected?",
+          "a2": "$\\dfrac{1}{6}\\times 30 = 5$<br>$\\boldsymbol{5}$",
+          "q3": "$P(\\text{win})=\\dfrac{3}{5}$. In $40$ games, how many wins are expected?",
+          "a3": "$\\dfrac{3}{5}\\times 40 = 24$<br>$\\boldsymbol{24}$"
+        },
+        {
+          "unit": "Probability",
+          "topic": "Frequency trees – draw",
+          "id": "frequency-trees-draw",
+          "q": "$100$ students. $60$ play sport. How many do not play sport?",
+          "a": "$100-60=40$<br>$\\boldsymbol{40}$",
+          "q2": "$80$ students. $50$ play sport. How many do not play sport?",
+          "a2": "$80-50=30$<br>$\\boldsymbol{30}$",
+          "q3": "$120$ students. $75$ play sport. How many do not play sport?",
+          "a3": "$120-75=45$<br>$\\boldsymbol{45}$"
+        },
+        {
+          "unit": "Probability",
+          "topic": "Frequency trees – interpret",
+          "id": "frequency-trees-interpret",
+          "q": "A frequency tree shows $100$ students, $60$ play sport, and $40$ of those play football. Work out $P(\\text{sport but not football})$.",
+          "a": "Sport but not football $= 60-40=20$<br>$P=\\dfrac{20}{100}$<br>$\\boldsymbol{\\dfrac{20}{100}}$",
+          "q2": "A frequency tree shows $80$ students, $50$ play sport, and $30$ of those play football. Work out $P(\\text{sport but not football})$.",
+          "a2": "Sport but not football $= 50-30=20$<br>$P=\\dfrac{20}{80}$<br>$\\boldsymbol{\\dfrac{20}{80}}$",
+          "q3": "A frequency tree shows $120$ students, $90$ play sport, and $54$ of those play football. Work out $P(\\text{sport but not football})$.",
+          "a3": "Sport but not football $= 90-54=36$<br>$P=\\dfrac{36}{120}$<br>$\\boldsymbol{\\dfrac{36}{120}}$"
+        },
+        {
+          "unit": "Standard Form",
+          "topic": "Add and subtract standard form",
+          "id": "standard-form-add-subtract",
+          "q": "Work out $3\\times 10^{3}+2\\times 10^{2}$. Give your answer in standard form.",
+          "a": "Write with the same power of $10$, then add.<br>$\\boldsymbol{3.2\\times 10^{3}}$",
+          "q2": "Work out $4\\times 10^{4}+5\\times 10^{3}$. Give your answer in standard form.",
+          "a2": "Write with the same power of $10$, then add.<br>$\\boldsymbol{4.5\\times 10^{4}}$",
+          "q3": "Work out $6\\times 10^{2}+4\\times 10^{1}$. Give your answer in standard form.",
+          "a3": "Write with the same power of $10$, then add.<br>$\\boldsymbol{6.4\\times 10^{2}}$"
+        },
+        {
+          "unit": "Standard Form",
+          "topic": "Multiplying and dividing with standard form",
+          "id": "standard-form-multiply-divide",
+          "q": "Work out $(2\\times 10^{3})\\times(3\\times 10^{2})$. Give your answer in standard form.",
+          "a": "$2\\times 3=6$, and $3+2=5$<br>$\\boldsymbol{6\\times 10^{5}}$",
+          "q2": "Work out $(4\\times 10^{4})\\times(2\\times 10^{1})$. Give your answer in standard form.",
+          "a2": "$4\\times 2=8$, and $4+1=5$<br>$\\boldsymbol{8\\times 10^{5}}$",
+          "q3": "Work out $(5\\times 10^{2})\\times(3\\times 10^{3})$. Give your answer in standard form.",
+          "a3": "$5\\times 3=15$, and $2+3=5$<br>$\\boldsymbol{1.5\\times 10^{6}}$"
+        },
+        {
+          "unit": "Standard Form",
+          "topic": "Standard form on a calculator",
+          "id": "standard-form-calculator",
+          "q": "A calculator shows $2.5\\text{E}7$. Write this in standard form.",
+          "a": "$\\boldsymbol{2.5\\times 10^{7}}$",
+          "q2": "A calculator shows $3.2\\text{E}5$. Write this in standard form.",
+          "a2": "$\\boldsymbol{3.2\\times 10^{5}}$",
+          "q3": "A calculator shows $4.1\\text{E}-3$. Write this in standard form.",
+          "a3": "$\\boldsymbol{4.1\\times 10^{-3}}$"
+        },
+        {
+          "unit": "Inequalities",
+          "topic": "Solving inequalities one step",
+          "id": "inequalities-one-step",
+          "q": "Solve $x+4>9$.",
+          "a": "$x>9-4$<br>$\\boldsymbol{x>5}$",
+          "q2": "Solve $x+6>14$.",
+          "a2": "$x>14-6$<br>$\\boldsymbol{x>8}$",
+          "q3": "Solve $x+2>11$.",
+          "a3": "$x>11-2$<br>$\\boldsymbol{x>9}$"
+        },
+        {
+          "unit": "Inequalities",
+          "topic": "Solving inequalities multi step",
+          "id": "inequalities-multi-step",
+          "q": "Solve $3x+5<20$.",
+          "a": "$3x<15$<br>$\\boldsymbol{x<5}$",
+          "q2": "Solve $4x+2<18$.",
+          "a2": "$4x<16$<br>$\\boldsymbol{x<4}$",
+          "q3": "Solve $2x+3<15$.",
+          "a3": "$2x<12$<br>$\\boldsymbol{x<6}$"
+        },
+        {
+          "unit": "Inequalities",
+          "topic": "Solving double inequalities",
+          "id": "inequalities-double",
+          "q": "Solve $-2<x-3<5$.",
+          "a": "Add $3$ to all three parts.<br>$\\boldsymbol{1<x<8}$",
+          "q2": "Solve $1<x-4<10$.",
+          "a2": "Add $4$ to all three parts.<br>$\\boldsymbol{5<x<14}$",
+          "q3": "Solve $-5<x-2<3$.",
+          "a3": "Add $2$ to all three parts.<br>$\\boldsymbol{-3<x<5}$"
+        },
+        {
+          "unit": "Inequalities",
+          "topic": "Solving inequalities unknowns both sides",
+          "id": "inequalities-both-sides",
+          "q": "Solve $5x-2>2x+7$.",
+          "a": "Collect $x$ terms on one side.<br>$3x>9$<br>$\\boldsymbol{x>3}$",
+          "q2": "Solve $7x-1>3x+15$.",
+          "a2": "Collect $x$ terms on one side.<br>$4x>16$<br>$\\boldsymbol{x>4}$",
+          "q3": "Solve $6x-2>2x+18$.",
+          "a3": "Collect $x$ terms on one side.<br>$4x>20$<br>$\\boldsymbol{x>5}$"
+        },
+        {
+          "unit": "Inequalities",
+          "topic": "Solving inequalities (switching signs)",
+          "id": "inequalities-switching-signs",
+          "q": "Solve $-2x<8$.",
+          "a": "Divide by $-2$ and flip the inequality.<br>$\\boldsymbol{x>-4}$",
+          "q2": "Solve $-3x<15$.",
+          "a2": "Divide by $-3$ and flip the inequality.<br>$\\boldsymbol{x>-5}$",
+          "q3": "Solve $-4x<12$.",
+          "a3": "Divide by $-4$ and flip the inequality.<br>$\\boldsymbol{x>-3}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Equivalent expressions",
+          "id": "equivalent-expressions",
+          "q": "Are $2(x+3)$ and $2x+6$ equivalent?",
+          "a": "Expand: $2(x+3)=2x+6$.<br>$\\boldsymbol{\\text{Yes}}$",
+          "q2": "Are $(x+3)^{2}$ and $x^{2}+9$ equivalent?",
+          "a2": "$(x+3)^{2}=x^{2}+6x+9$.<br>$\\boldsymbol{\\text{No}}$",
+          "q3": "Are $3(x-2)$ and $3x-6$ equivalent?",
+          "a3": "Expand: $3(x-2)=3x-6$.<br>$\\boldsymbol{\\text{Yes}}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Expanding double brackets (positive)",
+          "id": "expanding-double-brackets-positive",
+          "q": "Expand $(x+2)(x+3)$.",
+          "a": "$x^{2}+3x+2x+6$<br>$\\boldsymbol{x^{2}+5x+6}$",
+          "q2": "Expand $(x+4)(x+5)$.",
+          "a2": "$x^{2}+5x+4x+20$<br>$\\boldsymbol{x^{2}+9x+20}$",
+          "q3": "Expand $(x+1)(x+6)$.",
+          "a3": "$x^{2}+6x+1x+6$<br>$\\boldsymbol{x^{2}+7x+6}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Expanding double brackets (negatives)",
+          "id": "expanding-double-brackets-negative",
+          "q": "Expand $(x-2)(x-3)$.",
+          "a": "$x^{2}-3x-2x+6$<br>$\\boldsymbol{x^{2}-5x+6}$",
+          "q2": "Expand $(x-4)(x-1)$.",
+          "a2": "$x^{2}-1x-4x+4$<br>$\\boldsymbol{x^{2}-5x+4}$",
+          "q3": "Expand $(x-5)(x-2)$.",
+          "a3": "$x^{2}-2x-5x+10$<br>$\\boldsymbol{x^{2}-7x+10}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Expanding double brackets (coefficients)",
+          "id": "expanding-double-brackets-coefficients",
+          "q": "Expand $(2x+1)(3x+4)$.",
+          "a": "$6x^{2}+8x+3x+4$<br>$\\boldsymbol{6x^{2}+11x+4}$",
+          "q2": "Expand $(3x+2)(2x+5)$.",
+          "a2": "$6x^{2}+15x+4x+10$<br>$\\boldsymbol{6x^{2}+19x+10}$",
+          "q3": "Expand $(4x+1)(2x+3)$.",
+          "a3": "$8x^{2}+12x+2x+3$<br>$\\boldsymbol{8x^{2}+14x+3}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Sum and product",
+          "id": "sum-and-product",
+          "q": "Find two numbers that sum to $7$ and multiply to $12$.",
+          "a": "Factor pairs of $12$.<br>$\\boldsymbol{3\\ \\text{and}\\ 4}$",
+          "q2": "Find two numbers that sum to $8$ and multiply to $15$.",
+          "a2": "Factor pairs of $15$.<br>$\\boldsymbol{3\\ \\text{and}\\ 5}$",
+          "q3": "Find two numbers that sum to $9$ and multiply to $20$.",
+          "a3": "Factor pairs of $20$.<br>$\\boldsymbol{4\\ \\text{and}\\ 5}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Factorising quadratics (positives)",
+          "id": "factorising-quadratics-positive",
+          "q": "Factorise $x^{2}+5x+6$.",
+          "a": "$ 2+3=5$, and $2\\times 3=6$<br>$\\boldsymbol{(x+2)(x+3)}$",
+          "q2": "Factorise $x^{2}+7x+12$.",
+          "a2": "$ 3+4=7$, and $3\\times 4=12$<br>$\\boldsymbol{(x+3)(x+4)}$",
+          "q3": "Factorise $x^{2}+8x+15$.",
+          "a3": "$ 3+5=8$, and $3\\times 5=15$<br>$\\boldsymbol{(x+3)(x+5)}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Factorising quadratics (negatives)",
+          "id": "factorising-quadratics-negative",
+          "q": "Factorise $x^{2}-x-6$.",
+          "a": "Two numbers that sum to $-1$ and multiply to $-6$: $-3$ and $2$.<br>$\\boldsymbol{(x-3)(x+2)}$",
+          "q2": "Factorise $x^{2}+x-12$.",
+          "a2": "Two numbers that sum to $1$ and multiply to $-12$: $4$ and $-3$.<br>$\\boldsymbol{(x+4)(x-3)}$",
+          "q3": "Factorise $x^{2}-49$.",
+          "a3": "Difference of two squares.<br>$\\boldsymbol{(x-7)(x+7)}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Solving with factorising",
+          "id": "solving-with-factorising",
+          "q": "Solve $x^{2}+2x-8=0$.",
+          "a": "$(x+4)(x-2)=0$<br>$\\boldsymbol{x=-4\\ \\text{or}\\ x=2}$",
+          "q2": "Solve $x^{2}+5x=0$.",
+          "a2": "$x(x+5)=0$<br>$\\boldsymbol{x=0\\ \\text{or}\\ x=-5}$",
+          "q3": "Solve $x^{2}-9=0$.",
+          "a3": "$(x-3)(x+3)=0$<br>$\\boldsymbol{x=3\\ \\text{or}\\ x=-3}$"
+        },
+        {
+          "unit": "Formulae",
+          "topic": "Manipulating equations (function machines with letters)",
+          "id": "manipulating-equations-function-machines",
+          "q": "Write the function machine for $y=3x+2$.",
+          "a": "$\\boldsymbol{\\text{input x → ×3 → +2 → output y}}$",
+          "q2": "Write the function machine for $y=2x-5$.",
+          "a2": "$\\boldsymbol{\\text{input x → ×2 → −5 → output y}}$",
+          "q3": "Write the function machine for $y=\\dfrac{x}{4}+1$.",
+          "a3": "$\\boldsymbol{\\text{input x → ÷4 → +1 → output y}}$"
+        },
+        {
+          "unit": "Formulae",
+          "topic": "One step rearranging",
+          "id": "one-step-rearranging",
+          "q": "Make $x$ the subject of $y=x+5$.",
+          "a": "Subtract $5$ from both sides.<br>$\\boldsymbol{x=y-5}$",
+          "q2": "Make $x$ the subject of $y=x+8$.",
+          "a2": "Subtract $8$ from both sides.<br>$\\boldsymbol{x=y-8}$",
+          "q3": "Make $x$ the subject of $y=x+3$.",
+          "a3": "Subtract $3$ from both sides.<br>$\\boldsymbol{x=y-3}$"
+        },
+        {
+          "unit": "Formulae",
+          "topic": "Change the subject – two step",
+          "id": "change-subject-two-step",
+          "q": "Make $x$ the subject of $y=2x+3$.",
+          "a": "$y-3=2x$<br>$\\boldsymbol{x=\\dfrac{y-3}{2}}$",
+          "q2": "Make $x$ the subject of $y=5x+1$.",
+          "a2": "$y-1=5x$<br>$\\boldsymbol{x=\\dfrac{y-1}{5}}$",
+          "q3": "Make $x$ the subject of $y=4x+7$.",
+          "a3": "$y-7=4x$<br>$\\boldsymbol{x=\\dfrac{y-7}{4}}$"
+        },
+        {
+          "unit": "Formulae",
+          "topic": "Change the subject – multi step",
+          "id": "change-subject-multi-step",
+          "q": "Make $x$ the subject of $y=2(x+1)-3$.",
+          "a": "$y=2x-1$<br>$y+1=2x$<br>$\\boldsymbol{x=\\dfrac{y+1}{2}}$",
+          "q2": "Make $x$ the subject of $y=3(x-2)+4$.",
+          "a2": "$y=3x-2$<br>$y+2=3x$<br>$\\boldsymbol{x=\\dfrac{y+2}{3}}$",
+          "q3": "Make $x$ the subject of $y=4(x+3)-1$.",
+          "a3": "$y=4x+11$<br>$y-11=4x$<br>$\\boldsymbol{x=\\dfrac{y-11}{4}}$"
+        },
+        {
+          "unit": "Formulae",
+          "topic": "Change the subject of formulae",
+          "id": "change-subject-of-formulae",
+          "q": "Make $h$ the subject of $A=\\dfrac{1}{2}bh$.",
+          "a": "$2A=bh$<br>$\\boldsymbol{h=\\dfrac{2A}{b}}$",
+          "q2": "Make $r$ the subject of $C=2\\pi r$.",
+          "a2": "$\\boldsymbol{r=\\dfrac{C}{2\\pi}}$",
+          "q3": "Make $b$ the subject of $A=\\dfrac{1}{2}bh$.",
+          "a3": "$2A=bh$<br>$\\boldsymbol{b=\\dfrac{2A}{h}}$"
+        },
+        {
+          "unit": "Constructions",
+          "topic": "Bisecting angles",
+          "id": "bisecting-angles",
+          "q": "An angle of $60^{\\circ}$ is bisected. What two angles are formed?",
+          "a": "$\\boldsymbol{30^{\\circ}\\ \\text{and}\\ 30^{\\circ}}$",
+          "q2": "An angle of $90^{\\circ}$ is bisected. What two angles are formed?",
+          "a2": "$\\boldsymbol{45^{\\circ}\\ \\text{and}\\ 45^{\\circ}}$",
+          "q3": "An angle of $40^{\\circ}$ is bisected. What two angles are formed?",
+          "a3": "$\\boldsymbol{20^{\\circ}\\ \\text{and}\\ 20^{\\circ}}$"
+        },
+        {
+          "unit": "Constructions",
+          "topic": "Perpendicular and line bisectors",
+          "id": "perpendicular-line-bisectors",
+          "q": "The perpendicular bisector of a $10$ cm line passes through which point on the line?",
+          "a": "It meets the line at its midpoint, at $90^{\\circ}$.<br>$\\boldsymbol{5\\ \\text{cm from each end}}$",
+          "q2": "The perpendicular bisector of an $8$ cm line passes through which point on the line?",
+          "a2": "$\\boldsymbol{4\\ \\text{cm from each end}}$",
+          "q3": "The perpendicular bisector of a $12$ cm line passes through which point on the line?",
+          "a3": "$\\boldsymbol{6\\ \\text{cm from each end}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Support 1 - Circumference of a Circle",
+          "id": "support-circumference",
+          "q": "A circle has diameter $10$ cm. Find the circumference in terms of $\\pi$.",
+          "a": "$C=\\pi d=\\pi\\times 10$<br>$\\boldsymbol{10\\pi\\ \\text{cm}}$",
+          "q2": "A circle has diameter $8$ cm. Find the circumference in terms of $\\pi$.",
+          "a2": "$C=\\pi d=\\pi\\times 8$<br>$\\boldsymbol{8\\pi\\ \\text{cm}}$",
+          "q3": "A circle has diameter $14$ cm. Find the circumference in terms of $\\pi$.",
+          "a3": "$C=\\pi d=\\pi\\times 14$<br>$\\boldsymbol{14\\pi\\ \\text{cm}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Support 2 - Area of a Circle",
+          "id": "support-area-circle",
+          "q": "A circle has radius $5$ cm. Find the area in terms of $\\pi$.",
+          "a": "$A=\\pi r^{2}=\\pi\\times 5^{2}=25\\pi$<br>$\\boldsymbol{25\\pi\\ \\text{cm}^{2}}$",
+          "q2": "A circle has radius $4$ cm. Find the area in terms of $\\pi$.",
+          "a2": "$A=\\pi r^{2}=\\pi\\times 4^{2}=16\\pi$<br>$\\boldsymbol{16\\pi\\ \\text{cm}^{2}}$",
+          "q3": "A circle has radius $6$ cm. Find the area in terms of $\\pi$.",
+          "a3": "$A=\\pi r^{2}=\\pi\\times 6^{2}=36\\pi$<br>$\\boldsymbol{36\\pi\\ \\text{cm}^{2}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Area of circles and Quarters",
+          "id": "area-circles-quarters",
+          "q": "A circle has radius $4$ cm. Find the area of a quarter of the circle in terms of $\\pi$.",
+          "a": "Full area $= 16\\pi$<br>Quarter $= \\dfrac{16\\pi}{4}=4\\pi$<br>$\\boldsymbol{4\\pi\\ \\text{cm}^{2}}$",
+          "q2": "A circle has radius $6$ cm. Find the area of a quarter of the circle in terms of $\\pi$.",
+          "a2": "Full area $= 36\\pi$<br>Quarter $= \\dfrac{36\\pi}{4}=9\\pi$<br>$\\boldsymbol{9\\pi\\ \\text{cm}^{2}}$",
+          "q3": "A circle has radius $8$ cm. Find the area of a quarter of the circle in terms of $\\pi$.",
+          "a3": "Full area $= 64\\pi$<br>Quarter $= \\dfrac{64\\pi}{4}=16\\pi$<br>$\\boldsymbol{16\\pi\\ \\text{cm}^{2}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Area of sectors",
+          "id": "area-sectors",
+          "q": "A sector has angle $90^{\\circ}$ and radius $6$ cm. Find its area in terms of $\\pi$.",
+          "a": "$\\dfrac{90}{360}\\times\\pi\\times 6^{2}=9\\pi$<br>$\\boldsymbol{9\\pi\\ \\text{cm}^{2}}$",
+          "q2": "A sector has angle $180^{\\circ}$ and radius $4$ cm. Find its area in terms of $\\pi$.",
+          "a2": "$\\dfrac{180}{360}\\times\\pi\\times 4^{2}=8\\pi$<br>$\\boldsymbol{8\\pi\\ \\text{cm}^{2}}$",
+          "q3": "A sector has angle $60^{\\circ}$ and radius $6$ cm. Find its area in terms of $\\pi$.",
+          "a3": "$\\dfrac{60}{360}\\times\\pi\\times 6^{2}=6\\pi$<br>$\\boldsymbol{6\\pi\\ \\text{cm}^{2}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Perimeter of circles and Quarters",
+          "id": "perimeter-circles-quarters",
+          "q": "A quarter circle has radius $6$ cm. Find its perimeter in terms of $\\pi$.",
+          "a": "Arc $= \\dfrac{1}{4}\\times 2\\pi r=\\dfrac{6}{2}\\pi$<br>Add two radii: $+ 12$<br>$\\boldsymbol{3\\pi+12\\ \\text{cm}}$",
+          "q2": "A quarter circle has radius $4$ cm. Find its perimeter in terms of $\\pi$.",
+          "a2": "Arc $= \\dfrac{1}{4}\\times 2\\pi r=\\dfrac{4}{2}\\pi$<br>Add two radii: $+ 8$<br>$\\boldsymbol{2\\pi+8\\ \\text{cm}}$",
+          "q3": "A quarter circle has radius $8$ cm. Find its perimeter in terms of $\\pi$.",
+          "a3": "Arc $= \\dfrac{1}{4}\\times 2\\pi r=\\dfrac{8}{2}\\pi$<br>Add two radii: $+ 16$<br>$\\boldsymbol{4\\pi+16\\ \\text{cm}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Arc length",
+          "id": "arc-length",
+          "q": "A sector has angle $90^{\\circ}$ and radius $6$ cm. Find the arc length in terms of $\\pi$.",
+          "a": "$\\dfrac{90}{360}\\times 2\\pi\\times 6=3\\pi$<br>$\\boldsymbol{3\\pi\\ \\text{cm}}$",
+          "q2": "A sector has angle $180^{\\circ}$ and radius $5$ cm. Find the arc length in terms of $\\pi$.",
+          "a2": "$\\dfrac{180}{360}\\times 2\\pi\\times 5=5\\pi$<br>$\\boldsymbol{5\\pi\\ \\text{cm}}$",
+          "q3": "A sector has angle $120^{\\circ}$ and radius $6$ cm. Find the arc length in terms of $\\pi$.",
+          "a3": "$\\dfrac{120}{360}\\times 2\\pi\\times 6=4\\pi$<br>$\\boldsymbol{4\\pi\\ \\text{cm}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Surface area of cylinders",
+          "id": "surface-area-cylinders",
+          "q": "A cylinder has radius $3$ cm and height $10$ cm. Find the total surface area in terms of $\\pi$.",
+          "a": "$2\\pi r^{2}+2\\pi rh=2\\pi r(r+h)$<br>$=2\\pi\\times 3\\times 13=78\\pi$<br>$\\boldsymbol{78\\pi\\ \\text{cm}^{2}}$",
+          "q2": "A cylinder has radius $2$ cm and height $5$ cm. Find the total surface area in terms of $\\pi$.",
+          "a2": "$2\\pi r^{2}+2\\pi rh=2\\pi r(r+h)$<br>$=2\\pi\\times 2\\times 7=28\\pi$<br>$\\boldsymbol{28\\pi\\ \\text{cm}^{2}}$",
+          "q3": "A cylinder has radius $4$ cm and height $3$ cm. Find the total surface area in terms of $\\pi$.",
+          "a3": "$2\\pi r^{2}+2\\pi rh=2\\pi r(r+h)$<br>$=2\\pi\\times 4\\times 7=56\\pi$<br>$\\boldsymbol{56\\pi\\ \\text{cm}^{2}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Volume of cylinders",
+          "id": "volume-cylinders",
+          "q": "A cylinder has radius $3$ cm and height $10$ cm. Find the volume in terms of $\\pi$.",
+          "a": "$V=\\pi r^{2}h=\\pi\\times 9\\times 10=90\\pi$<br>$\\boldsymbol{90\\pi\\ \\text{cm}^{3}}$",
+          "q2": "A cylinder has radius $2$ cm and height $7$ cm. Find the volume in terms of $\\pi$.",
+          "a2": "$V=\\pi r^{2}h=\\pi\\times 4\\times 7=28\\pi$<br>$\\boldsymbol{28\\pi\\ \\text{cm}^{3}}$",
+          "q3": "A cylinder has radius $5$ cm and height $4$ cm. Find the volume in terms of $\\pi$.",
+          "a3": "$V=\\pi r^{2}h=\\pi\\times 25\\times 4=100\\pi$<br>$\\boldsymbol{100\\pi\\ \\text{cm}^{3}}$"
+        }
+      ]
+    }
+  ],
+  "u0": [
+    {
+      "u": "Fractions & Percentages",
+      "l": "Fractions & Percentages",
+      "qs": [
+        {
+          "unit": "Fractions & Percentages",
+          "topic": "Percentage change (formula)",
+          "id": "percentage-change-formula",
+          "q": "A price changes from $\\text{£}40$ to $\\text{£}46$. Work out the percentage change.",
+          "a": "Change $= 46-40=6$<br>$\\dfrac{6}{40}\\times 100 = 15$<br>$\\boldsymbol{15\\%\\ \\text{increase}}$",
+          "q2": "A price changes from $\\text{£}50$ to $\\text{£}40$. Work out the percentage change.",
+          "a2": "Change $= 40-50=-10$<br>$\\dfrac{-10}{50}\\times 100 = 20$<br>$\\boldsymbol{20\\%\\ \\text{decrease}}$",
+          "q3": "A price changes from $\\text{£}80$ to $\\text{£}100$. Work out the percentage change.",
+          "a3": "Change $= 100-80=20$<br>$\\dfrac{20}{80}\\times 100 = 25$<br>$\\boldsymbol{25\\%\\ \\text{increase}}$"
+        },
+        {
+          "unit": "Fractions & Percentages",
+          "topic": "Reverse percentages (Original amount)",
+          "id": "reverse-percentages",
+          "q": "After a $20\\%$ increase, an amount is $\\text{£}60$. Find the original amount.",
+          "a": "Multiplier $= 1.2$<br>Original $= 60 \\div 1.2 = 50$<br>$\\boldsymbol{\\text{£}50}$",
+          "q2": "After a $10\\%$ decrease, an amount is $\\text{£}72$. Find the original amount.",
+          "a2": "Multiplier $= 0.9$<br>Original $= 72 \\div 0.9 = 80$<br>$\\boldsymbol{\\text{£}80}$",
+          "q3": "After a $5\\%$ increase, an amount is $\\text{£}105$. Find the original amount.",
+          "a3": "Multiplier $= 1.05$<br>Original $= 105 \\div 1.05 = 100$<br>$\\boldsymbol{\\text{£}100}$"
+        },
+        {
+          "unit": "Fractions & Percentages",
+          "topic": "Simple Interest",
+          "id": "simple-interest",
+          "q": "Find the simple interest on $\\text{£}500$ at $4\\%$ for $3$ years.",
+          "a": "$I = \\dfrac{P \\times R \\times T}{100}$<br>$I = \\dfrac{500\\times 4\\times 3}{100} = 60$<br>$\\boldsymbol{\\text{£}60}$",
+          "q2": "Find the simple interest on $\\text{£}800$ at $5\\%$ for $2$ years.",
+          "a2": "$I = \\dfrac{P \\times R \\times T}{100}$<br>$I = \\dfrac{800\\times 5\\times 2}{100} = 80$<br>$\\boldsymbol{\\text{£}80}$",
+          "q3": "Find the simple interest on $\\text{£}600$ at $3\\%$ for $5$ years.",
+          "a3": "$I = \\dfrac{P \\times R \\times T}{100}$<br>$I = \\dfrac{600\\times 3\\times 5}{100} = 90$<br>$\\boldsymbol{\\text{£}90}$"
+        },
+        {
+          "unit": "Fractions & Percentages",
+          "topic": "Compound Interest",
+          "id": "compound-interest",
+          "q": "$\\text{£}500$ is invested at $4\\%$ compound interest for $2$ years. Find the total amount.",
+          "a": "Amount $= 500\\times 1.04^{2}$<br>$= 540.80$<br>$\\boldsymbol{\\text{£}540.80}$",
+          "q2": "$\\text{£}200$ is invested at $10\\%$ compound interest for $2$ years. Find the total amount.",
+          "a2": "Amount $= 200\\times 1.1^{2}$<br>$= 242$<br>$\\boldsymbol{\\text{£}242}$",
+          "q3": "$\\text{£}1000$ is invested at $5\\%$ compound interest for $2$ years. Find the total amount.",
+          "a3": "Amount $= 1000\\times 1.05^{2}$<br>$= 1102.50$<br>$\\boldsymbol{\\text{£}1102.50}$"
+        }
+      ]
+    }
+  ],
+  "u1": [
+    {
+      "u": "Probability",
+      "l": "Probability",
+      "qs": [
+        {
+          "unit": "Probability",
+          "topic": "Experimental probability",
+          "id": "experimental-probability",
+          "q": "A spinner lands on red $18$ times in $30$ spins. Write the experimental probability of red as a fraction in its simplest form.",
+          "a": "$\\dfrac{18}{30} = \\dfrac{3}{5}$<br>$\\boldsymbol{\\dfrac{3}{5}}$",
+          "q2": "A spinner lands on red $14$ times in $21$ spins. Write the experimental probability of red as a fraction in its simplest form.",
+          "a2": "$\\dfrac{14}{21} = \\dfrac{2}{3}$<br>$\\boldsymbol{\\dfrac{2}{3}}$",
+          "q3": "A spinner lands on red $21$ times in $28$ spins. Write the experimental probability of red as a fraction in its simplest form.",
+          "a3": "$\\dfrac{21}{28} = \\dfrac{3}{4}$<br>$\\boldsymbol{\\dfrac{3}{4}}$"
+        },
+        {
+          "unit": "Probability",
+          "topic": "Expected outcomes",
+          "id": "expected-outcomes",
+          "q": "$P(\\text{win})=\\dfrac{1}{4}$. In $80$ games, how many wins are expected?",
+          "a": "$\\dfrac{1}{4}\\times 80 = 20$<br>$\\boldsymbol{20}$",
+          "q2": "$P(\\text{win})=\\dfrac{1}{6}$. In $30$ games, how many wins are expected?",
+          "a2": "$\\dfrac{1}{6}\\times 30 = 5$<br>$\\boldsymbol{5}$",
+          "q3": "$P(\\text{win})=\\dfrac{3}{5}$. In $40$ games, how many wins are expected?",
+          "a3": "$\\dfrac{3}{5}\\times 40 = 24$<br>$\\boldsymbol{24}$"
+        },
+        {
+          "unit": "Probability",
+          "topic": "Frequency trees – draw",
+          "id": "frequency-trees-draw",
+          "q": "$100$ students. $60$ play sport. How many do not play sport?",
+          "a": "$100-60=40$<br>$\\boldsymbol{40}$",
+          "q2": "$80$ students. $50$ play sport. How many do not play sport?",
+          "a2": "$80-50=30$<br>$\\boldsymbol{30}$",
+          "q3": "$120$ students. $75$ play sport. How many do not play sport?",
+          "a3": "$120-75=45$<br>$\\boldsymbol{45}$"
+        },
+        {
+          "unit": "Probability",
+          "topic": "Frequency trees – interpret",
+          "id": "frequency-trees-interpret",
+          "q": "A frequency tree shows $100$ students, $60$ play sport, and $40$ of those play football. Work out $P(\\text{sport but not football})$.",
+          "a": "Sport but not football $= 60-40=20$<br>$P=\\dfrac{20}{100}$<br>$\\boldsymbol{\\dfrac{20}{100}}$",
+          "q2": "A frequency tree shows $80$ students, $50$ play sport, and $30$ of those play football. Work out $P(\\text{sport but not football})$.",
+          "a2": "Sport but not football $= 50-30=20$<br>$P=\\dfrac{20}{80}$<br>$\\boldsymbol{\\dfrac{20}{80}}$",
+          "q3": "A frequency tree shows $120$ students, $90$ play sport, and $54$ of those play football. Work out $P(\\text{sport but not football})$.",
+          "a3": "Sport but not football $= 90-54=36$<br>$P=\\dfrac{36}{120}$<br>$\\boldsymbol{\\dfrac{36}{120}}$"
+        }
+      ]
+    }
+  ],
+  "u2": [
+    {
+      "u": "Standard Form",
+      "l": "Standard Form",
+      "qs": [
+        {
+          "unit": "Standard Form",
+          "topic": "Add and subtract standard form",
+          "id": "standard-form-add-subtract",
+          "q": "Work out $3\\times 10^{3}+2\\times 10^{2}$. Give your answer in standard form.",
+          "a": "Write with the same power of $10$, then add.<br>$\\boldsymbol{3.2\\times 10^{3}}$",
+          "q2": "Work out $4\\times 10^{4}+5\\times 10^{3}$. Give your answer in standard form.",
+          "a2": "Write with the same power of $10$, then add.<br>$\\boldsymbol{4.5\\times 10^{4}}$",
+          "q3": "Work out $6\\times 10^{2}+4\\times 10^{1}$. Give your answer in standard form.",
+          "a3": "Write with the same power of $10$, then add.<br>$\\boldsymbol{6.4\\times 10^{2}}$"
+        },
+        {
+          "unit": "Standard Form",
+          "topic": "Multiplying and dividing with standard form",
+          "id": "standard-form-multiply-divide",
+          "q": "Work out $(2\\times 10^{3})\\times(3\\times 10^{2})$. Give your answer in standard form.",
+          "a": "$2\\times 3=6$, and $3+2=5$<br>$\\boldsymbol{6\\times 10^{5}}$",
+          "q2": "Work out $(4\\times 10^{4})\\times(2\\times 10^{1})$. Give your answer in standard form.",
+          "a2": "$4\\times 2=8$, and $4+1=5$<br>$\\boldsymbol{8\\times 10^{5}}$",
+          "q3": "Work out $(5\\times 10^{2})\\times(3\\times 10^{3})$. Give your answer in standard form.",
+          "a3": "$5\\times 3=15$, and $2+3=5$<br>$\\boldsymbol{1.5\\times 10^{6}}$"
+        },
+        {
+          "unit": "Standard Form",
+          "topic": "Standard form on a calculator",
+          "id": "standard-form-calculator",
+          "q": "A calculator shows $2.5\\text{E}7$. Write this in standard form.",
+          "a": "$\\boldsymbol{2.5\\times 10^{7}}$",
+          "q2": "A calculator shows $3.2\\text{E}5$. Write this in standard form.",
+          "a2": "$\\boldsymbol{3.2\\times 10^{5}}$",
+          "q3": "A calculator shows $4.1\\text{E}-3$. Write this in standard form.",
+          "a3": "$\\boldsymbol{4.1\\times 10^{-3}}$"
+        }
+      ]
+    }
+  ],
+  "u3": [
+    {
+      "u": "Inequalities",
+      "l": "Inequalities",
+      "qs": [
+        {
+          "unit": "Inequalities",
+          "topic": "Solving inequalities one step",
+          "id": "inequalities-one-step",
+          "q": "Solve $x+4>9$.",
+          "a": "$x>9-4$<br>$\\boldsymbol{x>5}$",
+          "q2": "Solve $x+6>14$.",
+          "a2": "$x>14-6$<br>$\\boldsymbol{x>8}$",
+          "q3": "Solve $x+2>11$.",
+          "a3": "$x>11-2$<br>$\\boldsymbol{x>9}$"
+        },
+        {
+          "unit": "Inequalities",
+          "topic": "Solving inequalities multi step",
+          "id": "inequalities-multi-step",
+          "q": "Solve $3x+5<20$.",
+          "a": "$3x<15$<br>$\\boldsymbol{x<5}$",
+          "q2": "Solve $4x+2<18$.",
+          "a2": "$4x<16$<br>$\\boldsymbol{x<4}$",
+          "q3": "Solve $2x+3<15$.",
+          "a3": "$2x<12$<br>$\\boldsymbol{x<6}$"
+        },
+        {
+          "unit": "Inequalities",
+          "topic": "Solving double inequalities",
+          "id": "inequalities-double",
+          "q": "Solve $-2<x-3<5$.",
+          "a": "Add $3$ to all three parts.<br>$\\boldsymbol{1<x<8}$",
+          "q2": "Solve $1<x-4<10$.",
+          "a2": "Add $4$ to all three parts.<br>$\\boldsymbol{5<x<14}$",
+          "q3": "Solve $-5<x-2<3$.",
+          "a3": "Add $2$ to all three parts.<br>$\\boldsymbol{-3<x<5}$"
+        },
+        {
+          "unit": "Inequalities",
+          "topic": "Solving inequalities unknowns both sides",
+          "id": "inequalities-both-sides",
+          "q": "Solve $5x-2>2x+7$.",
+          "a": "Collect $x$ terms on one side.<br>$3x>9$<br>$\\boldsymbol{x>3}$",
+          "q2": "Solve $7x-1>3x+15$.",
+          "a2": "Collect $x$ terms on one side.<br>$4x>16$<br>$\\boldsymbol{x>4}$",
+          "q3": "Solve $6x-2>2x+18$.",
+          "a3": "Collect $x$ terms on one side.<br>$4x>20$<br>$\\boldsymbol{x>5}$"
+        },
+        {
+          "unit": "Inequalities",
+          "topic": "Solving inequalities (switching signs)",
+          "id": "inequalities-switching-signs",
+          "q": "Solve $-2x<8$.",
+          "a": "Divide by $-2$ and flip the inequality.<br>$\\boldsymbol{x>-4}$",
+          "q2": "Solve $-3x<15$.",
+          "a2": "Divide by $-3$ and flip the inequality.<br>$\\boldsymbol{x>-5}$",
+          "q3": "Solve $-4x<12$.",
+          "a3": "Divide by $-4$ and flip the inequality.<br>$\\boldsymbol{x>-3}$"
+        }
+      ]
+    }
+  ],
+  "u4": [
+    {
+      "u": "Quadratics",
+      "l": "Quadratics",
+      "qs": [
+        {
+          "unit": "Quadratics",
+          "topic": "Equivalent expressions",
+          "id": "equivalent-expressions",
+          "q": "Are $2(x+3)$ and $2x+6$ equivalent?",
+          "a": "Expand: $2(x+3)=2x+6$.<br>$\\boldsymbol{\\text{Yes}}$",
+          "q2": "Are $(x+3)^{2}$ and $x^{2}+9$ equivalent?",
+          "a2": "$(x+3)^{2}=x^{2}+6x+9$.<br>$\\boldsymbol{\\text{No}}$",
+          "q3": "Are $3(x-2)$ and $3x-6$ equivalent?",
+          "a3": "Expand: $3(x-2)=3x-6$.<br>$\\boldsymbol{\\text{Yes}}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Expanding double brackets (positive)",
+          "id": "expanding-double-brackets-positive",
+          "q": "Expand $(x+2)(x+3)$.",
+          "a": "$x^{2}+3x+2x+6$<br>$\\boldsymbol{x^{2}+5x+6}$",
+          "q2": "Expand $(x+4)(x+5)$.",
+          "a2": "$x^{2}+5x+4x+20$<br>$\\boldsymbol{x^{2}+9x+20}$",
+          "q3": "Expand $(x+1)(x+6)$.",
+          "a3": "$x^{2}+6x+1x+6$<br>$\\boldsymbol{x^{2}+7x+6}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Expanding double brackets (negatives)",
+          "id": "expanding-double-brackets-negative",
+          "q": "Expand $(x-2)(x-3)$.",
+          "a": "$x^{2}-3x-2x+6$<br>$\\boldsymbol{x^{2}-5x+6}$",
+          "q2": "Expand $(x-4)(x-1)$.",
+          "a2": "$x^{2}-1x-4x+4$<br>$\\boldsymbol{x^{2}-5x+4}$",
+          "q3": "Expand $(x-5)(x-2)$.",
+          "a3": "$x^{2}-2x-5x+10$<br>$\\boldsymbol{x^{2}-7x+10}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Expanding double brackets (coefficients)",
+          "id": "expanding-double-brackets-coefficients",
+          "q": "Expand $(2x+1)(3x+4)$.",
+          "a": "$6x^{2}+8x+3x+4$<br>$\\boldsymbol{6x^{2}+11x+4}$",
+          "q2": "Expand $(3x+2)(2x+5)$.",
+          "a2": "$6x^{2}+15x+4x+10$<br>$\\boldsymbol{6x^{2}+19x+10}$",
+          "q3": "Expand $(4x+1)(2x+3)$.",
+          "a3": "$8x^{2}+12x+2x+3$<br>$\\boldsymbol{8x^{2}+14x+3}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Sum and product",
+          "id": "sum-and-product",
+          "q": "Find two numbers that sum to $7$ and multiply to $12$.",
+          "a": "Factor pairs of $12$.<br>$\\boldsymbol{3\\ \\text{and}\\ 4}$",
+          "q2": "Find two numbers that sum to $8$ and multiply to $15$.",
+          "a2": "Factor pairs of $15$.<br>$\\boldsymbol{3\\ \\text{and}\\ 5}$",
+          "q3": "Find two numbers that sum to $9$ and multiply to $20$.",
+          "a3": "Factor pairs of $20$.<br>$\\boldsymbol{4\\ \\text{and}\\ 5}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Factorising quadratics (positives)",
+          "id": "factorising-quadratics-positive",
+          "q": "Factorise $x^{2}+5x+6$.",
+          "a": "$ 2+3=5$, and $2\\times 3=6$<br>$\\boldsymbol{(x+2)(x+3)}$",
+          "q2": "Factorise $x^{2}+7x+12$.",
+          "a2": "$ 3+4=7$, and $3\\times 4=12$<br>$\\boldsymbol{(x+3)(x+4)}$",
+          "q3": "Factorise $x^{2}+8x+15$.",
+          "a3": "$ 3+5=8$, and $3\\times 5=15$<br>$\\boldsymbol{(x+3)(x+5)}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Factorising quadratics (negatives)",
+          "id": "factorising-quadratics-negative",
+          "q": "Factorise $x^{2}-x-6$.",
+          "a": "Two numbers that sum to $-1$ and multiply to $-6$: $-3$ and $2$.<br>$\\boldsymbol{(x-3)(x+2)}$",
+          "q2": "Factorise $x^{2}+x-12$.",
+          "a2": "Two numbers that sum to $1$ and multiply to $-12$: $4$ and $-3$.<br>$\\boldsymbol{(x+4)(x-3)}$",
+          "q3": "Factorise $x^{2}-49$.",
+          "a3": "Difference of two squares.<br>$\\boldsymbol{(x-7)(x+7)}$"
+        },
+        {
+          "unit": "Quadratics",
+          "topic": "Solving with factorising",
+          "id": "solving-with-factorising",
+          "q": "Solve $x^{2}+2x-8=0$.",
+          "a": "$(x+4)(x-2)=0$<br>$\\boldsymbol{x=-4\\ \\text{or}\\ x=2}$",
+          "q2": "Solve $x^{2}+5x=0$.",
+          "a2": "$x(x+5)=0$<br>$\\boldsymbol{x=0\\ \\text{or}\\ x=-5}$",
+          "q3": "Solve $x^{2}-9=0$.",
+          "a3": "$(x-3)(x+3)=0$<br>$\\boldsymbol{x=3\\ \\text{or}\\ x=-3}$"
+        }
+      ]
+    }
+  ],
+  "u5": [
+    {
+      "u": "Formulae",
+      "l": "Formulae",
+      "qs": [
+        {
+          "unit": "Formulae",
+          "topic": "Manipulating equations (function machines with letters)",
+          "id": "manipulating-equations-function-machines",
+          "q": "Write the function machine for $y=3x+2$.",
+          "a": "$\\boldsymbol{\\text{input x → ×3 → +2 → output y}}$",
+          "q2": "Write the function machine for $y=2x-5$.",
+          "a2": "$\\boldsymbol{\\text{input x → ×2 → −5 → output y}}$",
+          "q3": "Write the function machine for $y=\\dfrac{x}{4}+1$.",
+          "a3": "$\\boldsymbol{\\text{input x → ÷4 → +1 → output y}}$"
+        },
+        {
+          "unit": "Formulae",
+          "topic": "One step rearranging",
+          "id": "one-step-rearranging",
+          "q": "Make $x$ the subject of $y=x+5$.",
+          "a": "Subtract $5$ from both sides.<br>$\\boldsymbol{x=y-5}$",
+          "q2": "Make $x$ the subject of $y=x+8$.",
+          "a2": "Subtract $8$ from both sides.<br>$\\boldsymbol{x=y-8}$",
+          "q3": "Make $x$ the subject of $y=x+3$.",
+          "a3": "Subtract $3$ from both sides.<br>$\\boldsymbol{x=y-3}$"
+        },
+        {
+          "unit": "Formulae",
+          "topic": "Change the subject – two step",
+          "id": "change-subject-two-step",
+          "q": "Make $x$ the subject of $y=2x+3$.",
+          "a": "$y-3=2x$<br>$\\boldsymbol{x=\\dfrac{y-3}{2}}$",
+          "q2": "Make $x$ the subject of $y=5x+1$.",
+          "a2": "$y-1=5x$<br>$\\boldsymbol{x=\\dfrac{y-1}{5}}$",
+          "q3": "Make $x$ the subject of $y=4x+7$.",
+          "a3": "$y-7=4x$<br>$\\boldsymbol{x=\\dfrac{y-7}{4}}$"
+        },
+        {
+          "unit": "Formulae",
+          "topic": "Change the subject – multi step",
+          "id": "change-subject-multi-step",
+          "q": "Make $x$ the subject of $y=2(x+1)-3$.",
+          "a": "$y=2x-1$<br>$y+1=2x$<br>$\\boldsymbol{x=\\dfrac{y+1}{2}}$",
+          "q2": "Make $x$ the subject of $y=3(x-2)+4$.",
+          "a2": "$y=3x-2$<br>$y+2=3x$<br>$\\boldsymbol{x=\\dfrac{y+2}{3}}$",
+          "q3": "Make $x$ the subject of $y=4(x+3)-1$.",
+          "a3": "$y=4x+11$<br>$y-11=4x$<br>$\\boldsymbol{x=\\dfrac{y-11}{4}}$"
+        },
+        {
+          "unit": "Formulae",
+          "topic": "Change the subject of formulae",
+          "id": "change-subject-of-formulae",
+          "q": "Make $h$ the subject of $A=\\dfrac{1}{2}bh$.",
+          "a": "$2A=bh$<br>$\\boldsymbol{h=\\dfrac{2A}{b}}$",
+          "q2": "Make $r$ the subject of $C=2\\pi r$.",
+          "a2": "$\\boldsymbol{r=\\dfrac{C}{2\\pi}}$",
+          "q3": "Make $b$ the subject of $A=\\dfrac{1}{2}bh$.",
+          "a3": "$2A=bh$<br>$\\boldsymbol{b=\\dfrac{2A}{h}}$"
+        }
+      ]
+    }
+  ],
+  "u6": [
+    {
+      "u": "Constructions",
+      "l": "Constructions",
+      "qs": [
+        {
+          "unit": "Constructions",
+          "topic": "Bisecting angles",
+          "id": "bisecting-angles",
+          "q": "An angle of $60^{\\circ}$ is bisected. What two angles are formed?",
+          "a": "$\\boldsymbol{30^{\\circ}\\ \\text{and}\\ 30^{\\circ}}$",
+          "q2": "An angle of $90^{\\circ}$ is bisected. What two angles are formed?",
+          "a2": "$\\boldsymbol{45^{\\circ}\\ \\text{and}\\ 45^{\\circ}}$",
+          "q3": "An angle of $40^{\\circ}$ is bisected. What two angles are formed?",
+          "a3": "$\\boldsymbol{20^{\\circ}\\ \\text{and}\\ 20^{\\circ}}$"
+        },
+        {
+          "unit": "Constructions",
+          "topic": "Perpendicular and line bisectors",
+          "id": "perpendicular-line-bisectors",
+          "q": "The perpendicular bisector of a $10$ cm line passes through which point on the line?",
+          "a": "It meets the line at its midpoint, at $90^{\\circ}$.<br>$\\boldsymbol{5\\ \\text{cm from each end}}$",
+          "q2": "The perpendicular bisector of an $8$ cm line passes through which point on the line?",
+          "a2": "$\\boldsymbol{4\\ \\text{cm from each end}}$",
+          "q3": "The perpendicular bisector of a $12$ cm line passes through which point on the line?",
+          "a3": "$\\boldsymbol{6\\ \\text{cm from each end}}$"
+        }
+      ]
+    }
+  ],
+  "u7": [
+    {
+      "u": "Circles",
+      "l": "Circles",
+      "qs": [
+        {
+          "unit": "Circles",
+          "topic": "Support 1 - Circumference of a Circle",
+          "id": "support-circumference",
+          "q": "A circle has diameter $10$ cm. Find the circumference in terms of $\\pi$.",
+          "a": "$C=\\pi d=\\pi\\times 10$<br>$\\boldsymbol{10\\pi\\ \\text{cm}}$",
+          "q2": "A circle has diameter $8$ cm. Find the circumference in terms of $\\pi$.",
+          "a2": "$C=\\pi d=\\pi\\times 8$<br>$\\boldsymbol{8\\pi\\ \\text{cm}}$",
+          "q3": "A circle has diameter $14$ cm. Find the circumference in terms of $\\pi$.",
+          "a3": "$C=\\pi d=\\pi\\times 14$<br>$\\boldsymbol{14\\pi\\ \\text{cm}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Support 2 - Area of a Circle",
+          "id": "support-area-circle",
+          "q": "A circle has radius $5$ cm. Find the area in terms of $\\pi$.",
+          "a": "$A=\\pi r^{2}=\\pi\\times 5^{2}=25\\pi$<br>$\\boldsymbol{25\\pi\\ \\text{cm}^{2}}$",
+          "q2": "A circle has radius $4$ cm. Find the area in terms of $\\pi$.",
+          "a2": "$A=\\pi r^{2}=\\pi\\times 4^{2}=16\\pi$<br>$\\boldsymbol{16\\pi\\ \\text{cm}^{2}}$",
+          "q3": "A circle has radius $6$ cm. Find the area in terms of $\\pi$.",
+          "a3": "$A=\\pi r^{2}=\\pi\\times 6^{2}=36\\pi$<br>$\\boldsymbol{36\\pi\\ \\text{cm}^{2}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Area of circles and Quarters",
+          "id": "area-circles-quarters",
+          "q": "A circle has radius $4$ cm. Find the area of a quarter of the circle in terms of $\\pi$.",
+          "a": "Full area $= 16\\pi$<br>Quarter $= \\dfrac{16\\pi}{4}=4\\pi$<br>$\\boldsymbol{4\\pi\\ \\text{cm}^{2}}$",
+          "q2": "A circle has radius $6$ cm. Find the area of a quarter of the circle in terms of $\\pi$.",
+          "a2": "Full area $= 36\\pi$<br>Quarter $= \\dfrac{36\\pi}{4}=9\\pi$<br>$\\boldsymbol{9\\pi\\ \\text{cm}^{2}}$",
+          "q3": "A circle has radius $8$ cm. Find the area of a quarter of the circle in terms of $\\pi$.",
+          "a3": "Full area $= 64\\pi$<br>Quarter $= \\dfrac{64\\pi}{4}=16\\pi$<br>$\\boldsymbol{16\\pi\\ \\text{cm}^{2}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Area of sectors",
+          "id": "area-sectors",
+          "q": "A sector has angle $90^{\\circ}$ and radius $6$ cm. Find its area in terms of $\\pi$.",
+          "a": "$\\dfrac{90}{360}\\times\\pi\\times 6^{2}=9\\pi$<br>$\\boldsymbol{9\\pi\\ \\text{cm}^{2}}$",
+          "q2": "A sector has angle $180^{\\circ}$ and radius $4$ cm. Find its area in terms of $\\pi$.",
+          "a2": "$\\dfrac{180}{360}\\times\\pi\\times 4^{2}=8\\pi$<br>$\\boldsymbol{8\\pi\\ \\text{cm}^{2}}$",
+          "q3": "A sector has angle $60^{\\circ}$ and radius $6$ cm. Find its area in terms of $\\pi$.",
+          "a3": "$\\dfrac{60}{360}\\times\\pi\\times 6^{2}=6\\pi$<br>$\\boldsymbol{6\\pi\\ \\text{cm}^{2}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Perimeter of circles and Quarters",
+          "id": "perimeter-circles-quarters",
+          "q": "A quarter circle has radius $6$ cm. Find its perimeter in terms of $\\pi$.",
+          "a": "Arc $= \\dfrac{1}{4}\\times 2\\pi r=\\dfrac{6}{2}\\pi$<br>Add two radii: $+ 12$<br>$\\boldsymbol{3\\pi+12\\ \\text{cm}}$",
+          "q2": "A quarter circle has radius $4$ cm. Find its perimeter in terms of $\\pi$.",
+          "a2": "Arc $= \\dfrac{1}{4}\\times 2\\pi r=\\dfrac{4}{2}\\pi$<br>Add two radii: $+ 8$<br>$\\boldsymbol{2\\pi+8\\ \\text{cm}}$",
+          "q3": "A quarter circle has radius $8$ cm. Find its perimeter in terms of $\\pi$.",
+          "a3": "Arc $= \\dfrac{1}{4}\\times 2\\pi r=\\dfrac{8}{2}\\pi$<br>Add two radii: $+ 16$<br>$\\boldsymbol{4\\pi+16\\ \\text{cm}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Arc length",
+          "id": "arc-length",
+          "q": "A sector has angle $90^{\\circ}$ and radius $6$ cm. Find the arc length in terms of $\\pi$.",
+          "a": "$\\dfrac{90}{360}\\times 2\\pi\\times 6=3\\pi$<br>$\\boldsymbol{3\\pi\\ \\text{cm}}$",
+          "q2": "A sector has angle $180^{\\circ}$ and radius $5$ cm. Find the arc length in terms of $\\pi$.",
+          "a2": "$\\dfrac{180}{360}\\times 2\\pi\\times 5=5\\pi$<br>$\\boldsymbol{5\\pi\\ \\text{cm}}$",
+          "q3": "A sector has angle $120^{\\circ}$ and radius $6$ cm. Find the arc length in terms of $\\pi$.",
+          "a3": "$\\dfrac{120}{360}\\times 2\\pi\\times 6=4\\pi$<br>$\\boldsymbol{4\\pi\\ \\text{cm}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Surface area of cylinders",
+          "id": "surface-area-cylinders",
+          "q": "A cylinder has radius $3$ cm and height $10$ cm. Find the total surface area in terms of $\\pi$.",
+          "a": "$2\\pi r^{2}+2\\pi rh=2\\pi r(r+h)$<br>$=2\\pi\\times 3\\times 13=78\\pi$<br>$\\boldsymbol{78\\pi\\ \\text{cm}^{2}}$",
+          "q2": "A cylinder has radius $2$ cm and height $5$ cm. Find the total surface area in terms of $\\pi$.",
+          "a2": "$2\\pi r^{2}+2\\pi rh=2\\pi r(r+h)$<br>$=2\\pi\\times 2\\times 7=28\\pi$<br>$\\boldsymbol{28\\pi\\ \\text{cm}^{2}}$",
+          "q3": "A cylinder has radius $4$ cm and height $3$ cm. Find the total surface area in terms of $\\pi$.",
+          "a3": "$2\\pi r^{2}+2\\pi rh=2\\pi r(r+h)$<br>$=2\\pi\\times 4\\times 7=56\\pi$<br>$\\boldsymbol{56\\pi\\ \\text{cm}^{2}}$"
+        },
+        {
+          "unit": "Circles",
+          "topic": "Volume of cylinders",
+          "id": "volume-cylinders",
+          "q": "A cylinder has radius $3$ cm and height $10$ cm. Find the volume in terms of $\\pi$.",
+          "a": "$V=\\pi r^{2}h=\\pi\\times 9\\times 10=90\\pi$<br>$\\boldsymbol{90\\pi\\ \\text{cm}^{3}}$",
+          "q2": "A cylinder has radius $2$ cm and height $7$ cm. Find the volume in terms of $\\pi$.",
+          "a2": "$V=\\pi r^{2}h=\\pi\\times 4\\times 7=28\\pi$<br>$\\boldsymbol{28\\pi\\ \\text{cm}^{3}}$",
+          "q3": "A cylinder has radius $5$ cm and height $4$ cm. Find the volume in terms of $\\pi$.",
+          "a3": "$V=\\pi r^{2}h=\\pi\\times 25\\times 4=100\\pi$<br>$\\boldsymbol{100\\pi\\ \\text{cm}^{3}}$"
+        }
+      ]
+    }
+  ]
+};
+// ═══════════════════════════════════════════════════════════════════════════
+//  APP STATE
+// ═══════════════════════════════════════════════════════════════════════════
+const STRAND_KEYS   = UNIT_KEYS;
+const STRAND_LABELS = UNIT_LABELS;
+
+let currentStrand = UNIT_KEYS[0];
+let currentTopic  = 0;
+let currentStyle  = 'qs';
+let revealed  = {};
+let hiddenQs  = {};
+
+let viewMode = 15; // 15 = normal, 6 = board mode (rows 0-1 only)
+
+function applyViewMode() {}
+
+function toggleViewMode() {
+  viewMode = viewMode === 15 ? 6 : 15;
+  document.body.classList.toggle('mode6', viewMode === 6);
+  const btn = document.getElementById('btnview');
+  if (btn) {
+    btn.textContent = viewMode === 6 ? 'Show all' : 'Show 6';
+    btn.classList.toggle('active', viewMode === 6);
+  }
+}
+
+let versions  = {};
+let fontSize  = 18;
+let printScale = 90;
+
+function currentQs() {
+  const topics = TOPICS();
+  const topic = topics[currentTopic];
+  return topic ? (topic[currentStyle] || topic.qs || []) : [];
+}
+function qCount() { return currentQs().length; }
+function boardTitle() {
+  if (typeof BOARD_TITLE === 'string' && BOARD_TITLE) return BOARD_TITLE;
+  const pack = DATA.all && DATA.all[0];
+  return (pack && pack.u) ? String(pack.u).replace(' · ', ' ') : 'Cycle revision';
+}
+function verOf(q) {
+  if (q && q.q3) return 3;
+  if (q && q.q2) return 2;
+  return 1;
+}
+function qText(q, ver) {
+  if (ver === 3 && q.q3) return q.q3;
+  if (ver === 2 && q.q2) return q.q2;
+  return q.q;
+}
+function aText(q, ver) {
+  if (ver === 3 && q.a3) return q.a3;
+  if (ver === 2 && q.a2) return q.a2;
+  return q.a;
+}
+function nextVer(q, ver) {
+  const max = verOf(q);
+  return ver >= max ? 1 : ver + 1;
+}
+function versionLabel() {
+  const v = versions[0] || 1;
+  const nxt = v === 1 ? 2 : v === 2 ? 3 : 1;
+  return 'Switch to V' + nxt;
+}
+function setVersionButtons(v) {
+  const btn = document.getElementById('btnver');
+  if (btn) btn.textContent = 'Switch to V' + (v === 1 ? 2 : v === 2 ? 3 : 1);
+  const fv = document.getElementById('fverbtn');
+  if (fv) { fv.classList.toggle('on', v !== 1); fv.textContent = 'V' + v; }
+  const vv = document.getElementById('vizver');
+  if (vv) { vv.classList.toggle('on', v !== 1); vv.textContent = 'V' + v; }
+}
+
+// ── Suppress KaTeX console noise ──
+(function() {
+  const _err = console.error.bind(console);
+  console.error = function(...args) {
+    if (args[0] && typeof args[0] === 'string' && args[0].includes('KaTeX')) return;
+    _err(...args);
+  };
+})();
+
+// ── KaTeX ──
+function initKatex() {
+  if (typeof renderMathInElement !== 'undefined' && TOPICS().length > 0) {
+    try {
+      renderMathInElement(document.getElementById('grid'), {
+        delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],
+        throwOnError:false,
+        strict: false,
+        ignoredClasses: ['qhint','qnum','qver','qcbtn','qhiddennum','qhiddenlbl']
+      });
+    } catch(e) { /* suppress */ }
+  }
+}
+
+// ── Export HTML with edits baked in ──
+function exportHTML() {
+  const src = document.documentElement.outerHTML;
+  const dataStr = JSON.stringify(DATA, null, 2);
+  // Replace the DATA object in the source with the current live version
+  const exported = src.replace(
+    /const DATA = \{[\s\S]*?\n\};/,
+    'const DATA = ' + dataStr + ';'
+  );
+  const blob = new Blob([exported], {type: 'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'donow-strands.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── Print Worksheet ──────────────────────────────────────────────────────────
+function printSheet() {
+  const topics = TOPICS();
+  const topic  = topics[currentTopic];
+  if (!topic) return;
+
+  const qs     = currentQs();
+  const title  = (topic.u || '') + (topic.l && topic.l !== topic.u ? ' \u2014 ' + topic.l : '') + ' \u2014 ' + boardTitle();
+  const activeVer = versions[0] || 1;
+
+  // Pre-render KaTeX in the parent page (already loaded) using temp elements
+  function buildSet() {
+    let html = '';
+    for (let i = 0; i < qs.length; i++) {
+      const q = qs[i];
+      if (!q) continue;
+      const raw = qText(q, activeVer);
+      const qShow = raw;
+      const tmp = document.createElement('div');
+      tmp.innerHTML = qShow;
+      try {
+        renderMathInElement(tmp, {
+          delimiters:[{left:'$',right:'$',display:false}],
+          throwOnError:false, strict:false
+        });
+      } catch(e){}
+      html += '<div class="pz-q"><span class="pz-n">' + (i+1) + '</span><div class="pz-t">' + tmp.innerHTML + '</div></div>';
+    }
+    return html;
+  }
+
+  const setHTML = buildSet();
+  const pz = document.getElementById('pz');
+  pz.innerHTML =
+    '<div class="pz-half"><div class="pz-title">' + title + '</div><div class="pz-grid">' + setHTML + '</div></div>' +
+    '<div class="pz-half"><div class="pz-title">' + title + '</div><div class="pz-grid">' + setHTML + '</div></div>';
+  tagDiagrams(pz);
+
+  // Double rAF ensures browser has painted #pz before print dialog opens
+  const scaleFrac = printScale / 100;
+  pz.style.transform = scaleFrac < 1 ? 'scale(' + scaleFrac + ')' : '';
+  pz.style.width = scaleFrac < 1 ? (100 / scaleFrac) + '%' : '';
+
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      window.print();
+      pz.innerHTML = '';
+      pz.style.transform = '';
+      pz.style.width = '';
+    });
+  });
+}
+
+function setPrintScale(pct) {
+  pct = Math.round(pct / 5) * 5;
+  pct = Math.max(50, Math.min(100, pct));
+  printScale = pct;
+  const inp = document.getElementById('printScaleInput');
+  if (inp && parseInt(inp.value) !== pct) inp.value = pct;
+}
+
+// ── Strand Bar ──
+
+
+function TOPICS() {
+  return DATA[currentStrand] || [];
+}
+
+function buildSubStrandBar() {
+  const bar = document.getElementById('substrandbar');
+  if (bar) bar.style.display = 'none';
+}
+
+function buildStrandBar() {
+  const bar = document.getElementById('strandbar');
+  bar.innerHTML = '';
+  STRAND_KEYS.forEach((key, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'strandbtn' + (key === currentStrand ? ' active' : '');
+    const pack = (DATA[key] || [])[0];
+    const count = pack && pack.qs ? pack.qs.length : 0;
+    btn.innerHTML = STRAND_LABELS[i] +
+      '<span class="strbadge">' + count + '</span>';
+    btn.onclick = () => switchStrand(key);
+    bar.appendChild(btn);
+  });
+  buildSubStrandBar();
+}
+
+function switchStrand(key) {
+  currentStrand = key;
+  currentTopic  = 0;
+  revealed = {}; hiddenQs = {}; versions = {};
+  buildStrandBar();
+  populateTopicSelect();
+  renderGrid();
+}
+
+// ── Topic Select ──
+function populateTopicSelect() {
+  const sel = document.getElementById('topsel');
+  sel.innerHTML = '';
+  const topics = TOPICS();
+  if (!topics.length) {
+    const opt = document.createElement('option');
+    opt.textContent = '— No topics available —';
+    opt.disabled = true; opt.selected = true;
+    sel.appendChild(opt);
+    return;
+  }
+  topics.forEach((t, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = t.u + ' · ' + t.l;
+    sel.appendChild(opt);
+  });
+  sel.value = currentTopic;
+}
+
+// ── Font ──
+// ── Diagram size: 50% to 200% in steps of 10%, separate from text size ──
+let diagramScale = 100;
+function changeDiagram(delta) {
+  diagramScale = Math.min(200, Math.max(50, diagramScale + delta * 10));
+  document.getElementById('dgdisplay').textContent = diagramScale + '%';
+  document.documentElement.style.setProperty('--dscale', (diagramScale / 100).toFixed(2));
+  if (typeof focusMode !== 'undefined' && focusMode) { if (typeof f3Fit === 'function') f3Fit(); requestAnimationFrame(penRedraw); }
+}
+// remember each diagram's own width so it can be scaled (KaTeX's internal svgs are left alone)
+function tagDiagrams(root) {
+  if (!root) return;
+  root.querySelectorAll('svg[width]').forEach(sv => {
+    if (sv.closest('.katex')) return;
+    const w = sv.getAttribute('width');
+    if (/^\d+(\.\d+)?$/.test(w)) sv.style.setProperty('--w', w + 'px');
+  });
+}
+function changeFont(delta) {
+  fontSize = Math.min(32, Math.max(10, fontSize + delta));
+  document.getElementById('szdisplay').textContent = fontSize;
+  document.body.style.fontSize = fontSize + 'px';
+  // Focus mode text scales with the size buttons too (18 = normal size)
+  document.documentElement.style.setProperty('--fscale', (fontSize / 18).toFixed(3));
+}
+
+// ── Panel ──
+function togglePanel() { document.getElementById('panel').classList.toggle('open'); }
+function onStyleChange() { currentStyle = 'qs'; }
+function onTopicChange() {}
+
+// ── Load & Render ──
+function loadQuestions() {
+  if (!TOPICS().length) return;
+  currentTopic = parseInt(document.getElementById('topsel').value) || 0;
+  currentStyle = 'qs';
+  revealed = {}; hiddenQs = {}; versions = {};
+  setVersionButtons(1);
+  document.getElementById('panel').classList.remove('open');
+  renderGrid();
+}
+
+function renderGrid(keepFocusQ) {
+  const topics = TOPICS();
+  const grid       = document.getElementById('grid');
+  const empty      = document.getElementById('emptystate');
+  const titlestrip = document.getElementById('titlestrip');
+
+  if (!topics.length) {
+    grid.style.display = 'none';
+    titlestrip.style.display = 'none';
+    empty.classList.add('show');
+    document.getElementById('toplabel').textContent = STRAND_LABELS[STRAND_KEYS.indexOf(currentStrand)] + ' — No topics yet';
+    document.getElementById('tunit').textContent = '';
+    document.getElementById('ttopic').textContent = '';
+    return;
+  }
+
+  empty.classList.remove('show');
+  grid.style.display = '';
+  titlestrip.style.display = '';
+
+  const topic = topics[currentTopic];
+  const qs = currentQs();
+
+  document.getElementById('tunit').textContent  = (topic.u || '') + ' · ';
+  document.getElementById('ttopic').textContent = topic.l;
+  const strandLabel = STRAND_LABELS[STRAND_KEYS.indexOf(currentStrand)];
+  document.getElementById('toplabel').textContent =
+    boardTitle() + ' — ' + strandLabel + ' · ' + qs.length + ' topics';
+
+  grid.innerHTML = '';
+  const cols = 3;
+  const rows = Math.ceil(qs.length / cols) || 1;
+
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const idx = row * cols + col;
+      const q = qs[idx];
+      if (!q) continue;
+
+      const ver      = versions[idx] || 1;
+      const displayQ = qText(q, ver);
+      const ansHtml  = aText(q, ver);
+      const maxV     = verOf(q);
+      const hasAlt   = maxV > 1;
+      const nxt      = nextVer(q, ver);
+      const isHidden = !!hiddenQs[idx];
+      const topicBit = q.topic ? '<span class="qtopic">' + q.topic + '</span>' : '';
+
+      const card = document.createElement('div');
+      card.className = 'qcard' + (isHidden ? ' qhidden' : '') + (revealed[idx] ? ' rev' : '');
+      card.id = 'card' + idx;
+      card.dataset.idx = idx;
+      card.dataset.col = col;
+      card.dataset.row = row;
+
+      card.innerHTML = `
+        <div class="qhiddenbar" onclick="event.stopPropagation();showQ(${idx})">
+          <span class="qhiddennum">${idx+1}</span>
+          <span class="qhiddenlbl">hidden</span>
+          <button class="qhiddenshow" onclick="event.stopPropagation();showQ(${idx})">show</button>
+        </div>
+        <div class="qrow">
+          <span class="qnum">${idx+1}${hasAlt ? '<span class="qver"> v'+ver+'</span>' : ''}</span>
+          <span class="qtxt">${topicBit}${displayQ}</span>
+          <span class="qans${revealed[idx]?' show':''}" id="ans${idx}"><span class="qansmark">✓</span>${ansHtml}</span>
+          <span class="qcontrols">
+            ${hasAlt ? '<button class="qcbtn qcswap" onclick="event.stopPropagation();swapVersion('+idx+')" title="Swap to v'+nxt+'">⟲ v'+nxt+'</button>' : ''}
+            <button class="qcbtn qcedit" onclick="event.stopPropagation();editQuestion(${idx})" title="Edit">✎</button>
+            <button class="qcbtn qchide" onclick="event.stopPropagation();hideQ(${idx})" title="Hide">✕</button>
+          </span>
+        </div>`;
+      card.addEventListener('click', () => toggleCard(idx));
+      grid.appendChild(card);
+    }
+  }
+  reRenderMath();
+  applyViewMode();
+  tagDiagrams(document.getElementById('grid'));
+  if (focusMode) { const keep = keepFocusQ ? focusIdx : 0; focusRevd = {}; focusIdx = keep; buildFocusDots(); focusGoTo(keep); }
+}
+
+// ── FOCUS MODE ──────────────────────────────────────────────────────────────
+let focusMode = false;
+let focusIdx  = 0;
+let focusRevd = {};
+
+function buildFocusDots() {
+  const wrap = document.getElementById('fdots');
+  wrap.innerHTML = '';
+  for (let i = 0; i < qs.length; i++) {
+    const d = document.createElement('div');
+    d.className = 'fdot';
+    d.dataset.i = i;
+    d.onclick = () => focusGoTo(i);
+    wrap.appendChild(d);
+  }
+}
+
+function toggleFocusMode() {
+  if (typeof vizToggle === 'function' && document.body.classList.contains('vizmode')) vizToggle(false);
+  if (typeof toggleBlank === 'function') toggleBlank(false);
+  focusMode = !focusMode;
+  focusRevd = {};
+  focusIdx  = 0;
+  document.body.classList.toggle('focusmode', focusMode);
+  if (typeof resetFreePos === 'function') { resetFreePos(); if (focusMode) { vizApplyScale(); vizStartLoop(); } }
+  const btn = document.getElementById('btnfocus');
+  btn.classList.toggle('focuson', focusMode);
+  btn.innerHTML = focusMode ? '&#9635; Grid' : '&#9654; Focus';
+  if (!focusMode && penOn) penToggle();
+  if (focusMode) {
+    buildFocusDots();
+    focusGoTo(0);
+  }
+}
+
+function focusGoTo(idx) {
+  const topics = TOPICS();
+  if (!topics.length) return;
+  const topic = topics[currentTopic];
+  const qs    = currentQs();
+  focusIdx    = Math.max(0, Math.min(qs.length - 1, idx));
+  const q     = qs[focusIdx];
+  if (!q) return;
+
+  const ver  = versions[focusIdx] || 1;
+  const qTxt = (q.topic ? '<div class="qtopic">' + q.topic + '</div>' : '') + qText(q, ver);
+  const aTxt = aText(q, ver);
+  const rev  = !!focusRevd[focusIdx];
+  const total = qs.length;
+
+  document.getElementById('focusqnum').textContent = 'Question ' + (focusIdx + 1) + ' of ' + total;
+  document.getElementById('focusq').innerHTML = qTxt;
+  document.getElementById('focusa').innerHTML = '<span class="qansmark">✓</span>' + aTxt;
+  document.getElementById('focusa').classList.toggle('show', rev);
+  document.getElementById('focushint').style.display = rev ? 'none' : '';
+  document.getElementById('fprogressbar').style.width = ((focusIdx + 1) / total * 100) + '%';
+
+  document.querySelectorAll('.fdot').forEach((d, i) => {
+    d.classList.toggle('cur',  i === focusIdx);
+    d.classList.toggle('done', i < focusIdx);
+  });
+  document.getElementById('fnavprev').style.opacity = focusIdx === 0 ? '0.3' : '1';
+  document.getElementById('fnavnext').style.opacity = focusIdx === total - 1 ? '0.3' : '1';
+
+  if (focus3) render3(qs);
+  reRenderMath();
+  vizApplyScale();
+  requestAnimationFrame(penRedraw);
+  if (document.body.classList.contains('vizmode')) setTimeout(vizPlace, 120);
+}
+
+// ── 3 questions at a time ──
+let focus3 = false;
+function f3Start() { return focusIdx - (focusIdx % 3); }
+function render3(qs) {
+  const start = f3Start(), wrap = document.getElementById('focus3wrap');
+  let html = '';
+  for (let i = start; i < Math.min(start + 3, qs.length); i++) {
+    const q = qs[i]; if (!q) continue;
+    const ver = versions[i] || 1;
+    const qT = (q.topic ? '<div class="qtopic">' + q.topic + '</div>' : '') + qText(q, ver), aT = aText(q, ver);
+    html += '<div class="f3card' + (i === focusIdx ? ' cur' : '') + '" data-i="' + i + '" onclick="f3Toggle(' + i + ')">' +
+      '<div class="f3num">' + (i + 1) + '</div><div class="f3q">' + qT + '</div>' +
+      '<div class="f3a' + (focusRevd[i] ? ' show' : '') + '"><span class="qansmark">✓</span>' + aT + '</div></div>';
+  }
+  wrap.innerHTML = html;
+  f3Fit();
+  const total = qs.length;
+  document.querySelectorAll('.fdot').forEach((d, i) => {
+    d.classList.toggle('cur', i >= start && i < start + 3);
+    d.classList.toggle('done', i < start);
+  });
+  document.getElementById('fprogressbar').style.width = (Math.min(start + 3, total) / total * 100) + '%';
+  document.getElementById('fnavprev').style.opacity = start === 0 ? '0.3' : '1';
+  document.getElementById('fnavnext').style.opacity = start + 3 >= total ? '0.3' : '1';
+}
+// with the pen on, the 3 questions stack in the left half: size them to fit the screen height
+function f3Fit() {
+  const w = document.getElementById('focuswrap'), f = document.getElementById('focus3wrap');
+  if (!focus3 || !penOn) { f.style.removeProperty('--f3card'); f.style.removeProperty('--f3svg'); return; }
+  const wr = w.getBoundingClientRect(), tr = document.getElementById('pentools').getBoundingClientRect();
+  const avail = Math.min(wr.bottom, window.innerHeight) - Math.max(tr.bottom, wr.top) - 70; // visible room under the pen tools
+  const card = Math.max(90, Math.floor((avail - 88) / 3));
+  f.style.setProperty('--f3card', card + 'px');
+  f.style.setProperty('--f3svg', Math.max(50, card - 70) + 'px');
+}
+function f3Toggle(i) {
+  focusRevd[i] = !focusRevd[i];
+  const el = document.querySelector('.f3card[data-i="' + i + '"] .f3a');
+  if (el) el.classList.toggle('show', !!focusRevd[i]);
+}
+let f3Single = 0;
+function focusThree() {
+  if (!focus3) f3Single = focusIdx;                   // remember the single question we came from
+  focus3 = !focus3;
+  document.body.classList.toggle('focus3', focus3);
+  document.getElementById('threebtn').classList.toggle('on', focus3);
+  const vt = document.getElementById('vizthree'); if (vt) vt.classList.toggle('on', focus3);
+  if (!focus3 && document.body.classList.contains('vizmode')) setTimeout(vizPlace, 50);
+  if (focus3) focusGoTo(f3Start());
+  else { const s = focusIdx - (focusIdx % 3); focusGoTo(f3Single >= s && f3Single < s + 3 ? f3Single : s); }
+}
+// tap at a point: in 3-at-a-time reveal the card under the finger, otherwise the single question
+function focusTapAt(x, y) {
+  if (!focus3) { focusToggleReveal(); return; }
+  const card = document.elementsFromPoint(x, y).find(el => el.classList && el.classList.contains('f3card'));
+  if (card) f3Toggle(+card.dataset.i);
+}
+
+function focusToggleReveal() {
+  focusRevd[focusIdx] = !focusRevd[focusIdx];
+  const rev = focusRevd[focusIdx];
+  document.getElementById('focusa').classList.toggle('show', rev);
+  document.getElementById('focushint').style.display = rev ? 'none' : '';
+  if (rev) reRenderMath();
+  if (document.body.classList.contains('vizmode')) setTimeout(vizPlace, 120);
+}
+
+// ── Swipe left / right with a finger to change question ──
+let swipeStart = null, swipeAt = 0;
+(function swipeInit() {
+  const w = document.getElementById('focuswrap'); if (!w) return;
+  w.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'touch') return;
+    if (penOn && !penStylusOnly) return;           // finger is being used as the pen
+    if (e.target.closest && e.target.closest('#pentools')) return;
+    if (document.body.classList.contains('vizmode') && e.target.closest && e.target.closest('#focuscard, #focus3wrap, #vizbox')) return; // dragging the question
+    swipeStart = { x: e.clientX, y: e.clientY, t: Date.now(), id: e.pointerId };
+  }, true);
+  w.addEventListener('pointerup', e => {
+    if (!swipeStart || e.pointerId !== swipeStart.id) return;
+    const dx = e.clientX - swipeStart.x, dy = e.clientY - swipeStart.y, dt = Date.now() - swipeStart.t;
+    swipeStart = null;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > 1.5 * Math.abs(dy) && dt < 900) {
+      swipeAt = Date.now();
+      focusNav(dx < 0 ? 1 : -1);                    // swipe left = next, swipe right = back
+    } else if (Math.abs(dx) < 12 && Math.abs(dy) < 12 && dt < 600) {
+      swipeAt = Date.now();                         // a finger tap reveals the answer (handled here so it
+      focusTapAt(e.clientX, e.clientY);             // works reliably straight after a swipe)
+    }
+  }, true);
+  w.addEventListener('pointercancel', () => { swipeStart = null; }, true);
+  // a swipe should not also count as a tap that reveals the answer
+  w.addEventListener('click', e => { if (Date.now() - swipeAt < 500) { e.stopPropagation(); e.preventDefault(); } }, true);
+})();
+
+// ── Swipe up / down with a finger in Focus mode to hide / show the top options bar ──
+(function barSwipeInit() {
+  let t0 = null;
+  document.addEventListener('touchstart', e => {
+    t0 = null;
+    if (!focusMode || e.touches.length !== 1) return;
+    if (document.body.classList.contains('vizmode')) return;     // visualiser: fingers drag the question instead
+    if (penOn && !penStylusOnly) return;                       // finger is the pen
+    if (penCur || Date.now() - penLastAt < 1000) return;        // writing: a resting hand is not a swipe
+    if (e.target.closest && e.target.closest('#pentools, #topwrap, #panel, button, select, input')) return;
+    const p = e.touches[0]; t0 = { x: p.clientX, y: p.clientY, t: Date.now() };
+  }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (!t0) return;
+    const p = e.changedTouches[0], dx = p.clientX - t0.x, dy = p.clientY - t0.y, dt = Date.now() - t0.t;
+    t0 = null;
+    // a long, deliberate vertical swipe only (40% of the screen height), so writing never triggers it
+    if ((window.vizDragEndAt && Date.now() - window.vizDragEndAt < 1000) || (vizDrag && vizDrag.moved) || vizRs) return;
+    if (penCur || Date.now() - penLastAt < 1000) return;
+    if (Math.abs(dy) < Math.max(220, window.innerHeight * 0.4) || Math.abs(dy) < 2.5 * Math.abs(dx) || dt > 800) return;
+    if (dy < 0 && barVisible) toggleTopBar();                  // swipe up: hide
+    else if (dy > 0 && !barVisible) toggleTopBar();            // swipe down: show
+    else return;
+    swipeAt = Date.now();
+    setTimeout(() => { if (typeof f3Fit === 'function') f3Fit(); penRedraw(); }, 50);
+  }, { passive: true });
+})();
+
+function focusNav(dir) {
+  // arrows only move between questions; the answer is revealed by tapping the question
+  if (focus3) { const s = f3Start() + dir * 3; if (s < 0 || s >= qCount()) return; focusGoTo(s); return; }
+  focusGoTo(focusIdx + dir);
+}
+
+
+// ── VISUALISER ─────────────────────────────────────────────────────────────
+// Shows only the current question with the live camera (document camera / visualiser) underneath.
+// The bottom-right button (or the camera button again) brings everything back.
+let vizStream = null, vizCams = [], vizCamIdx = 0, vizRot = 0;
+function vizMsg(t) { document.getElementById('vizmsg').textContent = t || ''; }
+// list every camera the browser can see and fill the picker
+let vizLastErr = null;
+function vizWhere() {
+  let framed = false; try { framed = window.top !== window; } catch (e) { framed = true; }
+  if (framed) return 'The app is open inside another page (a preview or viewer), which blocks cameras. Open the file directly in Chrome or Edge.';
+  if (!window.isSecureContext) return 'This browser treats the page as not secure, so it blocks cameras. Open the file in Chrome or Edge, or use the web link.';
+  return '';
+}
+// list every camera the browser can see and fill the picker
+async function vizDetect(restart) {
+  const sel = document.getElementById('vizsel');
+  vizLastErr = null;
+  let list = [];
+  try { list = (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === 'videoinput'); } catch (e) { vizLastErr = e; }
+  // some browsers (Safari, locked-down Windows) list nothing, or no names, until a camera has been allowed once
+  if (!list.length || !list[0].label) {
+    try {
+      const tmp = await navigator.mediaDevices.getUserMedia({ video: true });
+      const lbl = (tmp.getVideoTracks()[0] || {}).label || '';
+      tmp.getTracks().forEach(t => t.stop());
+      list = (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === 'videoinput');
+      if (!list.length) list = [{ deviceId: '', label: lbl || 'Camera' }];
+    } catch (e) { vizLastErr = e; }
+  }
+  vizCams = list;
+  const cur = vizCams[vizCamIdx] ? vizCams[vizCamIdx].deviceId : null;
+  let saved = null; try { saved = localStorage.getItem('vizCam'); } catch (e) {}
+  let i = vizCams.findIndex(d => d.deviceId && d.deviceId === (cur || saved));
+  if (i < 0) i = vizCams.findIndex(d => /visuali|document|doc ?cam|ipevo|elmo|hue|ziggi|lumens|aver|joy-?it|usb/i.test(d.label));
+  if (i < 0) i = vizCams.findIndex(d => !/integrated|built-?in|facetime|front|user facing|ir camera/i.test(d.label));
+  vizCamIdx = i < 0 ? 0 : i;
+  sel.innerHTML = vizCams.length ? vizCams.map((d, k) => '<option value="' + k + '"' + (k === vizCamIdx ? ' selected' : '') + '>' + (d.label || ('Camera ' + (k + 1))).replace(/</g, '&lt;') + '</option>').join('') : '<option>No cameras found</option>';
+  if (restart && document.body.classList.contains('vizmode')) { vizStop(); vizStart(true); }
+}
+function vizChoose(k) { vizCamIdx = +k; try { localStorage.setItem('vizCam', vizCams[vizCamIdx].deviceId); } catch (e) {} vizStop(); vizStart(true); }
+function vizErrText(e, cam) {
+  const n = e && e.name, nm = cam && cam.label ? '"' + cam.label + '"' : 'The camera';
+  const where = vizWhere();
+  if (where) return where;
+  if (n === 'NotAllowedError' || n === 'SecurityError') return 'Camera access is blocked. Click the camera (or padlock) icon in the address bar, choose Allow for the camera, then press Detect. If your school blocks cameras in the browser, IT may need to allow it.';
+  if (n === 'NotReadableError' || n === 'AbortError') return nm + ' is being used by another program (e.g. the visualiser\'s own software, Teams or Zoom). Close it, then press Detect.';
+  if (n === 'NotFoundError' || n === 'OverconstrainedError') return 'No camera found. Plug in the visualiser (try another USB port), wait a few seconds, then press Detect.';
+  return 'Could not start the camera' + (n ? ' (' + n + ')' : '') + '. Press Detect, or choose another camera from the list.';
+}
+async function vizStart(skipDetect) {
+  const v = document.getElementById('vizvideo'), pick = document.getElementById('vizpick');
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { pick.classList.add('show'); vizMsg(vizWhere() || 'This browser cannot use a camera here. Open the app in Chrome or Edge.'); return; }
+  vizMsg('Looking for cameras…');
+  if (!skipDetect || !vizCams.length) await vizDetect(false);
+  const cam = vizCams[vizCamIdx];
+  if (!cam) { pick.classList.add('show'); vizMsg(vizErrText(vizLastErr || { name: 'NotFoundError' })); return; }
+  let err = null;
+  const tries = cam.deviceId
+    ? [{ deviceId: { exact: cam.deviceId }, width: { ideal: 1920 }, height: { ideal: 1080 } }, { deviceId: { exact: cam.deviceId } }, true]
+    : [{ width: { ideal: 1920 }, height: { ideal: 1080 } }, true];
+  for (const c of tries) {
+    try { vizStream = await navigator.mediaDevices.getUserMedia({ video: c }); break; } catch (e) { err = e; vizStream = null; }
+  }
+  if (!vizStream) { pick.classList.add('show'); vizMsg(vizErrText(err, cam)); return; }
+  v.srcObject = vizStream; try { await v.play(); } catch (e) {}
+  vizMsg(''); pick.classList.remove('show');
+  try { if (cam.deviceId) localStorage.setItem('vizCam', cam.deviceId); } catch (e) {}
+}
+if (navigator.mediaDevices && navigator.mediaDevices.addEventListener)
+  navigator.mediaDevices.addEventListener('devicechange', () => { if (document.body.classList.contains('vizmode')) vizDetect(!vizStream); });
+// middle of the left half: 46% wide, centred vertically
+function vizPlace() {
+  if (!document.body.classList.contains('vizmode')) return;
+  if (vizDragged) return;                               // keep where the teacher dragged it
+  const W = window.innerWidth;
+  document.body.style.setProperty('--vzl', Math.round(W * 0.02) + 'px');
+  document.body.style.setProperty('--vzw', Math.round(W * 0.46) + 'px');
+  document.body.style.setProperty('--vzt', '50vh');
+  document.body.style.setProperty('--vztf', 'translateY(-50%)');
+}
+window.addEventListener('resize', vizPlace);
+// ── drag the question (or the 3 questions) around: visualiser mode and all focus modes (pen off) ──
+// Mouse / stylus: drag straight away. Finger: in visualiser mode straight away; in normal focus mode
+// press and hold for a moment first, so quick finger swipes still change question.
+let vizDragged = false, vizDrag = null;
+function isViz() { return document.body.classList.contains('vizmode'); }
+function vizTarget() { return document.getElementById(document.body.classList.contains('focus3') ? 'focus3wrap' : 'focuscard'); }
+function canMoveQ() { return typeof focusMode !== 'undefined' && focusMode && (isViz() || !penOn); }
+function curScale() { return vizScales[vizSetKey()] || 1; }
+// fix the question at its current place on screen so it can be moved / resized from there
+function freezeQ(el) {
+  const r = el.getBoundingClientRect(), sc = curScale(), B = document.body.style;
+  if (isViz()) {
+    vizDragged = true;
+    if (el.id === 'focuscard') { B.setProperty('--vzl', r.left + 'px'); B.setProperty('--vzt', r.top + 'px'); B.setProperty('--vztf', 'none'); }
+    else { el.style.left = r.left + 'px'; el.style.top = r.top + 'px'; el.style.transform = 'none'; }
+  } else if (el.id === 'focuscard') {
+    if (!document.body.classList.contains('freepos')) B.setProperty('--fpw', (r.width / sc) + 'px');
+    B.setProperty('--fpl', r.left + 'px'); B.setProperty('--fpt', r.top + 'px');
+    document.body.classList.add('freepos');
+  } else {
+    if (!document.body.classList.contains('freepos3')) B.setProperty('--f3w', (r.width / sc) + 'px');
+    B.setProperty('--f3l', r.left + 'px'); B.setProperty('--f3t', r.top + 'px');
+    document.body.classList.add('freepos3');
+  }
+  return el.getBoundingClientRect();
+}
+function placeQ(el, l, t) {
+  const B = document.body.style;
+  if (isViz()) {
+    if (el.id === 'focuscard') { B.setProperty('--vzl', l + 'px'); B.setProperty('--vzt', t + 'px'); }
+    else { el.style.left = l + 'px'; el.style.top = t + 'px'; }
+  } else if (el.id === 'focuscard') { B.setProperty('--fpl', l + 'px'); B.setProperty('--fpt', t + 'px'); }
+  else { B.setProperty('--f3l', l + 'px'); B.setProperty('--f3t', t + 'px'); }
+}
+function resetFreePos() {
+  document.body.classList.remove('freepos', 'freepos3');
+}
+document.addEventListener('pointerdown', e => {
+  if (!canMoveQ() || e.button > 0) return;
+  const el = e.target.closest && (document.body.classList.contains('focus3') ? e.target.closest('#focus3wrap') : e.target.closest('#focuscard'));
+  if (!el) return;
+  const hold = e.pointerType === 'touch' && !isViz();
+  vizDrag = { el, id: e.pointerId, x: e.clientX, y: e.clientY, moved: false, hold, holdUntil: Date.now() + 350 };
+});
+document.addEventListener('pointermove', e => {
+  if (!vizDrag || e.pointerId !== vizDrag.id) return;
+  const dx = e.clientX - vizDrag.x, dy = e.clientY - vizDrag.y;
+  if (!vizDrag.moved) {
+    if (vizDrag.hold && Date.now() < vizDrag.holdUntil) { if (Math.hypot(dx, dy) > 10) vizDrag = null; return; }   // moved too soon: it's a swipe
+    if (Math.hypot(dx, dy) < 8) return;
+    vizDrag.moved = true;
+    if (typeof swipeStart !== 'undefined') swipeStart = null;              // this is a move, not a swipe or a tap
+    const r = freezeQ(vizDrag.el);
+    vizDrag.l = r.left; vizDrag.t = r.top; vizDrag.w = r.width;
+    try { vizDrag.el.setPointerCapture(e.pointerId); } catch (err) {}
+    document.body.classList.add('vzdragging');
+  }
+  e.preventDefault();
+  const W = window.innerWidth, H = window.innerHeight;
+  placeQ(vizDrag.el, Math.min(Math.max(vizDrag.l + dx, 40 - vizDrag.w), W - 40), Math.min(Math.max(vizDrag.t + dy, 0), H - 40));
+}, { passive: false });
+function vizDragEnd(e) {
+  if (!vizDrag || (e && e.pointerId !== vizDrag.id)) return;
+  if (vizDrag.moved) { swipeAt = Date.now(); window.vizDragEndAt = Date.now(); }   // a drag is not a tap: don't reveal the answer
+  document.body.classList.remove('vzdragging');
+  vizDrag = null;
+}
+document.addEventListener('pointerup', vizDragEnd);
+document.addEventListener('pointercancel', vizDragEnd);
+document.addEventListener('click', e => {
+  if (window.vizDragEndAt && Date.now() - window.vizDragEndAt < 400) { e.stopPropagation(); e.preventDefault(); }
+}, true);
+// ── resize handle (bottom-right of the question). The size is kept per question set (topic + style).
+const vizScales = {};
+function vizSetKey() { const t = TOPICS()[currentTopic]; return [currentStrand, t ? t.l : '', currentStyle].join('|'); }
+function vizApplyScale() { document.body.style.setProperty('--vzs', vizScales[vizSetKey()] || 1); }
+let vizLoopOn = false;
+function vizHandleLoop() {
+  if (!(typeof focusMode !== 'undefined' && focusMode)) { vizLoopOn = false; return; }
+  vizLoopOn = true;
+  const h = document.getElementById('vizsize'), r = vizTarget().getBoundingClientRect();
+  if (r.width) {
+    h.style.left = Math.min(window.innerWidth - 12, Math.max(4, r.right - 4)) + 'px';
+    h.style.top = Math.min(window.innerHeight - 12, Math.max(4, r.bottom - 4)) + 'px';
+  }
+  requestAnimationFrame(vizHandleLoop);
+}
+function vizStartLoop() { if (!vizLoopOn) requestAnimationFrame(vizHandleLoop); }
+let vizRs = null;
+document.addEventListener('DOMContentLoaded', () => {
+  const h = document.getElementById('vizsize'); if (!h) return;
+  h.addEventListener('pointerdown', e => {
+    if (!canMoveQ()) return;
+    e.preventDefault(); e.stopPropagation();
+    const r = freezeQ(vizTarget());                 // anchor the top-left corner so the question grows towards the handle
+    vizRs = { id: e.pointerId, x: e.clientX, y: e.clientY, w: r.width, h: r.height, s: curScale() };
+    try { h.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  h.addEventListener('pointermove', e => {
+    if (!vizRs || e.pointerId !== vizRs.id) return;
+    const f = Math.max((vizRs.w + (e.clientX - vizRs.x)) / vizRs.w, (vizRs.h + (e.clientY - vizRs.y)) / vizRs.h);
+    vizScales[vizSetKey()] = Math.min(3, Math.max(0.4, vizRs.s * f)); vizApplyScale();
+  });
+  const end = e => { if (vizRs && (!e || e.pointerId === vizRs.id)) { vizRs = null; window.vizDragEndAt = Date.now(); swipeAt = Date.now(); } };
+  h.addEventListener('pointerup', end); h.addEventListener('pointercancel', end);
+});
+function vizStop() {
+  if (vizStream) vizStream.getTracks().forEach(t => t.stop());
+  vizStream = null; const v = document.getElementById('vizvideo'); if (v) v.srcObject = null;
+}
+function vizToggle(force) {
+  const on = force === undefined ? !document.body.classList.contains('vizmode') : force;
+  if (on) {
+    if (typeof penOn !== 'undefined' && penOn) penToggle();
+    // start the question where it is now, then slide it to the middle of the left half (like the pen)
+    const card = document.getElementById('focuscard');
+    card.style.transition = 'none'; void card.offsetWidth;
+    const rc = card.getBoundingClientRect();
+    card.style.transition = '';
+    document.body.style.setProperty('--vzl', rc.left + 'px');
+    document.body.style.setProperty('--vzt', Math.max(8, rc.top) + 'px');
+    document.body.style.setProperty('--vzw', rc.width + 'px');
+    document.body.style.setProperty('--vztf', 'none');
+    vizDragged = false; const f3w = document.getElementById('focus3wrap'); f3w.style.left = f3w.style.top = f3w.style.transform = '';
+    vizApplyScale();
+    document.body.classList.add('vizmode');
+    void card.offsetWidth;
+    vizStartLoop();
+    document.body.classList.add('vzanim');
+    vizPlace();
+    setTimeout(() => document.body.classList.remove('vzanim'), 1600);
+    document.getElementById('vizbtn').classList.add('on');
+    vizStart();
+  } else {
+    document.body.classList.remove('vizmode');
+    vizDragged = false; const f3x = document.getElementById('focus3wrap'); f3x.style.left = f3x.style.top = f3x.style.transform = '';
+    document.getElementById('vizbtn').classList.remove('on');
+    vizStop();
+  }
+}
+function vizRotate() { vizRot = (vizRot + 90) % 360; document.getElementById('vizvideo').style.transform = 'rotate(' + vizRot + 'deg)'; }
+
+// ── FOCUS PEN ───────────────────────────────────────────────────────────────
+// Annotations are kept in memory for each question (strand, topic, style,
+// version, question number). They stay until the app is reloaded.
+const penStore = {};
+let penLastAt = 0;
+let penOn = false, penCol = '#111', penCur = null, penErase = false, penW = 3.5, penStylusOnly = true, penLastType = 'mouse';
+function penKey() {
+  const topics = TOPICS(); const t = topics[currentTopic];
+  if (focus3) { const s = f3Start(); return [currentStrand, t ? t.l : '', currentStyle, 'three', s, [0, 1, 2].map(k => versions[s + k] || 1).join('')].join('|'); }
+  return [currentStrand, t ? t.l : '', currentStyle, versions[focusIdx] || 1, focusIdx].join('|');
+}
+function penCanvas() { return document.getElementById('penlayer'); }
+function penSize() {
+  const c = penCanvas(), r = c.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+  const w = Math.round(r.width * d), h = Math.round(r.height * d);
+  if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+  return { w: r.width, h: r.height, d: d };
+}
+function penRedraw() {
+  const c = penCanvas(); if (!c) return;
+  const sz = penSize(), ctx = c.getContext('2d');
+  ctx.setTransform(sz.d, 0, 0, sz.d, 0, 0);
+  ctx.clearRect(0, 0, sz.w, sz.h);
+  (penStore[penKey()] || []).forEach(st => penDrawStroke(ctx, st, sz));
+}
+function penDrawStroke(ctx, st, sz) {
+  const p = st.pts; if (!p.length) return;
+  const lw = st.erase ? 28 : (st.w || 3.5);
+  ctx.globalCompositeOperation = st.erase ? 'destination-out' : 'source-over';
+  ctx.strokeStyle = st.col; ctx.fillStyle = st.col; ctx.lineWidth = lw; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  if (p.length === 1) { ctx.beginPath(); ctx.arc(p[0][0] * sz.w, p[0][1] * sz.h, lw / 2, 0, Math.PI * 2); ctx.fill(); }
+  else {
+    ctx.beginPath(); ctx.moveTo(p[0][0] * sz.w, p[0][1] * sz.h);
+    for (let i = 1; i < p.length; i++) ctx.lineTo(p[i][0] * sz.w, p[i][1] * sz.h);
+    ctx.stroke();
+  }
+  ctx.globalCompositeOperation = 'source-over';
+}
+function penPoint(e) {
+  const r = penCanvas().getBoundingClientRect();
+  return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height];
+}
+function penToggle() {
+  penOn = !penOn;
+  setTimeout(f3Fit, 0);
+  // the question text only animates while sliding; size buttons change it instantly
+  document.body.classList.add('penanim');
+  clearTimeout(penToggle._t); penToggle._t = setTimeout(() => document.body.classList.remove('penanim'), 1600);
+  document.body.classList.toggle('penon', penOn);
+  document.getElementById('penbtn').classList.toggle('on', penOn);
+  penRedraw();
+}
+function penColour(col, btn) {
+  penCol = col; penErase = false;
+  document.querySelectorAll('#pentools .pencol').forEach(b => b.classList.toggle('sel', b === btn));
+  document.getElementById('rubberbtn').classList.remove('sel');
+}
+function penRubber() {
+  penErase = !penErase;
+  document.getElementById('rubberbtn').classList.toggle('sel', penErase);
+  document.querySelectorAll('#pentools .pencol').forEach(b => b.classList.toggle('sel', !penErase && b.style.background && b.title && penCol === ({Black:'#111',Blue:'#1565c0',Red:'#d32f2f',Green:'#2e7d32'})[b.title]));
+}
+function penWidth(w) {
+  penW = w; penErase = false;
+  document.getElementById('penfine').classList.toggle('sel', w < 2.5);
+  document.getElementById('penthin').classList.toggle('sel', w >= 2.5 && w < 5);
+  document.getElementById('penthick').classList.toggle('sel', w >= 5);
+  document.getElementById('rubberbtn').classList.remove('sel');
+}
+function penStylus() {
+  penStylusOnly = !penStylusOnly;
+  document.getElementById('stylusbtn').classList.toggle('on', penStylusOnly);
+}
+function penSquared() {
+  const on = document.getElementById('focuswrap').classList.toggle('squared');
+  document.getElementById('squaredbtn').classList.toggle('on', on);
+}
+// a finger touch is ignored for writing when "Stylus only" is on
+function penAccepts(e) { return !penStylusOnly || e.pointerType !== 'touch'; }
+function penUndo() { const k = penKey(); if (penStore[k] && penStore[k].length) { penStore[k].pop(); penRedraw(); } }
+function penClear() { delete penStore[penKey()]; penRedraw(); }
+(function penInit() {
+  const c = penCanvas(); if (!c) return;
+  c.addEventListener('pointerdown', e => {
+    penLastType = e.pointerType;
+    if (!penOn || !penAccepts(e)) return;
+    e.preventDefault(); e.stopPropagation();
+    try { c.setPointerCapture(e.pointerId); } catch (err) {}
+    const k = penKey();
+    penCur = { col: penCol, erase: penErase, w: penW, pts: [penPoint(e)] }; penLastAt = Date.now();
+    (penStore[k] = penStore[k] || []).push(penCur);
+    penRedraw();
+  });
+  c.addEventListener('pointermove', e => {
+    if (!penOn || !penCur || !penAccepts(e)) return;
+    e.preventDefault();
+    let evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [];
+    if (!evs || !evs.length) evs = [e];
+    evs.forEach(ev => penCur.pts.push(penPoint(ev)));
+    const sz = penSize(), ctx = c.getContext('2d');
+    ctx.setTransform(sz.d, 0, 0, sz.d, 0, 0);
+    penDrawStroke(ctx, { col: penCur.col, erase: penCur.erase, w: penCur.w, pts: penCur.pts.slice(-evs.length - 1) }, sz);
+  });
+  const end = () => { if (penCur) penLastAt = Date.now(); penCur = null; };
+  c.addEventListener('pointerup', end);
+  c.addEventListener('pointercancel', end);
+  c.addEventListener('click', e => {
+    if (!penOn) return;
+    e.stopPropagation();
+    if (penStylusOnly && penLastType === 'touch' && Date.now() - swipeAt > 500) focusTapAt(e.clientX, e.clientY);
+  });
+  window.addEventListener('resize', () => { if (focusMode) { f3Fit(); penRedraw(); } });
+})();
+
+// Keyboard support for focus mode
+// Presentation clickers send Page Down / Page Up (or the arrow keys) for next / back,
+// and "." or "b" for their blank-screen button: here that shows / hides the answer.
+document.addEventListener('keydown', e => {
+  if (!focusMode) return;
+  const k = e.key;
+  // clicker "present / switch screen" button: sends F5, Shift+F5 or Escape (often alternating) -> show / hide the answer
+  if (k === 'F5' || k === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); if (isBlank()) { toggleBlank(false); return; } clickerAnswer(e); return; }
+  if (isBlank() && ['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp', ' ', 'PageDown', 'PageUp'].includes(k)) { e.preventDefault(); toggleBlank(false); return; }
+  if (k === 'ArrowRight' || k === 'ArrowDown' || k === ' ' || k === 'PageDown') { e.preventDefault(); clickerStep(1, e); }
+  else if (k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp')            { e.preventDefault(); clickerStep(-1, e); }
+  else if (k === '.' || k === 'b' || k === 'B')            { e.preventDefault(); e.stopImmediatePropagation(); clickerReveal(e); }
+});
+// clicker / arrow keys: always one question at a time (also in "3 at a time", where the page turns after the third)
+let clickerAt = 0;
+function clickerStep(dir, e) {
+  if (e && e.repeat) return;                                  // held button: no auto-repeat
+  if (Date.now() - clickerAt < 250) return;                   // clickers that send two keys per press
+  clickerAt = Date.now();
+  const n = qCount();
+  const i = focusIdx + dir;
+  if (i < 0 || i >= n) return;
+  focusGoTo(i);
+}
+// clicker blank-screen button: one press = one show/hide. Many clickers send two or three key
+// signals per press (e.g. "b" and "."), which used to toggle the answer on and straight back off.
+let revealAt = 0;
+function clickerReveal(e) {
+  if (e && e.repeat) return;
+  if (Date.now() - revealAt < 600) return;
+  revealAt = Date.now();
+  toggleBlank();
+}
+let answerAt = 0;
+function clickerAnswer(e) {
+  if (e && e.repeat) return;
+  if (Date.now() - answerAt < 600) return;
+  answerAt = Date.now();
+  focusRevealKey();
+}
+// blank the board (Focus mode): a black screen over everything; press again, tap it, or use an arrow to bring it back
+function toggleBlank(force) {
+  let b = document.getElementById('blankscreen');
+  if (!b) {
+    b = document.createElement('div'); b.id = 'blankscreen';
+    b.style.cssText = 'position:fixed;inset:0;background:#000;z-index:2147483000;display:none;cursor:none';
+    b.addEventListener('pointerdown', e => { e.preventDefault(); e.stopPropagation(); toggleBlank(false); });
+    document.body.appendChild(b);
+  }
+  const on = force === undefined ? b.style.display === 'none' : force;
+  b.style.display = on ? 'block' : 'none';
+}
+function isBlank() { const b = document.getElementById('blankscreen'); return !!b && b.style.display !== 'none'; }
+// show / hide the answer from the keyboard or clicker (in "3 at a time": all three together)
+function focusRevealKey() {
+  if (!focus3) { focusToggleReveal(); return; }
+  const cards = [...document.querySelectorAll('.f3card')].map(c => +c.dataset.i);
+  const show = cards.some(i => !focusRevd[i]);
+  cards.forEach(i => { focusRevd[i] = show; const el = document.querySelector('.f3card[data-i="' + i + '"] .f3a'); if (el) el.classList.toggle('show', show); });
+  if (show) reRenderMath();
+}
+
+// Re-enter focus mode cleanly when topic/style changes
+
+function reRenderMath() {
+  setTimeout(() => {
+    if (typeof renderMathInElement === 'undefined') return;
+    const opts = {
+      delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],
+      throwOnError:false,
+      errorColor:'#cc0000',
+      strict: false,
+      ignoredClasses: ['qhint','qnum','qver','qcbtn','qhiddennum','qhiddenlbl']
+    };
+    try {
+      if (focusMode) {
+        renderMathInElement(document.getElementById('focuswrap'), opts);
+      } else {
+        renderMathInElement(document.getElementById('grid'), opts);
+      }
+    } catch(e) { /* suppress */ }
+  }, 50);
+}
+
+function toggleCard(idx) {
+  const card = document.getElementById('card' + idx);
+  if (!card || card.classList.contains('qhidden') || card.classList.contains('editing')) return;
+  revealed[idx] = !revealed[idx];
+  const ans = document.getElementById('ans' + idx);
+  if (!ans) return;
+  if (revealed[idx]) { ans.classList.add('show'); card.classList.add('rev'); reRenderMath(); }
+  else               { ans.classList.remove('show'); card.classList.remove('rev'); }
+}
+
+function revealAll() {
+  for (let i = 0; i < qCount(); i++) {
+    revealed[i] = true;
+    const ans = document.getElementById('ans' + i);
+    const card = document.getElementById('card' + i);
+    if (ans && card && !card.classList.contains('qhidden')) { ans.classList.add('show'); card.classList.add('rev'); }
+  }
+  reRenderMath();
+}
+function hideAll() {
+  for (let i = 0; i < qCount(); i++) {
+    revealed[i] = false;
+    const ans = document.getElementById('ans' + i);
+    const card = document.getElementById('card' + i);
+    if (ans && card) { ans.classList.remove('show'); card.classList.remove('rev'); }
+  }
+}
+
+function hideQ(idx) { hiddenQs[idx] = true;  const c = document.getElementById('card'+idx); if(c) c.classList.add('qhidden'); }
+function showQ(idx) { hiddenQs[idx] = false; const c = document.getElementById('card'+idx); if(c) c.classList.remove('qhidden'); }
+function hideAllQs() { for (let i=0;i<qCount();i++) hideQ(i); }
+function showAllQs() { for (let i=0;i<qCount();i++) showQ(i); }
+
+function swapVersion(idx) { const q = currentQs()[idx]; versions[idx] = nextVer(q, versions[idx]||1); renderGrid(true); }
+
+function toggleAllVersions() {
+  const qs = currentQs();
+  const currentV = versions[0] || 1;
+  const newV = currentV === 1 ? 2 : currentV === 2 ? 3 : 1;
+  for (let i = 0; i < qs.length; i++) {
+    if (qs[i] && verOf(qs[i]) >= newV) versions[i] = newV;
+    else if (qs[i]) versions[i] = ((versions[i]||1) % verOf(qs[i])) + 1;
+  }
+  setVersionButtons(newV);
+  renderGrid(true);
+}
+
+function editQuestion(idx) {
+  const topic = TOPICS()[currentTopic];
+  const qs    = currentQs();
+  const q     = qs[idx];
+  const ver   = versions[idx] || 1;
+  const qTextVal = qText(q, ver);
+  const aTextVal = aText(q, ver);
+  const editQ = qTextVal;
+
+  const card = document.getElementById('card' + idx);
+  card.classList.add('editing');
+  card.innerHTML = `
+    <div style="width:100%;display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="qnum">${idx+1}</span>
+        <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.4">Edit Question</span>
+      </div>
+      <label style="font-size:9px;font-weight:700;opacity:.4;text-transform:uppercase;letter-spacing:1px">Question</label>
+      <textarea class="qeditarea qeditq" id="editq${idx}">${editQ}</textarea>
+      <label style="font-size:9px;font-weight:700;opacity:.4;text-transform:uppercase;letter-spacing:1px">Answer</label>
+      <textarea class="qeditarea qedita" id="edita${idx}">${aTextVal}</textarea>
+      <div class="qeditbtns">
+        <button class="qeditbtn save" onclick="event.stopPropagation();saveEdit(${idx})">Save</button>
+        <button class="qeditbtn cancel" onclick="event.stopPropagation();cancelEdit(${idx})">Cancel</button>
+      </div>
+    </div>`;
+}
+
+function saveEdit(idx) {
+  const newQ = document.getElementById('editq'+idx).value;
+  const newA = document.getElementById('edita'+idx).value;
+  const q    = currentQs()[idx];
+  const ver  = versions[idx] || 1;
+  if (ver===3 && q.q3 !== undefined) { q.q3 = newQ; q.a3 = newA; }
+  else if (ver===2 && q.q2 !== undefined) { q.q2 = newQ; q.a2 = newA; }
+  else                               { q.q  = newQ; q.a  = newA; }
+  renderGrid();
+}
+function cancelEdit(idx) { renderGrid(); }
+
+// ── Fullscreen (F key / ⛶ button only) ──
+function toggleFullscreen() {
+  const fs = document.body.classList.toggle('fs');
+  document.getElementById('btnfs').textContent = fs ? '✕' : '⛶';
+  if (fs) {
+    document.getElementById('panel').classList.remove('open');
+    barVisible = false;
+  }
+}
+
+// ── Bar toggle — works in and out of fullscreen ──
+let barVisible = true;
+function toggleTopBar() {
+  if (document.body.classList.contains('vizmode')) { vizToggle(false); return; }
+  barVisible = !barVisible;
+  const inFS = document.body.classList.contains('fs');
+  if (barVisible) {
+    if (inFS) document.body.classList.remove('fs');
+    document.getElementById('topwrap').classList.remove('hidden');
+    document.getElementById('strandbar').classList.remove('hidden');
+    document.getElementById('btnfs').textContent = '⛶';
+  } else {
+    document.getElementById('panel').classList.remove('open');
+    document.body.classList.add('fs');
+    document.getElementById('btnfs').textContent = '✕';
+  }
+}
+
+
+// ── Keyboard shortcuts ──
+document.addEventListener('keydown', function(e) {
+  const tag = document.activeElement.tagName.toLowerCase();
+  if (tag==='select'||tag==='input'||tag==='textarea') return;
+  const key = e.key;
+  if (key==='s'||key==='S') revealAll();
+  else if (key==='h'||key==='H') hideAll();
+  else if (key==='t'||key==='T') togglePanel();
+  else if (key==='Enter') { if (document.getElementById('panel').classList.contains('open')) loadQuestions(); }
+  else if (key==='ArrowRight') { if (!focusMode) changeTopic(1); }
+  else if (key==='ArrowLeft')  { if (!focusMode) changeTopic(-1); }
+  else if (key==='v'||key==='V') toggleAllVersions();
+  else if (key==='='||key==='+') changeFont(1);
+  else if (key==='-'||key==='_') changeFont(-1);
+  else if ((key==='b'||key==='B') && !focusMode) toggleTopBar()
+  else if (key==='f'||key==='F') toggleFullscreen();
+  else if (key==='?') openKbd();
+  else if (key>='1' && key<='8') { const i = parseInt(key,10)-1; if (STRAND_KEYS[i]) switchStrand(STRAND_KEYS[i]); }
+  else if (key==='Escape') {
+    if (document.getElementById('kbdoverlay').classList.contains('open')) closeKbd();
+    else if (document.body.classList.contains('fs')) toggleFullscreen();
+    else if (document.getElementById('panel').classList.contains('open')) document.getElementById('panel').classList.remove('open');
+  }
+});
+
+function changeTopic(delta) {
+  const topics = TOPICS();
+  if (!topics.length) return;
+  const sel  = document.getElementById('topsel');
+  const next = Math.min(topics.length-1, Math.max(0, parseInt(sel.value)+delta));
+  sel.value = next; currentTopic = next; loadQuestions();
+}
+function setStyle(s) { currentStyle = 'qs'; }
+
+// ── Keyboard modal ──
+function openKbd()  { document.getElementById('kbdoverlay').classList.add('open'); }
+function closeKbd(e) {
+  if (!e || e.target===document.getElementById('kbdoverlay') || e.currentTarget===document.getElementById('kbdclose'))
+    document.getElementById('kbdoverlay').classList.remove('open');
+}
+
+// ── INIT ──
+(function applyHash() {
+  const h = (location.hash || '').replace(/^#/, '');
+  if (h && UNIT_KEYS.indexOf(h) !== -1) currentStrand = h;
+})();
+buildStrandBar();
+populateTopicSelect();
+renderGrid();
+window.addEventListener('load', () => {
+  reRenderMath();
+  if (location.hash === '#answers') revealAll();
+});
+
+</script>
+<div id="pz"></div>
+</body>
+</html>

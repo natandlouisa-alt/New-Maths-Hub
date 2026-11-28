@@ -1,0 +1,139 @@
+<body>
+
+<div id="topwrap">
+<div id="topbar">
+  <span class="previewtag">Preview</span>
+  <span id="szlabel">SIZE</span>
+  <button class="tb" onclick="changeFont(-1)">−</button>
+  <span id="szdisplay">18</span>
+  <button class="tb" onclick="changeFont(1)">+</button>
+  <div class="sep"></div>
+  <span id="dglabel">DIAGRAM</span>
+  <button class="tb" onclick="changeDiagram(-1)" title="Smaller diagrams">−</button>
+  <span id="dgdisplay">100%</span>
+  <button class="tb" onclick="changeDiagram(1)" title="Bigger diagrams">+</button>
+  <div class="sep"></div>
+  <button class="tb tbw" onclick="revealAll()">Show Answers</button>
+  <button class="tb tbw" onclick="hideAll()">Hide Answers</button>
+  <div class="sep"></div>
+  <button class="tb tbw" onclick="showAllQs()">Show All Qs</button>
+  <button class="tb tbw" onclick="hideAllQs()">Hide All Qs</button>
+  <div class="sep"></div>
+  <button class="tb tbw" id="btnver" onclick="toggleAllVersions()">Switch to V2</button>
+  <div class="sep"></div>
+  <button class="tb tbw tbac" id="btnsettings" onclick="togglePanel()">⚙ Choose unit</button>
+  <div class="sep"></div>
+  <button class="tb tbw" onclick="exportHTML()" title="Download with edits saved">⬇ Save</button>
+  <div class="sep"></div>
+  <button class="tb tbw" onclick="printSheet()" title="Print worksheet — 2 sets per A4 page">🖨 Print</button>
+  <span class="print-scale-wrap">
+    <label>Scale</label>
+    <input type="number" class="print-scale-input" id="printScaleInput" min="50" max="100" step="5" value="90"
+      onchange="setPrintScale(Math.round(this.value/5)*5)" oninput="this.value=Math.min(100,Math.max(50,this.value))">
+    <label style="color:#666">%</label>
+  </span>
+  <div class="sep"></div>
+  <button class="tb" onclick="openKbd()" title="Keyboard shortcuts">?</button>
+  <div class="sep"></div>
+  <button class="tb tbw" id="btnview" onclick="toggleViewMode()" title="Toggle 6-question board view">Show 6</button>
+  <div class="sep"></div>
+  <button class="tb" id="btnfs" onclick="toggleFullscreen()" title="Fullscreen (F)">⛶</button>
+  <div class="sep"></div>
+  <button class="tb tbw" id="btnfocus" onclick="toggleFocusMode()" title="Focus: one question at a time">&#9654; Focus</button>
+  <span id="toplabel"></span>
+</div>
+<div id="panel">
+  <div class="fg" style="flex:3 1 320px">
+    <div class="fl">Unit</div>
+    <select id="topsel" style="font-size:15px" onchange="onTopicChange()"></select>
+  </div>
+  <div class="fg" id="styleselwrap" style="flex:2 1 220px">
+    <div class="fl">Question Style</div>
+    <select id="stylesel" style="font-size:15px" onchange="onStyleChange()">
+      <option value="qs">Cycle revision</option>
+    </select>
+  </div>
+  <button id="gobtn" onclick="loadQuestions()">Go</button>
+</div>
+</div>
+
+<div id="vizsize" title="Drag to make the question bigger or smaller"><svg viewBox="0 0 30 30" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"><path d="M10 25L25 10M16 25L25 16M22 25L25 22"/></svg></div>
+<button id="togglebar" onclick="toggleTopBar()"><span></span><span></span><span></span></button>
+
+<div id="strandbar"></div>
+<div id="substrandbar" style="display:none"></div>
+
+<div id="kbdoverlay" onclick="closeKbd(event)">
+  <div id="kbdbox">
+    <button id="kbdclose" onclick="closeKbd()">✕</button>
+    <h2>Keyboard Shortcuts</h2>
+    <div class="kbdgrid">
+      <div class="kbdrow"><kbd>S</kbd><span class="kbddesc">Show all answers</span></div>
+      <div class="kbdrow"><kbd>H</kbd><span class="kbddesc">Hide all answers</span></div>
+      <div class="kbdrow"><kbd>T</kbd><span class="kbddesc">Toggle unit panel</span></div>
+      <div class="kbdrow"><kbd>Enter</kbd><span class="kbddesc">Load questions</span></div>
+      <div class="kbdrow"><kbd>V</kbd><span class="kbddesc">Switch V1 / V2 / V3</span></div>
+      <div class="kbdrow"><kbd>+</kbd> / <kbd>=</kbd><span class="kbddesc">Increase font size</span></div>
+      <div class="kbdrow"><kbd>−</kbd><span class="kbddesc">Decrease font size</span></div>
+      <div class="kbdrow"><kbd>1</kbd>–<kbd>8</kbd><span class="kbddesc">Switch unit</span></div>
+      <div class="kbdrow"><kbd>B</kbd><span class="kbddesc">Show / hide options bar</span></div>
+      <div class="kbdrow"><kbd>F</kbd><span class="kbddesc">Toggle fullscreen</span></div>
+      <div class="kbdrow"><kbd>?</kbd><span class="kbddesc">Show this help screen</span></div>
+      <div class="kbdrow"><kbd>Esc</kbd><span class="kbddesc">Close panel / modal</span></div>
+    </div>
+    <p id="kbdfooter">Use the button in the bottom-right corner to show/hide the bar</p>
+  </div>
+</div>
+
+<div id="titlestrip">
+  <div><span id="tunit"></span><span id="ttopic"></span></div>
+  <span id="thint">Tap any card to reveal its worked answer</span>
+</div>
+<div id="grid"></div>
+
+<div id="emptystate">
+  <div class="empty-icon">∅</div>
+  <div class="empty-title">No topics yet</div>
+  <div class="empty-sub">This unit doesn't have any questions yet.</div>
+</div>
+
+<div id="focuswrap">
+  <div id="focuscard" onclick="focusToggleReveal()">
+    <div id="focusqnum">Question 1 of 36</div>
+    <div id="focusq"></div>
+    <div id="focushint">tap to reveal</div>
+    <div id="focusa"></div>
+  </div>
+  <div id="focus3wrap"></div>
+  <div id="vizbox" onclick="event.stopPropagation()"><video id="vizvideo" autoplay playsinline muted></video><div id="vizmsg"></div>
+    <div id="vizpick"><select id="vizsel" title="Choose camera" onchange="vizChoose(this.value)"></select><button id="vizdetect" title="Look for cameras again" onclick="vizDetect(true)">&#10227; Detect</button></div>
+    <button class="vizctl" id="vizrot" title="Rotate the picture" onclick="vizRotate()">&#8635;</button>
+    <button class="vizctl vizbig" id="vizver" title="Switch V1 / V2 / V3" onclick="toggleAllVersions()">V1</button>
+    <button class="vizctl vizbig" id="vizthree" title="1 question / 3 questions" onclick="focusThree()">3</button></div>
+  <canvas id="penlayer"></canvas>
+  <div id="pentools" onclick="event.stopPropagation()">
+    <button class="penextra pencol sel" style="background:#111" title="Black" onclick="penColour('#111',this)"></button>
+    <button class="penextra pencol" style="background:#1565c0" title="Blue" onclick="penColour('#1565c0',this)"></button>
+    <button class="penextra pencol" style="background:#d32f2f" title="Red" onclick="penColour('#d32f2f',this)"></button>
+    <button class="penextra pencol" style="background:#2e7d32" title="Green" onclick="penColour('#2e7d32',this)"></button>
+    <button class="pensm" id="fverbtn" title="Switch V1 / V2 / V3" onclick="toggleAllVersions()">V1</button>
+    <button class="penextra penw" id="penfine" title="Fine pen" onclick="penWidth(1.8)"><span style="width:3px;height:3px;border-radius:50%;background:currentColor"></span></button>
+    <button class="penextra penw sel" id="penthin" title="Thin pen" onclick="penWidth(3.5)"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span></button>
+    <button class="penextra penw" id="penthick" title="Thick pen" onclick="penWidth(9)"><span style="width:14px;height:14px;border-radius:50%;background:currentColor"></span></button>
+    <button class="penextra" id="rubberbtn" title="Rubber" onclick="penRubber()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M16.2 3.8l4 4a1.5 1.5 0 0 1 0 2.1L11 19H6.5l-3-3a1.5 1.5 0 0 1 0-2.1L14.1 3.8a1.5 1.5 0 0 1 2.1 0z"/><path d="M9.5 8.5l6 6"/><path d="M11 19h9"/></svg></button>
+    <button class="penextra" title="Undo last line" onclick="penUndo()">&#8630;</button>
+    <button class="penextra" title="Clear this question" onclick="penClear()">&#128465;</button>
+    <span class="penextra pensep"></span>
+    <button class="penextra pentog on" id="stylusbtn" title="When on, only a stylus (or mouse) writes; a finger tap reveals the answer" onclick="penStylus()">&#9997; Stylus only</button>
+    <button class="pensm" id="threebtn" title="Show 3 questions at a time" onclick="focusThree()">3</button>
+    <button class="pensm" id="squaredbtn" title="Squared paper on/off" onclick="penSquared()"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="1.5" width="15" height="15"/><path d="M6.5 1.5v15M11.5 1.5v15M1.5 6.5h15M1.5 11.5h15"/></svg></button>
+    <button class="pensm" id="vizbtn" title="Visualiser: show only this question and the live camera" onclick="vizToggle()"><svg width="20" height="18" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 6h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="12" r="4"/></svg></button>
+    <button id="penbtn" title="Pen" onclick="penToggle()">&#9998;</button>
+  </div>
+</div>
+
+<button class="fnav" id="fnavprev" onclick="focusNav(-1)">&#8592;</button>
+<button class="fnav" id="fnavnext" onclick="focusNav(1)">&#8594;</button>
+<div id="fkeys"><span class="fkey">&#8592;</span> prev &nbsp;&nbsp; <span class="fkey">&#8594;</span> next &nbsp;&nbsp; <span class="fkey">Space</span> reveal &nbsp;&nbsp; <span class="fkey">Esc</span> exit</div>
+<div id="fprogress"><div id="fprogressbar"></div></div>
+<div id="fdots"></div>
